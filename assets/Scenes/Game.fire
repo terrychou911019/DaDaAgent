@@ -15,9 +15,6 @@
     "_children": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 7
       }
     ],
     "_active": false,
@@ -73,6 +70,9 @@
     "_children": [
       {
         "__id__": 3
+      },
+      {
+        "__id__": 7
       }
     ],
     "_active": true,
@@ -246,8 +246,8 @@
     },
     "offset": {
       "__type__": "cc.Vec2",
-      "x": -480,
-      "y": -320
+      "x": 0,
+      "y": 0
     },
     "smoothTime": 0.3,
     "_id": "19T4G8MaRJHonb+7UkGj9f"
@@ -322,7 +322,7 @@
     "_name": "Game",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 1
+      "__id__": 2
     },
     "_children": [
       {
