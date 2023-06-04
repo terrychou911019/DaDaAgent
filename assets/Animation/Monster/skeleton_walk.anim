@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "skeleton_walk",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6666666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "bebaa2ad-9392-4084-8a3a-401771616f03"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "6c0ed403-0a75-4469-9eef-d1cb42f40ade"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "f56b0676-c61b-4d69-b9bb-d847e4777844"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "606dfe05-e225-41fc-ba90-1345770006b6"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.6666666666666666,
+      "func": "",
+      "params": []
+    }
+  ]
+}

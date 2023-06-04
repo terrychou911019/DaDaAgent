@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "skeleton_die",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.5166666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "1ab9eb9e-5e3d-40ec-8a66-77ad180fa01e"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "642f928a-91e4-47c5-88a0-48a6f3cf7e10"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "662ed59b-4d8b-4e34-bb7a-43a8b7063d07"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "d8dd27f0-7595-4672-9d3f-cd489fd62412"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
