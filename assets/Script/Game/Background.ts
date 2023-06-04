@@ -5,6 +5,9 @@ export class Background extends cc.Component {
     @property([cc.Prefab])
     private backgroundPrefabs: cc.Prefab[] = [];
 
+    @property([cc.Prefab])
+    private rarebackgroundPrefabs: cc.Prefab[] = [];
+
     @property(cc.Node)
     private targetNode: cc.Node;
 
@@ -27,11 +30,11 @@ export class Background extends cc.Component {
         backgroundNode.destroy();
         
         // Calculate rows and columns
-        this.rows = Math.ceil(cc.winSize.height / this.nodeSize) + 1;
-        this.columns = Math.ceil(cc.winSize.width / this.nodeSize) + 1;
+        this.rows = Math.ceil(cc.winSize.height / this.nodeSize) + 5;
+        this.columns = Math.ceil(cc.winSize.width / this.nodeSize) + 5;
         
-        this.rows = 4;
-        this.columns = 6;
+        // this.rows = 4;
+        // this.columns = 6;
 
         console.log(this.rows, this.columns, this.nodeSize);
 
@@ -48,9 +51,9 @@ export class Background extends cc.Component {
         for (let i = 0; i < this.rows; i++) {
             const rowNodes: cc.Node[] = [];
             for (let u = 0; u < this.columns; u++) {
-                const randomIndex = this.randomRangeInt(0, this.backgroundPrefabs.length);
                 //console.log(randomIndex);
-                const backgroundNode = cc.instantiate(this.backgroundPrefabs[randomIndex]);
+                const backgroundPrefab = this.randomPrefab();
+                const backgroundNode = cc.instantiate(backgroundPrefab);
                 backgroundNode.parent = this.node;
 
                 const x = u * this.nodeSize - this.nodeSize + cc.winSize.width / 2 + this.offset.x;
@@ -141,6 +144,18 @@ export class Background extends cc.Component {
         }
 
         this.playerGridPosY = playerGridPosY;
+    }
+    private randomPrefab():cc.Prefab {
+        //the possibility of rare background is (1-0.9)
+        let isRare: boolean = Math.random() > 0.8 ? true : false;
+        let randomIndex: number;
+        if (isRare) {
+            randomIndex = this.randomRangeInt(0, this.rarebackgroundPrefabs.length);
+            return this.rarebackgroundPrefabs[randomIndex];
+        } else {
+            randomIndex = this.randomRangeInt(0, this.backgroundPrefabs.length);
+            return this.backgroundPrefabs[randomIndex];
+        }
     }
 
     private randomRangeInt(min: number, max: number): number {
