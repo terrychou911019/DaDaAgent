@@ -801,6 +801,7 @@
     },
     "_enabled": true,
     "moveSpeed": 200,
+    "animation": null,
     "_id": "a7iarKmy1K2b6QRAIonTus"
   },
   {
