@@ -5,6 +5,9 @@ export class PlayerMovement extends cc.Component {
     @property(cc.Float)
     private moveSpeed: number = 200;
 
+    @property(cc.Animation)
+    private animation: cc.Animation = null;
+
     private velocity: cc.Vec2 = cc.Vec2.ZERO;
 
     onLoad() {
