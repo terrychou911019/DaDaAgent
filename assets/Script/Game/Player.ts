@@ -54,7 +54,7 @@ export class PlayerMovement extends cc.Component {
 
     update(dt: number) {
         const movement = this.velocity.mul(this.moveSpeed * dt);
-        this.node.position = this.node.position.add(movement);
+        this.node.position = this.node.position.add(new cc.Vec3(movement.x, movement.y, 0));
 
         //console.log("player ", this.node.position.x, this.node.position.y);
     }
