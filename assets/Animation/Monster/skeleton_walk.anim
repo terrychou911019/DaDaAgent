@@ -1,12 +1,12 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "mushroom_die",
+  "_name": "skeleton_walk",
   "_objFlags": 0,
   "_native": "",
   "_duration": 0.6666666666666666,
   "sample": 60,
   "speed": 1,
-  "wrapMode": 1,
+  "wrapMode": 2,
   "curveData": {
     "comps": {
       "cc.Sprite": {
@@ -14,25 +14,25 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "79d6b9a2-abcc-4957-ae31-9f1955142a4d"
+              "__uuid__": "bebaa2ad-9392-4084-8a3a-401771616f03"
             }
           },
           {
             "frame": 0.16666666666666666,
             "value": {
-              "__uuid__": "71b2f82b-a8c2-4d81-b059-934cd6b2f545"
+              "__uuid__": "6c0ed403-0a75-4469-9eef-d1cb42f40ade"
             }
           },
           {
             "frame": 0.3333333333333333,
             "value": {
-              "__uuid__": "885714e0-f26f-41a3-aa1b-cfbf0bedecad"
+              "__uuid__": "f56b0676-c61b-4d69-b9bb-d847e4777844"
             }
           },
           {
             "frame": 0.5,
             "value": {
-              "__uuid__": "ff674f02-1ddd-47dd-b02f-89cb87e1b9fd"
+              "__uuid__": "606dfe05-e225-41fc-ba90-1345770006b6"
             }
           }
         ]
