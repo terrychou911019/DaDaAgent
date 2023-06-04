@@ -97,6 +97,6 @@ export default class ActorController extends Controller {
 
         this.rigidBody.linearVelocity = this.moveAxis2D.mul(this.moveSpeed);
 
-        this.node.position = this.node.position.add(this.rigidBody.linearVelocity);
+        this.node.position = this.node.position.add(new cc.Vec3(this.rigidBody.linearVelocity.x, this.rigidBody.linearVelocity.y, 0));
     }
 }
