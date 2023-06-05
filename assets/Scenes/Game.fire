@@ -833,21 +833,21 @@
     "_enabled": true,
     "backgroundPrefabs": [
       {
-        "__uuid__": "5409e699-7ea1-47bf-b411-5adb8ff3e84e"
+        "__uuid__": "8e660f08-3e1f-4fcb-814e-13308f07869d"
       }
     ],
     "rarebackgroundPrefabs": [
       {
-        "__uuid__": "5740a426-22a0-4dcb-a5fa-20dec8f56a2c"
+        "__uuid__": "4414021e-8e44-46e8-a2d6-112554ccf671"
       },
       {
-        "__uuid__": "5e8bafaa-b96f-44c2-bf9d-44d00d5ced3f"
+        "__uuid__": "c70b27de-901f-41f9-a087-6ff827cfeddd"
       },
       {
-        "__uuid__": "bc8e037e-aedb-49cb-8739-05e110c3b83e"
+        "__uuid__": "b9e2f44f-3c3d-458d-bd13-fe01bd268734"
       },
       {
-        "__uuid__": "272fd73f-e1f8-48eb-b279-7accf4fa996e"
+        "__uuid__": "d83d7707-2377-4a13-94bb-b4d9413d3f35"
       }
     ],
     "targetNode": {

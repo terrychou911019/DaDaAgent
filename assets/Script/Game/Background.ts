@@ -52,8 +52,7 @@ export class Background extends cc.Component {
             const rowNodes: cc.Node[] = [];
             for (let u = 0; u < this.columns; u++) {
                 //console.log(randomIndex);
-                const backgroundPrefab = this.randomPrefab();
-                const backgroundNode = cc.instantiate(backgroundPrefab);
+                const backgroundNode = this.randomNode();
                 backgroundNode.parent = this.node;
 
                 const x = u * this.nodeSize - this.nodeSize + cc.winSize.width / 2 + this.offset.x;
@@ -145,17 +144,21 @@ export class Background extends cc.Component {
 
         this.playerGridPosY = playerGridPosY;
     }
-    private randomPrefab():cc.Prefab {
+    private randomNode():cc.Node {
         //the possibility of rare background is (1-0.9)
         let isRare: boolean = Math.random() > 0.8 ? true : false;
         let randomIndex: number;
+        let randomPrefab: cc.Prefab;
         if (isRare) {
             randomIndex = this.randomRangeInt(0, this.rarebackgroundPrefabs.length);
-            return this.rarebackgroundPrefabs[randomIndex];
+            randomPrefab = this.rarebackgroundPrefabs[randomIndex];
         } else {
             randomIndex = this.randomRangeInt(0, this.backgroundPrefabs.length);
-            return this.backgroundPrefabs[randomIndex];
+            randomPrefab = this.backgroundPrefabs[randomIndex];
         }
+        const randomNode = cc.instantiate(randomPrefab);
+        randomNode.scaleX = Math.random() > 0.5 ? 1 : -1;
+        return randomNode;
     }
 
     private randomRangeInt(min: number, max: number): number {
