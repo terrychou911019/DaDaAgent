@@ -282,13 +282,13 @@
         "__id__": 15
       },
       {
+        "__id__": 16
+      },
+      {
         "__id__": 17
       },
       {
         "__id__": 18
-      },
-      {
-        "__id__": 16
       }
     ],
     "_prefab": null,
@@ -627,33 +627,10 @@
       "__id__": 13
     },
     "moveSpeed": 3,
-    "animation": {
-      "__id__": 16
-    },
+    "idleAnimationName": "idle",
+    "walkAnimationName": "walk",
+    "dieAnimationName": "die",
     "_id": "882+zlEvFNIagB+RpwfNk8"
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 6
-    },
-    "_enabled": true,
-    "_defaultClip": null,
-    "_clips": [
-      {
-        "__uuid__": "84ff5c47-42e1-4616-8ef7-8256e55590e3"
-      },
-      {
-        "__uuid__": "7b064a74-61eb-4c15-a62b-d526f20974db"
-      },
-      {
-        "__uuid__": "e73eac47-e1fc-4ccb-97ce-c475efc922cc"
-      }
-    ],
-    "playOnLoad": false,
-    "_id": "ceVdUB3/xLmZrX10Jr07dC"
   },
   {
     "__type__": "1309421t9FFvLX9fMbHIdlS",
@@ -698,6 +675,29 @@
       "__uuid__": "c3f6500e-d22e-47ec-9095-d6503a2594a9"
     },
     "_id": "d48lzygJJLs6bQVfoH5smh"
+  },
+  {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 6
+    },
+    "_enabled": true,
+    "_defaultClip": null,
+    "_clips": [
+      {
+        "__uuid__": "84ff5c47-42e1-4616-8ef7-8256e55590e3"
+      },
+      {
+        "__uuid__": "7b064a74-61eb-4c15-a62b-d526f20974db"
+      },
+      {
+        "__uuid__": "e73eac47-e1fc-4ccb-97ce-c475efc922cc"
+      }
+    ],
+    "playOnLoad": false,
+    "_id": "ceVdUB3/xLmZrX10Jr07dC"
   },
   {
     "__type__": "cc.Node",
