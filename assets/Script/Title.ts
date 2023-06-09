@@ -7,6 +7,14 @@
 
 const {ccclass, property} = cc._decorator;
 
+enum State{
+    Title,
+    Choose, 
+    SignIn,
+    LogIn,
+    Google,
+}
+
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -17,18 +25,15 @@ export default class NewClass extends cc.Component {
 
     private moveSpeed: number = 80;
 
-    private moveEndX = 960;
+    private moveStartX: number = 960;
+
+    private moveEndX = -960;
 
     private moveDistance = 1920;
 
-    private dir = 1;
+    private curState: State = State.Title;
 
-    onLoad() {
-        this.spawnBackground(true);
-        this.spawnBackground(false);
-        const spawnInterval = cc.winSize.width / this.moveSpeed - 0.05;
-        this.schedule(this.repeatSpawn, spawnInterval);
-    }
+    private dir = 1;
 
     repeatSpawn(){
         this.spawnBackground(false);
@@ -36,7 +41,7 @@ export default class NewClass extends cc.Component {
 
     spawnBackground(First: boolean) {
         const backgroundNode = cc.instantiate(this.backgroundPrefab);
-        backgroundNode.position = First ? new cc.Vec3(0, 0) : new cc.Vec3(-960, 0);
+        backgroundNode.position = First ? new cc.Vec3(0, 0) : new cc.Vec3(this.moveStartX, 0);
         backgroundNode.scaleX = this.dir;
         this.node.addChild(backgroundNode);
         const duration = First ? this.moveDistance / this.moveSpeed / 2 : this.moveDistance / this.moveSpeed;
@@ -51,10 +56,56 @@ export default class NewClass extends cc.Component {
         this.backgroundNodes.push(backgroundNode);
         this.dir *= -1;
     }
+    onKeyDown(e: cc.Event.EventKeyboard){
+        switch (e.keyCode) {
+            case cc.macro.KEY.enter:
+                this.changeState(State.Choose);
+                break
+            default:
+                break;
+        }    
+    }
+
+    changeState(S: State){
+        this.curState = S;
+        switch (S) {
+            case State.Choose:
+                this.changeChoose();
+                break;
+        
+            default:
+                break;
+        }
+    }
+    changeChoose(){
+        const label = cc.find('Canvas/Label2');
+        const buttonArea = cc.find('Canvas/button_area');
+        cc.log(label);
+        const labelAction = cc.sequence(
+            cc.moveTo(0.5, cc.v2(this.moveEndX, -140)),
+            cc.delayTime(1)
+        )
+        const chooseUIAction = cc.sequence(
+            cc.moveTo(0.1, cc.v2(this.moveStartX, -120)),
+            cc.moveTo(0.5
+                
+                , cc.v2(0, -130))
+        )
+        label.runAction(labelAction);
+        buttonArea.runAction(chooseUIAction);
+    }
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad() {
+        //handle the background
+        this.spawnBackground(true);
+        this.spawnBackground(false);
+        const spawnInterval = cc.winSize.width / this.moveSpeed - 0.05;
+        this.schedule(this.repeatSpawn, spawnInterval);
+        //detect the keyboard
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    }
 
     start () {
 
