@@ -6,6 +6,9 @@ export default class ParticleManager extends cc.Component {
     @property(cc.Prefab)
     iceParticle: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    thunderEffect: cc.Prefab = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -20,5 +23,11 @@ export default class ParticleManager extends cc.Component {
         let iceParticle = cc.instantiate(this.iceParticle);
         iceParticle.position = pos;
         this.node.addChild(iceParticle);
+    }
+
+    spawnThunderEffect(pos: cc.Vec2){
+        let thunderEffect = cc.instantiate(this.thunderEffect);
+        thunderEffect.position = pos;
+        this.node.addChild(thunderEffect);
     }
 }

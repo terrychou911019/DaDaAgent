@@ -21,7 +21,8 @@ export default class TestEnemy extends cc.Component {
     // update (dt) {}
 
     onBeginContact(contact, selfCollider, otherCollider) {
-        this.particleManager.getComponent("ParticleManager").spawnIceParticle(selfCollider.node.position);
+        //this.particleManager.getComponent("ParticleManager").spawnIceParticle(selfCollider.node.position);
+        this.particleManager.getComponent("ParticleManager").spawnThunderEffect(selfCollider.node.position);
     }
 
 }

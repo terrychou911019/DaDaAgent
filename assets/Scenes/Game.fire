@@ -893,9 +893,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 229,
+      "g": 141,
+      "b": 52,
       "a": 255
     },
     "_contentSize": {
@@ -1105,6 +1105,9 @@
     "_enabled": true,
     "iceParticle": {
       "__uuid__": "2e4502e6-eee0-4f98-b679-d598d0adad86"
+    },
+    "thunderEffect": {
+      "__uuid__": "407da2fa-7167-4aa9-8b07-f5416847747d"
     },
     "_id": "e5cTS5NhZOeYAqlLn+fOAM"
   },
