@@ -16,6 +16,7 @@ export default class Bullet extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
     onBeginContact(contact, self, other) {
         // if other is enemy, then let enemy take damage and destroy self
+        //console.log('bullet collision');
     }
 
     onLoad () {
