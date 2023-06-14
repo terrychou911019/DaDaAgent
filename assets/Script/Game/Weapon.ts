@@ -1,5 +1,3 @@
-
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -40,6 +38,8 @@ export default class Weapon extends cc.Component {
     }
 
     shoot(dt) {
+        this.callCameraShake();
+
         if (this.bulletNum <= 0) {
             if (!this.isReload) {
                 this.reloadCD = this.RELOAD_TIME_SEC;
@@ -141,4 +141,9 @@ export default class Weapon extends cc.Component {
     }
 
     start () {}
+
+    callCameraShake() {
+        this.Camera.getComponent('MainCamera').setShakeMagnitude(1.5);
+    }
+
 }

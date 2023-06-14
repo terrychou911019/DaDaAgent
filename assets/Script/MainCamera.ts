@@ -1,7 +1,7 @@
-const { ccclass, property } = cc._decorator;
+const {ccclass, property} = cc._decorator;
 
 @ccclass
-export class CameraFollow extends cc.Component {
+export default class CameraFollow extends cc.Component {
     @property(cc.Node)
     private target: cc.Node = null;
 
@@ -13,15 +13,37 @@ export class CameraFollow extends cc.Component {
 
     private velocity: cc.Vec2 = cc.Vec2.ZERO;
 
-    lateUpdate() {
-        if (this.target) {
-            const targetPosition = this.target.position.add(this.offset);
-            //const currentPosition = this.node.position;
-            //const smoothPosition = cc.Vec2.lerp(currentPosition, targetPosition, this.smoothTime);
+    private shakeMagnitude: number = 0;
 
-            this.node.position = targetPosition;
+    update() {
+        this.smoothFollow();
+        this.shake();
+    }
+
+    smoothFollow() {
+        let targetPos = this.target.position.add(this.offset);
+        let smoothPos = cc.Vec2.ZERO;
+        smoothPos.x = cc.misc.lerp(this.node.position.x, targetPos.x, this.smoothTime);
+        smoothPos.y = cc.misc.lerp(this.node.position.y, targetPos.y, this.smoothTime);
+        this.node.position = smoothPos;
+    }
+
+    shake(){
+        let shakeX = Math.random() < 0.5 ? -1 : 1;
+        let shakeY = Math.random() < 0.5 ? -1 : 1;
+
+        this.node.x += shakeX * this.shakeMagnitude;
+        this.node.y += shakeY * this.shakeMagnitude;
+
+        if(this.shakeMagnitude > 0){
+            this.shakeMagnitude -= 0.3;
         }
+        else{
+            this.shakeMagnitude = 0;
+        }
+    }
 
-        //console.log("camera ", this.node.position.x, this.node.position.y);
+    setShakeMagnitude(shakeMagnitude: number){
+        this.shakeMagnitude = shakeMagnitude;
     }
 }

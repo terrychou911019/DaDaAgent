@@ -16,9 +16,9 @@ export class Background extends cc.Component {
 
     private instancedBackgrounds: cc.Node[][] = [];
 
-    private rows = 3;
-    private columns = 3;
-    private nodeSize = 512;
+    private rows = 0;
+    private columns = 0;
+    private nodeSize = 0;
 
     private playerGridPosX = 0;
     private playerGridPosY = 0;

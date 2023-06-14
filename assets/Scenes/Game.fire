@@ -252,7 +252,7 @@
       "x": 0,
       "y": 0
     },
-    "smoothTime": 0.3,
+    "smoothTime": 0.1,
     "_id": "19T4G8MaRJHonb+7UkGj9f"
   },
   {
@@ -855,8 +855,8 @@
     },
     "offset": {
       "__type__": "cc.Vec2",
-      "x": -980,
-      "y": -650
+      "x": -960,
+      "y": -700
     },
     "_id": "eetX/N7pFCMKD9Dt31pxXf"
   },
