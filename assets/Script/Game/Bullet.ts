@@ -27,7 +27,6 @@ export default class Bullet extends cc.Component {
 
     update (dt) {
         this.move(dt);
-    }
-    
-    start () {}
+    }    
 }
+// start () {}

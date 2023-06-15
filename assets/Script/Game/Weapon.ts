@@ -12,6 +12,7 @@ export default class Weapon extends cc.Component {
 
     Camera: cc.Node = null;
     Player: cc.Node = null;
+    BulletNode: cc.Node = null;
 
     ATTACT_SPEED_SEC: number = 0;
     RELOAD_TIME_SEC: number = 0;
@@ -29,20 +30,23 @@ export default class Weapon extends cc.Component {
 
     reload(dt) {
         this.reloadCD -= dt;
+        this.BulletNode.getChildByName("LoadingBar").width = 20 * this.reloadCD / this.RELOAD_TIME_SEC;
         if (this.reloadCD <= 0) {
             this.bulletNum = this.CAPACITY;
             this.reloadCD = this.RELOAD_TIME_SEC;
             this.isReload = false;
+
+            this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
+            this.BulletNode.getChildByName("LoadingBar").width = 0;
             console.log('reload finish')
         }
     }
 
     shoot(dt) {
-        this.callCameraShake();
-
         if (this.bulletNum <= 0) {
             if (!this.isReload) {
                 this.reloadCD = this.RELOAD_TIME_SEC;
+                this.BulletNode.getChildByName("LoadingBar").width = 20;
                 this.isReload = true;
             }
             return;
@@ -53,6 +57,7 @@ export default class Weapon extends cc.Component {
             return;
         }
         console.log('shoot')
+        this.callCameraShake();
         
         let bullet = cc.instantiate(this.bulletPrefab);
         bullet.width = 16 * 168 / 512;  // 168 is the width of the bullet image, 512 is the height of the bullet image
@@ -72,14 +77,23 @@ export default class Weapon extends cc.Component {
 
         this.attactCD = this.ATTACT_SPEED_SEC;
         this.bulletNum -= 1;
+
+        this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
+        this.BulletNode.getChildByName("LoadingBar").width = 0;
+    }
+
+    callCameraShake() {
+        this.Camera.getComponent('MainCamera').setShakeMagnitude(1.5);
     }
 
     onMouseDown(event: cc.Event.EventMouse) {   // Check if can shoot
         let button = event.getButton();
         if (button == cc.Event.EventMouse.BUTTON_LEFT && !this.isShoot) {
             this.isShoot = true;
-            this.isReload = false;
-            this.onMouseMove(event)
+            this.onMouseMove(event);    // handle the event that player just click the mouse. In this case, we have to rotate the weapon, too.
+
+            if (this.bulletNum !== 0)
+                this.isReload = false;
         }
     }
     onMouseUp(event: cc.Event.EventMouse) {     // Once the mouse is up, reload the weapon
@@ -87,8 +101,10 @@ export default class Weapon extends cc.Component {
         if (button == cc.Event.EventMouse.BUTTON_LEFT) {
             this.isShoot = false;
 
-            this.reloadCD = this.RELOAD_TIME_SEC;
-            this.isReload = true;
+            if (this.bulletNum !== 0) {
+                this.reloadCD = this.RELOAD_TIME_SEC;
+                this.isReload = true;
+            }
         }
     }
     onMouseMove(event: cc.Event.EventMouse) {   // Get the angle of mouse and rotate the weapon SpriteFrame
@@ -116,15 +132,18 @@ export default class Weapon extends cc.Component {
     onLoad () {
         this.Camera = cc.find("Canvas/Main Camera");
         this.Player = cc.find("Canvas/Player");
-
+        this.BulletNode = cc.find("Canvas/Player/BulletNum");
+        
         this.Camera.on('mousedown', this.onMouseDown, this);
         this.Camera.on('mouseup', this.onMouseUp, this);
         this.Camera.on('mousemove', this.onMouseMove, this);
-
+        
         this.bulletNum = this.CAPACITY = 8;
         this.ATTACT_SPEED_SEC = 0.125;
         this.reloadCD = this.RELOAD_TIME_SEC = 0.5;
         this.DAMAGE = 10;
+
+        this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
     }
     onDestroy() {
         this.Camera.off('mousedown', this.onMouseDown, this);
@@ -133,17 +152,16 @@ export default class Weapon extends cc.Component {
     }
     
     update (dt) {
+        if (this.Player.scaleX === 1)
+            this.BulletNode.scaleX = 1;
+        else
+            this.BulletNode.scaleX = -1;
+
         if (this.isShoot)
             this.shoot(dt);
 
         if (this.isReload) 
             this.reload(dt);
-    }
-
-    start () {}
-
-    callCameraShake() {
-        this.Camera.getComponent('MainCamera').setShakeMagnitude(1.5);
-    }
-
+    }    
 }
+// start () {}

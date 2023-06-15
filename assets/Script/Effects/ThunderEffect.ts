@@ -9,7 +9,7 @@ export default class ThunderEffect extends cc.Component {
     start () {
         // random rotate 45 ~ -45 degree
         let randomRotate = Math.random() * 90 - 45;
-        this.node.rotation = randomRotate;
+        this.node.angle = -randomRotate;
 
         // random scaleX 0.5 ~ 1.5
         let randomScaleX = Math.random() + 0.5;
