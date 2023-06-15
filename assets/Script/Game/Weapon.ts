@@ -73,7 +73,7 @@ export default class Weapon extends cc.Component {
         bulletNode.damage = this.DAMAGE;
         bulletNode.moveSpeed = 500;
         bulletNode.direction = this.direction;
-        cc.find("Canvas/Game").addChild(bullet)
+        cc.find("Canvas/Game/BulletGroup").addChild(bullet)
 
         this.attactCD = this.ATTACT_SPEED_SEC;
         this.bulletNum -= 1;
