@@ -3,9 +3,6 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class TestEnemy extends cc.Component {
 
-    @property(cc.Node)
-    particleManager: cc.Node = null;
-
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -21,8 +18,7 @@ export default class TestEnemy extends cc.Component {
     // update (dt) {}
 
     onBeginContact(contact, selfCollider, otherCollider) {
-        //this.particleManager.getComponent("ParticleManager").spawnIceParticle(selfCollider.node.position);
-        this.particleManager.getComponent("ParticleManager").spawnThunderEffect(selfCollider.node.position);
+        
     }
 
 }

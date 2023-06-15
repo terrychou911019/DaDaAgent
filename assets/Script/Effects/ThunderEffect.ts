@@ -24,8 +24,8 @@ export default class ThunderEffect extends cc.Component {
         this.node.skewX = randomSkewX;
 
         // tiny adjust position randomly
-        let randomAdjustX = Math.random() * 10 - 5;
-        let randomAdjustY = Math.random() * 10 - 5;
+        let randomAdjustX = Math.random() * 20 - 10;
+        let randomAdjustY = Math.random() * 20 - 10;
         this.node.x += randomAdjustX;
         this.node.y += randomAdjustY;
         

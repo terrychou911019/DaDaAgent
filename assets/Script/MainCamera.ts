@@ -15,7 +15,7 @@ export default class CameraFollow extends cc.Component {
 
     private shakeMagnitude: number = 0;
 
-    update() {
+    gameTick(dt) {
         this.smoothFollow();
         this.shake();
     }

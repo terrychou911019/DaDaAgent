@@ -1,3 +1,5 @@
+import ParticleManager from "../ParticleManager";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -9,6 +11,9 @@ export default class Weapon extends cc.Component {
 
     @property(cc.Prefab)
     bulletPrefab: cc.Prefab = null;
+
+    @property(cc.Node)
+    skillManager: cc.Node = null;
 
     Camera: cc.Node = null;
     Player: cc.Node = null;
@@ -57,7 +62,10 @@ export default class Weapon extends cc.Component {
             return;
         }
         console.log('shoot')
-        this.callCameraShake();
+
+        if(this.skillManager.getComponent('SkillManager').skillMap['StrongBullet'] == true){
+            this.Camera.getComponent('MainCamera').setShakeMagnitude(2);
+        }
         
         let bullet = cc.instantiate(this.bulletPrefab);
         bullet.width = 16 * 168 / 512;  // 168 is the width of the bullet image, 512 is the height of the bullet image
@@ -82,9 +90,6 @@ export default class Weapon extends cc.Component {
         this.BulletNode.getChildByName("LoadingBar").width = 0;
     }
 
-    callCameraShake() {
-        this.Camera.getComponent('MainCamera').setShakeMagnitude(1.5);
-    }
 
     onMouseDown(event: cc.Event.EventMouse) {   // Check if can shoot
         let button = event.getButton();
@@ -151,7 +156,7 @@ export default class Weapon extends cc.Component {
         this.Camera.off('mousemove', this.onMouseMove, this);
     }
     
-    update (dt) {
+    gameTick (dt) {
         if (this.Player.scaleX === 1)
             this.BulletNode.scaleX = 1;
         else

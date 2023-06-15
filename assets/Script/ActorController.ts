@@ -100,7 +100,7 @@ export default class ActorController extends Controller {
     this.dieAnimState = this._animation.getAnimationState('die')
   }
 
-  update(dt) {
+  gameTick(dt) {
     if (this.inputSource) {
       this.node.scaleX =
         this.inputSource.horizontalAxis != 0
@@ -124,5 +124,7 @@ export default class ActorController extends Controller {
         0,
       ),
     )
+
+    this.rigidBody.linearVelocity = cc.Vec2.ZERO;
   }
 }

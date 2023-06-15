@@ -8,6 +8,9 @@ export default class Bullet extends cc.Component {
     moveSpeed: number = 0;
     direction: number[] = [0, 0];
 
+    skillManager: any = null;
+    particleManager: cc.Node = null;
+
     move(dt) {
         this.node.x += this.moveSpeed * this.direction[0] * dt;
         this.node.y += this.moveSpeed * this.direction[1] * dt;
@@ -16,16 +19,28 @@ export default class Bullet extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
     onBeginContact(contact, self, other) {
         // if other is enemy, then let enemy take damage and destroy self
-        //console.log('bullet collision');
+        if(other.node.name == 'TestEnemy') {
+            if(this.skillManager.skillMap['Thunder'] == true){
+                this.particleManager.getComponent('ParticleManager').spawnThunderEffect(other.node.position);
+            }
+        }
     }
 
     onLoad () {
+        this.skillManager = cc.find('Canvas/SkillManager').getComponent('SkillManager');
+        this.particleManager = cc.find('Canvas/ParticleManager');
+
+        if(this.skillManager.skillMap['LightBullet'] == false){
+            // cancel child visible
+            this.node.getChildByName('wake').active = false;
+        }
+
         this.scheduleOnce( () => {
             this.node.destroy();   
         }, 2)
     }
 
-    update (dt) {
+    gameTick (dt) {
         this.move(dt);
     }    
 }
