@@ -16,9 +16,9 @@ export class Background extends cc.Component {
 
     private instancedBackgrounds: cc.Node[][] = [];
 
-    private rows = 3;
-    private columns = 3;
-    private nodeSize = 512;
+    private rows = 0;
+    private columns = 0;
+    private nodeSize = 0;
 
     private playerGridPosX = 0;
     private playerGridPosY = 0;
@@ -39,10 +39,6 @@ export class Background extends cc.Component {
         console.log(this.rows, this.columns, this.nodeSize);
 
         this.init(this.targetNode);
-    }
-
-    update (dt) {
-        this.gameTick();
     }
 
     public init(targetNode: cc.Node): void {
@@ -67,7 +63,7 @@ export class Background extends cc.Component {
         //console.log(this.instancedBackgrounds);
     }
 
-    public gameTick(): void {
+    public gameTick(dt): void {
         this.tryTileX();
         this.tryTileY();
     }
