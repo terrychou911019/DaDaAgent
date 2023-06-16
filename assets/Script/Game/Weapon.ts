@@ -48,19 +48,20 @@ export default class Weapon extends cc.Component {
     }
 
     shoot(dt) {
+        if (this.attactCD > 0) {
+            this.attactCD -= dt;
+            return;
+        }
+
         if (this.bulletNum <= 0) {
             if (!this.isReload) {
                 this.reloadCD = this.RELOAD_TIME_SEC;
-                this.BulletNode.getChildByName("LoadingBar").width = 20;
+                this.BulletNode.getChildByName("LoadingBar").width = 25;
                 this.isReload = true;
             }
             return;
         }
         
-        if (this.attactCD > 0) {
-            this.attactCD -= dt;
-            return;
-        }
         console.log('shoot')
 
         if(this.skillManager.getComponent('SkillManager').skillMap['StrongBullet'] == true){
@@ -77,6 +78,10 @@ export default class Weapon extends cc.Component {
         // decrease bullet number and set 
         this.attactCD = this.ATTACT_SPEED_SEC;
         this.bulletNum -= 1;
+
+        // render bullet number
+        this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
+        this.BulletNode.getChildByName("LoadingBar").width = 0;
     }
 
     createBullet(adjustAngle: number){
@@ -98,31 +103,28 @@ export default class Weapon extends cc.Component {
         let radian = (this.rotateAngle + adjustAngle) * Math.PI / 180;
         bulletNode.direction = [Math.cos(radian), Math.sin(radian)];
         cc.find("Canvas/Game/BulletGroup").addChild(bullet);
-
-        this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
-        this.BulletNode.getChildByName("LoadingBar").width = 0;
     }
 
 
     onMouseDown(event: cc.Event.EventMouse) {   // Check if can shoot
         let button = event.getButton();
-        if (button == cc.Event.EventMouse.BUTTON_LEFT && !this.isShoot) {
-            this.isShoot = true;
-            this.onMouseMove(event);    // handle the event that player just click the mouse. In this case, we have to rotate the weapon, too.
+        if (button !== cc.Event.EventMouse.BUTTON_LEFT || this.isShoot) 
+            return;
 
-            if (this.bulletNum !== 0)
-                this.isReload = false;
-        }
+        this.shoot(0);
+        this.isShoot = true;
+        if (this.bulletNum !== 0)
+            this.isReload = false;
     }
     onMouseUp(event: cc.Event.EventMouse) {     // Once the mouse is up, reload the weapon
         let button = event.getButton();
-        if (button == cc.Event.EventMouse.BUTTON_LEFT) {
-            this.isShoot = false;
+        if (button !== cc.Event.EventMouse.BUTTON_LEFT)
+            return;
 
-            if (this.bulletNum !== 0) {
-                this.reloadCD = this.RELOAD_TIME_SEC;
-                this.isReload = true;
-            }
+        this.isShoot = false;
+        if (this.bulletNum !== 0) {
+            this.reloadCD = this.RELOAD_TIME_SEC;
+            this.isReload = true;
         }
     }
     onMouseMove(event: cc.Event.EventMouse) {   // Get the angle of mouse and rotate the weapon SpriteFrame
@@ -170,13 +172,13 @@ export default class Weapon extends cc.Component {
     }
     
     gameTick (dt) {
+        if (this.isShoot)
+            this.shoot(dt);
+
         if (this.Player.scaleX === 1)
             this.BulletNode.scaleX = 1;
         else
             this.BulletNode.scaleX = -1;
-
-        if (this.isShoot)
-            this.shoot(dt);
 
         if (this.isReload) 
             this.reload(dt);

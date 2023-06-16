@@ -27,25 +27,25 @@ export default class ParticleManager extends cc.Component {
 
     spawnIceParticle(pos: cc.Vec2){
         let iceParticle = cc.instantiate(this.iceParticle);
-        iceParticle.position = pos;
+        iceParticle.position = cc.v3(pos, 0);
         this.node.addChild(iceParticle);
     }
 
     spawnThunderEffect(pos: cc.Vec2){
         let thunderEffect = cc.instantiate(this.thunderEffect);
-        thunderEffect.position = pos;
+        thunderEffect.position = cc.v3(pos, 0);
         this.node.addChild(thunderEffect);
     }
 
     spawnFlameWalkParticle(pos: cc.Vec2){
         let flameWalkParticle = cc.instantiate(this.flameWalkParticle);
-        flameWalkParticle.position = pos;
+        flameWalkParticle.position = cc.v3(pos, 0);
         this.node.addChild(flameWalkParticle);
     }
 
     spawnFrozenEffect(pos: cc.Vec2){
         let frozenEffect = cc.instantiate(this.frozenEffect);
-        frozenEffect.position = pos;
+        frozenEffect.position = cc.v3(pos, 0);
         this.node.addChild(frozenEffect);
     }
     

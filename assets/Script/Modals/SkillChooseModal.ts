@@ -25,6 +25,9 @@ export default class SkillChooseModal extends cc.Component {
 
     @property(cc.Prefab)
     skillMultishot: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    skillSpinAtk: cc.Prefab = null;
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -37,81 +40,59 @@ export default class SkillChooseModal extends cc.Component {
         // shuffle available skills
         availableSkills.sort(() => Math.random() - 0.5);
 
-        for(let i = 0; i < 3; i++){
-            if(availableSkills[i] == 'Thunder'){
-                const thunder = cc.instantiate(this.skillThunder);
-                thunder.parent = this.node;
-                // load a click event listener
-                thunder.on(cc.Node.EventType.MOUSE_DOWN, () => {
-                    this.skillManager.chooseSkill('Thunder');
-                    this.gameManager.resumeGame();
-                    this.node.parent.getComponent('ModalManager').hideAll();
-                });
+        for(let i = 0; i < 3; i++) {
+            // console.log(availableSkills[i])
+            if (availableSkills[i] === undefined) 
+                break;
+
+            let skill = null;
+            switch (availableSkills[i]) {
+                case 'Thunder':
+                    skill = cc.instantiate(this.skillThunder);
+                    break;
+
+                case 'StrongBullet':
+                    skill = cc.instantiate(this.skillStrongBullet);
+                    break;
+
+                case 'LightBullet':
+                    skill = cc.instantiate(this.skillLightBullet);
+                    break;
+
+                case 'Ice':
+                    skill = cc.instantiate(this.skillIce);
+                    break;
+
+                case 'FlameWalk':
+                    skill = cc.instantiate(this.skillFlameWalk);
+                    break;
+
+                case 'Frozen':
+                    skill = cc.instantiate(this.skillFrozen);
+                    break;
+
+                case 'Multishot':
+                    skill = cc.instantiate(this.skillMultishot);
+                    break;
+
+                case 'SpinAtk':
+                    skill = cc.instantiate(this.skillSpinAtk);
+                    break;
+                    
+                default:    break;
             }
-            else if(availableSkills[i] == 'StrongBullet'){
-                const strongBullet = cc.instantiate(this.skillStrongBullet);
-                strongBullet.parent = this.node;
-                // load a click event listener
-                strongBullet.on(cc.Node.EventType.MOUSE_DOWN, () => {
-                    this.skillManager.chooseSkill('StrongBullet');
-                    this.gameManager.resumeGame();
-                    this.node.parent.getComponent('ModalManager').hideAll();
-                });
-            }
-            else if(availableSkills[i] == 'LightBullet'){
-                const lightBullet = cc.instantiate(this.skillLightBullet);
-                lightBullet.parent = this.node;
-                // load a click event listener
-                lightBullet.on(cc.Node.EventType.MOUSE_DOWN, () => {
-                    this.skillManager.chooseSkill('LightBullet');
-                    this.gameManager.resumeGame();
-                    this.node.parent.getComponent('ModalManager').hideAll();
-                });
-            }
-            else if(availableSkills[i] == 'Ice'){
-                const ice = cc.instantiate(this.skillIce);
-                ice.parent = this.node;
-                // load a click event listener
-                ice.on(cc.Node.EventType.MOUSE_DOWN, () => {
-                    this.skillManager.chooseSkill('Ice');
-                    this.gameManager.resumeGame();
-                    this.node.parent.getComponent('ModalManager').hideAll();
-                });
-            }
-            else if(availableSkills[i] == 'FlameWalk'){
-                const flameWalk = cc.instantiate(this.skillFlameWalk);
-                flameWalk.parent = this.node;
-                // load a click event listener
-                flameWalk.on(cc.Node.EventType.MOUSE_DOWN, () => {
-                    this.skillManager.chooseSkill('FlameWalk');
-                    this.gameManager.resumeGame();
-                    this.node.parent.getComponent('ModalManager').hideAll();
-                });
-            }
-            else if(availableSkills[i] == 'Frozen'){
-                const frozen = cc.instantiate(this.skillFrozen);
-                frozen.parent = this.node;
-                // load a click event listener
-                frozen.on(cc.Node.EventType.MOUSE_DOWN, () => {
-                    this.skillManager.chooseSkill('Frozen');
-                    this.gameManager.resumeGame();
-                    this.node.parent.getComponent('ModalManager').hideAll();
-                });
-            }
-            else if(availableSkills[i] == 'Multishot'){
-                const multishot = cc.instantiate(this.skillMultishot);
-                multishot.parent = this.node;
-                // load a click event listener
-                multishot.on(cc.Node.EventType.MOUSE_DOWN, () => {
-                    this.skillManager.chooseSkill('Multishot');
-                    this.gameManager.resumeGame();
-                    this.node.parent.getComponent('ModalManager').hideAll();
-                });
-            }
+            skill.parent = this.node;
+
+            // load a click event listener
+            skill.on(cc.Node.EventType.MOUSE_DOWN, () => {
+                this.skillManager.chooseSkill(availableSkills[i]);
+                this.gameManager.resumeGame();
+                this.node.parent.getComponent('ModalManager').hideAll();
+            });
         }
 
         // how many children in this node
-        //console.log(this.node.childrenCount);
+        // console.log(this.node.childrenCount);
         if(this.node.childrenCount == 0){
             this.gameManager.resumeGame();
             this.node.parent.getComponent('ModalManager').hideAll();

@@ -21,11 +21,11 @@ export default class CameraFollow extends cc.Component {
     }
 
     smoothFollow() {
-        let targetPos = this.target.position.add(this.offset);
+        let targetPos = this.target.position.add(cc.v3(this.offset, 0));
         let smoothPos = cc.Vec2.ZERO;
         smoothPos.x = cc.misc.lerp(this.node.position.x, targetPos.x, this.smoothTime);
         smoothPos.y = cc.misc.lerp(this.node.position.y, targetPos.y, this.smoothTime);
-        this.node.position = smoothPos;
+        this.node.position = cc.v3(smoothPos, 0);
     }
 
     shake(){

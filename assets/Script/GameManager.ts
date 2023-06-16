@@ -23,6 +23,12 @@ export default class GameManager extends cc.Component {
     @property(cc.Node)
     enemyGroup: cc.Node = null;
 
+    @property(cc.Node)
+    weaponSpin: cc.Node = null;
+
+    @property(cc.Node)
+    TimeManager: cc.Node = null;
+
     isGamePaused = false;
     // LIFE-CYCLE CALLBACKS:
 
@@ -37,6 +43,7 @@ export default class GameManager extends cc.Component {
             return;
         }
 
+        this.TimeManager.getComponent('TimeManager').gameTick(dt);
         this.mainCamera.getComponent('MainCamera').gameTick(dt);
         this.background.getComponent('Background').gameTick(dt);
         this.bulletGroup.children.forEach((bullet) => {
@@ -48,6 +55,7 @@ export default class GameManager extends cc.Component {
         this.enemyGroup.children.forEach((enemy) => {
             enemy.getComponent('TestEnemy').gameTick(dt);
         });
+        // this.weaponSpin.getComponent('WeaponSpin').gameTick(dt);
     }
 
     pauseGame() {

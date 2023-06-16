@@ -9,7 +9,7 @@ export default class SkillManager extends cc.Component {
 
     chosenSkills = [];
 
-    start() {
+    onLoad() {
         this.initializeSkillMap();
     }
 
@@ -36,6 +36,10 @@ export default class SkillManager extends cc.Component {
         if (this.skillMap.hasOwnProperty(skillName)) {
             this.skillMap[skillName] = true;
             this.chosenSkills.push(skillName);
+        }
+
+        if(skillName == 'SpinAtk'){
+            cc.find('Canvas/WeaponSpin').active = true;
         }
     }
 
