@@ -28,6 +28,7 @@ export default class EXPManager extends cc.Component {
     levelLabel: cc.Node = null;
 
     MAXLEVEL: number = 18;
+    MAXWIDTH: number = 930;
 
     curEXP: number = 0;
     curLevel: number = 1;
@@ -45,12 +46,12 @@ export default class EXPManager extends cc.Component {
         }
         
         if (this.curLevel === this.MAXLEVEL) {
-            this.expBar.width = 895;
+            this.expBar.width = this.MAXWIDTH;
             this.expBar.x = 0;
             return;
         }
-        this.expBar.width = 895 * this.curEXP / expTable[this.curLevel];
-        this.expBar.x = -447.5 + this.expBar.width / 2;
+        this.expBar.width = this.MAXWIDTH * this.curEXP / expTable[this.curLevel];
+        this.expBar.x = -(this.MAXWIDTH / 2) + this.expBar.width / 2;
     }
 
     // LIFE-CYCLE CALLBACKS:
