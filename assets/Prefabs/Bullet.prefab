@@ -179,7 +179,7 @@
     "totalParticles": 100,
     "duration": -1,
     "emissionRate": 200,
-    "life": 0.20000000298023224,
+    "life": 0.2,
     "lifeVar": 0.8,
     "_startColor": {
       "__type__": "cc.Color",
