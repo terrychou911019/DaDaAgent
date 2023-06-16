@@ -3,8 +3,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class TestEnemy extends cc.Component {
 
-    @property(cc.Node)
-    particleManager: cc.Node = null;
+    isFrozen: boolean = false;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -14,15 +13,18 @@ export default class TestEnemy extends cc.Component {
     }
 
     start () {
-        // open collision system
-        
+        this.isFrozen = false;
     }
 
-    // update (dt) {}
+    gameTick (dt) {
+        if(this.isFrozen == true){
+            return;
+        }
+        this.node.x += 40 * dt;
+    }
 
     onBeginContact(contact, selfCollider, otherCollider) {
-        //this.particleManager.getComponent("ParticleManager").spawnIceParticle(selfCollider.node.position);
-        this.particleManager.getComponent("ParticleManager").spawnThunderEffect(selfCollider.node.position);
+        
     }
 
 }

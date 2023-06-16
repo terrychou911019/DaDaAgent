@@ -1,3 +1,5 @@
+import ParticleManager from "../ParticleManager";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -9,6 +11,9 @@ export default class Weapon extends cc.Component {
 
     @property(cc.Prefab)
     bulletPrefab: cc.Prefab = null;
+
+    @property(cc.Node)
+    skillManager: cc.Node = null;
 
     Camera: cc.Node = null;
     Player: cc.Node = null;
@@ -58,8 +63,24 @@ export default class Weapon extends cc.Component {
         }
         
         console.log('shoot')
-        this.callCameraShake();
+
+        if(this.skillManager.getComponent('SkillManager').skillMap['StrongBullet'] == true){
+            this.Camera.getComponent('MainCamera').setShakeMagnitude(2);
+        }
         
+        this.createBullet(0);
+
+        if(this.skillManager.getComponent('SkillManager').skillMap['Multishot'] == true){
+            this.createBullet(10);
+            this.createBullet(-10);
+        }
+        
+        // decrease bullet number and set 
+        this.attactCD = this.ATTACT_SPEED_SEC;
+        this.bulletNum -= 1;
+    }
+
+    createBullet(adjustAngle: number){
         let bullet = cc.instantiate(this.bulletPrefab);
         bullet.width = 16 * 168 / 512;  // 168 is the width of the bullet image, 512 is the height of the bullet image
         if (this.Player.scaleX === 1)
@@ -68,24 +89,21 @@ export default class Weapon extends cc.Component {
             bullet.position = cc.v3(this.Player.position.x - 16, this.Player.position.y + 16, 0);
 
         bullet.getComponent(cc.Sprite).spriteFrame = this.bulletImg;
-        bullet.getComponent(cc.Sprite).node.angle = this.rotateAngle - 90;
+        bullet.getComponent(cc.Sprite).node.angle = this.rotateAngle - 90 + adjustAngle;
 
         let bulletNode = bullet.getComponent('Bullet');
         bulletNode.damage = this.DAMAGE;
         bulletNode.moveSpeed = 500;
-        bulletNode.direction = this.direction;
-        cc.find("Canvas/Game/BulletGroup").addChild(bullet)
-        
-        this.attactCD = this.ATTACT_SPEED_SEC;
-        this.bulletNum -= 1;
+        //bulletNode.direction = this.direction;
+        // adjust directoin according to the adjustangle
+        let radian = (this.rotateAngle + adjustAngle) * Math.PI / 180;
+        bulletNode.direction = [Math.cos(radian), Math.sin(radian)];
+        cc.find("Canvas/Game/BulletGroup").addChild(bullet);
 
         this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
         this.BulletNode.getChildByName("LoadingBar").width = 0;
     }
 
-    callCameraShake() {
-        this.Camera.getComponent('MainCamera').setShakeMagnitude(1.5);
-    }
 
     onMouseDown(event: cc.Event.EventMouse) {   // Check if can shoot
         let button = event.getButton();
@@ -152,7 +170,7 @@ export default class Weapon extends cc.Component {
         this.Camera.off('mousemove', this.onMouseMove, this);
     }
     
-    update (dt) {
+    gameTick (dt) {
         if (this.isShoot)
             this.shoot(dt);
 

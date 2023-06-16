@@ -41,10 +41,6 @@ export class Background extends cc.Component {
         this.init(this.targetNode);
     }
 
-    update (dt) {
-        this.gameTick();
-    }
-
     public init(targetNode: cc.Node): void {
         //this.targetNode = targetNode;
 
@@ -67,7 +63,7 @@ export class Background extends cc.Component {
         //console.log(this.instancedBackgrounds);
     }
 
-    public gameTick(): void {
+    public gameTick(dt): void {
         this.tryTileX();
         this.tryTileY();
     }

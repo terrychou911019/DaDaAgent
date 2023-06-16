@@ -24,17 +24,19 @@ export default class ThunderEffect extends cc.Component {
         this.node.skewX = randomSkewX;
 
         // tiny adjust position randomly
-        let randomAdjustX = Math.random() * 10 - 5;
+        /*let randomAdjustX = Math.random() * 10 - 5;
         let randomAdjustY = Math.random() * 10 - 5;
         this.node.x += randomAdjustX;
-        this.node.y += randomAdjustY;
+        this.node.y += randomAdjustY;*/
         
-        // destroy this node after 0.5 second
+        // destroy this node after x second
         this.scheduleOnce(function() {
             this.node.destroy();
         }
-        , 0.5);
+        , 0.2);
     }
 
-    // update (dt) {}
+    //gameTick (dt) {
+    //
+    //}
 }
