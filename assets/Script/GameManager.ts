@@ -20,6 +20,9 @@ export default class GameManager extends cc.Component {
     @property(cc.Node)
     particleManager: cc.Node = null;
 
+    @property(cc.Node)
+    enemyGroup: cc.Node = null;
+
     isGamePaused = false;
     // LIFE-CYCLE CALLBACKS:
 
@@ -42,6 +45,9 @@ export default class GameManager extends cc.Component {
         this.player.getComponent('ActorController').gameTick(dt);
         this.weapon.getComponent('Weapon').gameTick(dt);
         //this.particleManager.getComponent('ParticleManager').gameTick(dt);
+        this.enemyGroup.children.forEach((enemy) => {
+            enemy.getComponent('TestEnemy').gameTick(dt);
+        });
     }
 
     pauseGame() {

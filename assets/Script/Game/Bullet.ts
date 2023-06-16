@@ -26,6 +26,19 @@ export default class Bullet extends cc.Component {
             if(this.skillManager.skillMap['Ice'] == true){
                 this.particleManager.getComponent('ParticleManager').spawnIceParticle(other.node.position);
             }
+            if(this.skillManager.skillMap['Frozen'] == true){
+                // if enemy is already frozen, then do nothing
+                if(other.node.getComponent('TestEnemy').isFrozen == true){
+                    return;
+                }
+                this.particleManager.getComponent('ParticleManager').spawnFrozenEffect(other.node.position);
+                other.node.getComponent('TestEnemy').isFrozen = true;
+                // unfroze after 2 second
+                other.node.getComponent('TestEnemy').scheduleOnce(function() {
+                    console.log('unfroze');
+                    other.node.getComponent('TestEnemy').isFrozen = false;
+                }, 2);
+            }
         }
     }
 

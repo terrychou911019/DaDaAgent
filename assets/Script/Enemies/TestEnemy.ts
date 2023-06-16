@@ -3,6 +3,8 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class TestEnemy extends cc.Component {
 
+    isFrozen: boolean = false;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -11,11 +13,15 @@ export default class TestEnemy extends cc.Component {
     }
 
     start () {
-        // open collision system
-        
+        this.isFrozen = false;
     }
 
-    // update (dt) {}
+    gameTick (dt) {
+        if(this.isFrozen == true){
+            return;
+        }
+        this.node.x += 40 * dt;
+    }
 
     onBeginContact(contact, selfCollider, otherCollider) {
         
