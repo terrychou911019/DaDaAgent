@@ -17,6 +17,9 @@ export default class SkillChooseModal extends cc.Component {
     @property(cc.Prefab)
     skillIce: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    skillFlameWalk: cc.Prefab = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -66,6 +69,16 @@ export default class SkillChooseModal extends cc.Component {
                 // load a click event listener
                 ice.on(cc.Node.EventType.MOUSE_DOWN, () => {
                     this.skillManager.chooseSkill('Ice');
+                    this.gameManager.resumeGame();
+                    this.node.parent.getComponent('ModalManager').hideAll();
+                });
+            }
+            else if(availableSkills[i] == 'FlameWalk'){
+                const flameWalk = cc.instantiate(this.skillFlameWalk);
+                flameWalk.parent = this.node;
+                // load a click event listener
+                flameWalk.on(cc.Node.EventType.MOUSE_DOWN, () => {
+                    this.skillManager.chooseSkill('FlameWalk');
                     this.gameManager.resumeGame();
                     this.node.parent.getComponent('ModalManager').hideAll();
                 });

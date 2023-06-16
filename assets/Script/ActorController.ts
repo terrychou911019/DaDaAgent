@@ -46,6 +46,12 @@ export default class ActorController extends Controller {
 
   private cur_State = State.Idle
 
+  @property(cc.Node)
+  skillManager: cc.Node = null;
+
+  @property(cc.Node)
+  particleManager: cc.Node = null;
+
   public moveAxisX: number = 0
   public moveAxisY: number = 0
   public get moveAxis2D() {
@@ -115,6 +121,11 @@ export default class ActorController extends Controller {
     //play animation
     this.playanimation()
 
+    
+    if(this.skillManager.getComponent('SkillManager').skillMap['FlameWalk'] == true) {
+      this.playFlameWalkParticle();
+    }
+
     this.rigidBody.linearVelocity = this.moveAxis2D.mul(this.moveSpeed)
 
     this.node.position = this.node.position.add(
@@ -126,5 +137,12 @@ export default class ActorController extends Controller {
     )
 
     this.rigidBody.linearVelocity = cc.Vec2.ZERO;
+  }
+
+  playFlameWalkParticle() {
+    if(this.cur_State == State.Walk) {
+      // play flame walk particle on players feet
+      this.particleManager.getComponent('ParticleManager').spawnFlameWalkParticle(new cc.Vec2(this.node.position.x, this.node.position.y - this.node.height / 2));
+    }
   }
 }

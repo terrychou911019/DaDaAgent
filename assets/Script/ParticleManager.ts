@@ -9,6 +9,9 @@ export default class ParticleManager extends cc.Component {
     @property(cc.Prefab)
     thunderEffect: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    flameWalkParticle: cc.Prefab = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -29,5 +32,11 @@ export default class ParticleManager extends cc.Component {
         let thunderEffect = cc.instantiate(this.thunderEffect);
         thunderEffect.position = pos;
         this.node.addChild(thunderEffect);
+    }
+
+    spawnFlameWalkParticle(pos: cc.Vec2){
+        let flameWalkParticle = cc.instantiate(this.flameWalkParticle);
+        flameWalkParticle.position = pos;
+        this.node.addChild(flameWalkParticle);
     }
 }

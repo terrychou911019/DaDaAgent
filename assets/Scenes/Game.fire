@@ -661,7 +661,8 @@
       "Thunder",
       "StrongBullet",
       "LightBullet",
-      "Ice"
+      "Ice",
+      "FlameWalk"
     ],
     "_id": "50V6yLg85GYa1lTC++Nhc3"
   },
@@ -1634,6 +1635,9 @@
     "thunderEffect": {
       "__uuid__": "407da2fa-7167-4aa9-8b07-f5416847747d"
     },
+    "flameWalkParticle": {
+      "__uuid__": "5b7dc9df-e200-4dd3-a407-331e3e50f727"
+    },
     "_id": "e5cTS5NhZOeYAqlLn+fOAM"
   },
   {
@@ -1791,6 +1795,12 @@
     "idleAnimationName": "idle",
     "walkAnimationName": "walk",
     "dieAnimationName": "die",
+    "skillManager": {
+      "__id__": 13
+    },
+    "particleManager": {
+      "__id__": 33
+    },
     "_id": "882+zlEvFNIagB+RpwfNk8"
   },
   {
