@@ -78,6 +78,9 @@
         "__id__": 6
       },
       {
+        "__id__": 41
+      },
+      {
         "__id__": 35
       },
       {
@@ -87,7 +90,7 @@
         "__id__": 13
       },
       {
-        "__id__": 42
+        "__id__": 44
       },
       {
         "__id__": 27
@@ -96,10 +99,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 50
+        "__id__": 52
       },
       {
-        "__id__": 51
+        "__id__": 53
       }
     ],
     "_prefab": null,
@@ -294,12 +297,6 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 44
-      },
-      {
-        "__id__": 45
-      },
-      {
         "__id__": 46
       },
       {
@@ -310,6 +307,12 @@
       },
       {
         "__id__": 49
+      },
+      {
+        "__id__": 50
+      },
+      {
+        "__id__": 51
       }
     ],
     "_prefab": null,
@@ -664,7 +667,8 @@
       "Ice",
       "FlameWalk",
       "Frozen",
-      "Multishot"
+      "Multishot",
+      "SpinAtk"
     ],
     "_id": "50V6yLg85GYa1lTC++Nhc3"
   },
@@ -1167,7 +1171,7 @@
         "__id__": 26
       },
       {
-        "__id__": 41
+        "__id__": 43
       }
     ],
     "_N$interactable": true,
@@ -1339,6 +1343,9 @@
     },
     "enemyGroup": {
       "__id__": 35
+    },
+    "weaponSpin": {
+      "__id__": 41
     },
     "_id": "073Xq3+/tPZYK1EHnGAm+K"
   },
@@ -1875,9 +1882,89 @@
     "_id": "0aj4P4ybJNeLgyBcS6q1Zm"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "WeaponSpin",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": false,
+    "_components": [
+      {
+        "__id__": 42
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "b6GtPiOSFGx53uR9XgJUNc"
+  },
+  {
+    "__type__": "b2836TFkfVOfb/4o6QI91Y+",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 41
+    },
+    "_enabled": true,
+    "wheelPrefab": {
+      "__uuid__": "3e411edb-46c6-4fb8-8ed8-3a491828ddcb"
+    },
+    "radius": 250,
+    "spinSpeed": 150,
+    "player": {
+      "__id__": 6
+    },
+    "_id": "03nxJKgC9Np7WMJ5B3ZRA2"
+  },
+  {
     "__type__": "cc.ClickEvent",
     "target": {
-      "__id__": 42
+      "__id__": 44
     },
     "component": "",
     "_componentId": "af2c0mKiBNMTbLbf6EP3hcS",
@@ -1895,7 +1982,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 43
+        "__id__": 45
       }
     ],
     "_prefab": null,
@@ -1951,7 +2038,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 42
+      "__id__": 44
     },
     "_enabled": true,
     "skillChooseModal": {
@@ -2023,7 +2110,7 @@
     "_enabled": true,
     "initialFacingDirection": 0,
     "rigidBody": {
-      "__id__": 44
+      "__id__": 46
     },
     "moveSpeed": 3,
     "idleAnimationName": "idle",
