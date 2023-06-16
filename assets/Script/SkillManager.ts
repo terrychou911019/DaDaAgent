@@ -9,7 +9,7 @@ export default class SkillManager extends cc.Component {
 
     chosenSkills = [];
 
-    start() {
+    onLoad() {
         this.initializeSkillMap();
     }
 

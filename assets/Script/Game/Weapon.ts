@@ -78,6 +78,10 @@ export default class Weapon extends cc.Component {
         // decrease bullet number and set 
         this.attactCD = this.ATTACT_SPEED_SEC;
         this.bulletNum -= 1;
+
+        // render bullet number
+        this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
+        this.BulletNode.getChildByName("LoadingBar").width = 0;
     }
 
     createBullet(adjustAngle: number){
@@ -99,9 +103,6 @@ export default class Weapon extends cc.Component {
         let radian = (this.rotateAngle + adjustAngle) * Math.PI / 180;
         bulletNode.direction = [Math.cos(radian), Math.sin(radian)];
         cc.find("Canvas/Game/BulletGroup").addChild(bullet);
-
-        this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
-        this.BulletNode.getChildByName("LoadingBar").width = 0;
     }
 
 
