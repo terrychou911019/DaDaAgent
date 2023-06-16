@@ -78,6 +78,9 @@
         "__id__": 50
       },
       {
+        "__id__": 41
+      },
+      {
         "__id__": 6
       },
       {
@@ -87,10 +90,7 @@
         "__id__": 13
       },
       {
-        "__id__": 56
-      },
-      {
-        "__id__": 58
+        "__id__": 42
       },
       {
         "__id__": 27
@@ -99,10 +99,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 60
+        "__id__": 50
       },
       {
-        "__id__": 61
+        "__id__": 51
       }
     ],
     "_prefab": null,
@@ -341,13 +341,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 41
+        "__id__": 44
       },
       {
-        "__id__": 42
-      },
-      {
-        "__id__": 43
+        "__id__": 45
       },
       {
         "__id__": 46
@@ -357,6 +354,9 @@
       },
       {
         "__id__": 48
+      },
+      {
+        "__id__": 49
       }
     ],
     "_prefab": null,
@@ -711,7 +711,8 @@
       "Ice",
       "FlameWalk",
       "Frozen",
-      "Multishot"
+      "Multishot",
+      "SpinAtk"
     ],
     "_id": "50V6yLg85GYa1lTC++Nhc3"
   },
@@ -1212,6 +1213,9 @@
     "clickEvents": [
       {
         "__id__": 26
+      },
+      {
+        "__id__": 41
       }
     ],
     "_N$interactable": true,
@@ -1369,7 +1373,10 @@
     "levelLabel": {
       "__id__": 33
     },
-    "_id": "750Cf8NytAiq3xGcRW9lX+"
+    "enemyGroup": {
+      "__id__": 35
+    },
+    "_id": "073Xq3+/tPZYK1EHnGAm+K"
   },
   {
     "__type__": "cc.Node",
@@ -2421,6 +2428,16 @@
     "_id": "0aj4P4ybJNeLgyBcS6q1Zm"
   },
   {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 42
+    },
+    "component": "",
+    "_componentId": "af2c0mKiBNMTbLbf6EP3hcS",
+    "handler": "showSkillChooseModal",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.Node",
     "_name": "ModalManager",
     "_objFlags": 0,
@@ -2431,7 +2448,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 57
+        "__id__": 43
       }
     ],
     "_prefab": null,
@@ -2487,7 +2504,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 56
+      "__id__": 42
     },
     "_enabled": true,
     "skillChooseModal": {
@@ -2547,11 +2564,10 @@
         1
       ]
     },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
+    "_enabled": true,
+    "initialFacingDirection": 0,
+    "rigidBody": {
+      "__id__": 44
     },
     "_skewX": 0,
     "_skewY": 0,

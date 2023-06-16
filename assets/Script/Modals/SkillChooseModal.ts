@@ -25,6 +25,9 @@ export default class SkillChooseModal extends cc.Component {
 
     @property(cc.Prefab)
     skillMultishot: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    skillSpinAtk: cc.Prefab = null;
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -72,6 +75,10 @@ export default class SkillChooseModal extends cc.Component {
                     skill = cc.instantiate(this.skillMultishot);
                     break;
 
+                case 'SpinAtk':
+                    skill = cc.instantiate(this.skillSpinAtk);
+                    break;
+                    
                 default:    break;
             }
             skill.parent = this.node;
