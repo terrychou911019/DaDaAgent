@@ -37,6 +37,10 @@ export default class SkillManager extends cc.Component {
             this.skillMap[skillName] = true;
             this.chosenSkills.push(skillName);
         }
+
+        if(skillName == 'SpinAtk'){
+            cc.find('Canvas/WeaponSpin').active = true;
+        }
     }
 
     // ... (Other lifecycle callbacks and methods)

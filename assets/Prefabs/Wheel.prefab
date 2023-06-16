@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "SkillChooseModal",
+    "_name": "Wheel",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -21,26 +21,23 @@
     "_components": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 3
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 3
     },
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 99,
-      "g": 120,
-      "b": 125,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 600,
-      "height": 400
+      "width": 24,
+      "height": 24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -77,40 +74,6 @@
     "_id": ""
   },
   {
-    "__type__": "d039cihIxpPgIMMqOqMLGWG",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "skillThunder": {
-      "__uuid__": "f8a2cbf0-f4dd-492a-aa18-b531a1e36825"
-    },
-    "skillStrongBullet": {
-      "__uuid__": "2a2efccb-f5e3-4d3d-8fce-e2b5d49aad04"
-    },
-    "skillLightBullet": {
-      "__uuid__": "6bacc19f-6b57-4189-b1ee-425e2fd250e2"
-    },
-    "skillIce": {
-      "__uuid__": "4fdee16c-9f7c-4c6e-a3dc-6ccbd3a528b6"
-    },
-    "skillFlameWalk": {
-      "__uuid__": "93f0dc90-edd4-4608-811d-83410599dced"
-    },
-    "skillFrozen": {
-      "__uuid__": "54e2ce45-1a8b-4b02-8439-1e1d6f860509"
-    },
-    "skillMultishot": {
-      "__uuid__": "c1117099-d28e-42ef-9046-3214150ce608"
-    },
-    "skillSpinAtk": {
-      "__uuid__": "fff997f1-ee33-4152-b042-be3c2237d2bd"
-    },
-    "_id": ""
-  },
-  {
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
@@ -126,10 +89,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "c1cc0297-f436-4136-9aa3-68f0623467d4"
     },
     "_type": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",

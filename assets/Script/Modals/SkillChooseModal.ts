@@ -25,6 +25,9 @@ export default class SkillChooseModal extends cc.Component {
 
     @property(cc.Prefab)
     skillMultishot: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    skillSpinAtk: cc.Prefab = null;
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -104,6 +107,16 @@ export default class SkillChooseModal extends cc.Component {
                 // load a click event listener
                 multishot.on(cc.Node.EventType.MOUSE_DOWN, () => {
                     this.skillManager.chooseSkill('Multishot');
+                    this.gameManager.resumeGame();
+                    this.node.parent.getComponent('ModalManager').hideAll();
+                });
+            }
+            else if(availableSkills[i] == 'SpinAtk'){
+                const spinAtk = cc.instantiate(this.skillSpinAtk);
+                spinAtk.parent = this.node;
+                // load a click event listener
+                spinAtk.on(cc.Node.EventType.MOUSE_DOWN, () => {
+                    this.skillManager.chooseSkill('SpinAtk');
                     this.gameManager.resumeGame();
                     this.node.parent.getComponent('ModalManager').hideAll();
                 });
