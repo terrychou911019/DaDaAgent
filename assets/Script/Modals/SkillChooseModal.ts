@@ -23,6 +23,8 @@ export default class SkillChooseModal extends cc.Component {
     @property(cc.Prefab)
     skillFrozen: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    skillMultishot: cc.Prefab = null;
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -92,6 +94,16 @@ export default class SkillChooseModal extends cc.Component {
                 // load a click event listener
                 frozen.on(cc.Node.EventType.MOUSE_DOWN, () => {
                     this.skillManager.chooseSkill('Frozen');
+                    this.gameManager.resumeGame();
+                    this.node.parent.getComponent('ModalManager').hideAll();
+                });
+            }
+            else if(availableSkills[i] == 'Multishot'){
+                const multishot = cc.instantiate(this.skillMultishot);
+                multishot.parent = this.node;
+                // load a click event listener
+                multishot.on(cc.Node.EventType.MOUSE_DOWN, () => {
+                    this.skillManager.chooseSkill('Multishot');
                     this.gameManager.resumeGame();
                     this.node.parent.getComponent('ModalManager').hideAll();
                 });
