@@ -14,6 +14,9 @@ export default class SkillChooseModal extends cc.Component {
     @property(cc.Prefab)
     skillLightBullet: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    skillIce: cc.Prefab = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -53,6 +56,16 @@ export default class SkillChooseModal extends cc.Component {
                 // load a click event listener
                 lightBullet.on(cc.Node.EventType.MOUSE_DOWN, () => {
                     this.skillManager.chooseSkill('LightBullet');
+                    this.gameManager.resumeGame();
+                    this.node.parent.getComponent('ModalManager').hideAll();
+                });
+            }
+            else if(availableSkills[i] == 'Ice'){
+                const ice = cc.instantiate(this.skillIce);
+                ice.parent = this.node;
+                // load a click event listener
+                ice.on(cc.Node.EventType.MOUSE_DOWN, () => {
+                    this.skillManager.chooseSkill('Ice');
                     this.gameManager.resumeGame();
                     this.node.parent.getComponent('ModalManager').hideAll();
                 });

@@ -23,6 +23,9 @@ export default class Bullet extends cc.Component {
             if(this.skillManager.skillMap['Thunder'] == true){
                 this.particleManager.getComponent('ParticleManager').spawnThunderEffect(other.node.position);
             }
+            if(this.skillManager.skillMap['Ice'] == true){
+                this.particleManager.getComponent('ParticleManager').spawnIceParticle(other.node.position);
+            }
         }
     }
 
