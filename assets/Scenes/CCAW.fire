@@ -519,7 +519,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "3e2fa78e-3b26-4c60-afca-e2f0898ae01f"
+      "__uuid__": "4c4d9774-82e9-4795-a4c4-7a0de27bfd0f"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -533,7 +533,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "d5188038-643a-4f78-a7d3-4db4a7efe6d0"
+      "__uuid__": "c7c7d97a-e0a8-410b-ac3c-8aa9fc90d153"
     },
     "_id": "29BkIdPMBKr6HQjs0zKAUQ"
   },
@@ -833,7 +833,7 @@
       "a": 200
     },
     "_N$normalSprite": {
-      "__uuid__": "3e2fa78e-3b26-4c60-afca-e2f0898ae01f"
+      "__uuid__": "63e3e72c-2e74-44f9-9880-3e52c1668eef"
     },
     "_N$pressedSprite": {
       "__uuid__": "730cdb5a-5931-4857-a758-6a9a2736f8b2"
@@ -885,7 +885,6 @@
     "button": {
       "__id__": 17
     },
-    "buttontype": 1,
     "moveStartX": -84,
     "moveEndX": 650,
     "_id": "3fJqW5bUdPzLfG/ngb/hnt"
@@ -1340,7 +1339,6 @@
     "button": {
       "__id__": 28
     },
-    "buttontype": 1,
     "moveStartX": -282,
     "moveEndX": 650,
     "_id": "balgE1G95BfL/ZI7PXLr/q"
@@ -1768,7 +1766,6 @@
     "button": {
       "__id__": 38
     },
-    "buttontype": 0,
     "moveStartX": 650,
     "moveEndX": 650,
     "_id": "38YLQAbfVAupqF7W/I0HrE"
@@ -2196,7 +2193,6 @@
     "button": {
       "__id__": 48
     },
-    "buttontype": 0,
     "moveStartX": 650,
     "moveEndX": 650,
     "_id": "a9GNI7O4dEl7AOsNU6JlF5"
