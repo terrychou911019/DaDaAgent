@@ -54,6 +54,21 @@ export default class TestEnemy extends cc.Component {
   }
 
   update(dt) {
+    if (this.enemyHealth <= 0) {
+      this.isDead = true;
+      this.rigidbody.enabledContactListener = false;
+      this.collider.enabled = false;
+      this.anim.stop();
+      this.anim.play("goblin_die");
+      this.EnemyManager.put(this.node);
+      
+      this.enemyHealth = 100;
+      this.isDead = false;
+      this.rigidbody.enabledContactListener = true;
+      this.collider.enabled = true;
+      
+      this.anim.play("goblin_walk");
+    }
     //cc.log(this.playerLife.cur_life)
     if(this.gameManager.isGamePaused){
       return;

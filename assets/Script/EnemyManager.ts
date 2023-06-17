@@ -10,7 +10,7 @@ export default class enemyManager extends cc.Component {
 
   private enemyPool = null
 
-  private createCD = 0.5;
+  private createCD = 1;
 
   onLoad() {
     this.enemyGroup = cc.find('Canvas/EnemyGroup')
