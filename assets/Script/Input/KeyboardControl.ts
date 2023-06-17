@@ -54,6 +54,9 @@ export default class KeyboardControl extends cc.Component implements IInputContr
             case cc.macro.KEY.d:
                 this._hAxis++;
                 break;
+            case 16: // left shift
+                this._zKey = ButtonState.Pressed;
+                break;
         }
         this._vAxis = clamp(this._vAxis);
         this._hAxis = clamp(this._hAxis);
@@ -61,7 +64,7 @@ export default class KeyboardControl extends cc.Component implements IInputContr
         switch (this._zKey) {
             case ButtonState.Rest:
             case ButtonState.Released:
-                this._zKey = ButtonState.Pressed;
+                this._zKey = ButtonState.Rest;
                 break;
             case ButtonState.Pressed:
             case ButtonState.Held:
@@ -84,6 +87,9 @@ export default class KeyboardControl extends cc.Component implements IInputContr
             case cc.macro.KEY.d:
                 this._hAxis--;
                 break;
+            case 16: // left shift
+                this._zKey = ButtonState.Released;
+                break;
         }
         this._vAxis = clamp(this._vAxis);
         this._hAxis = clamp(this._hAxis);
@@ -95,7 +101,7 @@ export default class KeyboardControl extends cc.Component implements IInputContr
                 break;
             case ButtonState.Pressed:
             case ButtonState.Held:
-                this._zKey = ButtonState.Released;
+                this._zKey = ButtonState.Held;
                 break;
         }
     }
