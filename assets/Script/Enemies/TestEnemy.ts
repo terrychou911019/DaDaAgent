@@ -75,6 +75,17 @@ export default class TestEnemy extends cc.Component {
         )
       }
     }
+
+    // if the node is out of the screen, put it in the pool
+    if (
+      this.node.x > this.player.x + 1000 ||
+      this.node.x < this.player.x - 1000 ||
+      this.node.y > this.player.y + 700 ||
+      this.node.y < this.player.y - 700
+    ) {
+      this.EnemyManager.put(this.node)
+      cc.log('put enemy back to pool')
+    }
   }
 
   gameTick(dt) {}
@@ -120,25 +131,25 @@ export default class TestEnemy extends cc.Component {
     if (n >= 0 && n < 0.25) {
       this.node.position = cc.v3(
         this.player.x - 480 + Math.random() * 960,
-        0,
+        this.player.y,
         0,
       )
     } else if (n >= 0.25 && n < 0.5) {
       this.node.position = cc.v3(
-        this.player.x + 480 - Math.random() * 960,
-        0,
+        this.player.x - 480 + Math.random() * 960,
+        this.player.y * -1,
         0,
       )
     } else if (n >= 0.5 && n < 0.75) {
       this.node.position = cc.v3(
-        0,
+        this.player.x,
         this.player.y - 320 + Math.random() * 640,
         0,
       )
     } else {
       this.node.position = cc.v3(
-        0,
-        this.player.y + 320 - Math.random() * 640,
+        this.player.x * -1,
+        this.player.y - 320 + Math.random() * 640,
         0,
       )
     }
