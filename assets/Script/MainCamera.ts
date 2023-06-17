@@ -46,4 +46,6 @@ export default class CameraFollow extends cc.Component {
     setShakeMagnitude(shakeMagnitude: number){
         this.shakeMagnitude = shakeMagnitude;
     }
+
+    
 }

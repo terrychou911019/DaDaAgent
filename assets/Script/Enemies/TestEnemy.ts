@@ -4,52 +4,53 @@ const { ccclass, property } = cc._decorator
 
 @ccclass
 export default class TestEnemy extends cc.Component {
-  isFrozen: boolean = false
+    isFrozen: boolean = false
 
-  // LIFE-CYCLE CALLBACKS:
+    // LIFE-CYCLE CALLBACKS:
 
-  @property(cc.Node)
-  player: cc.Node = null
+    @property(cc.Node)
+    player: cc.Node = null
 
-  @property(lifebar)
-  playerLife: lifebar = null
+    @property(lifebar)
+    playerLife: lifebar = null
 
-  @property(Number)
-  moveSpeed: number = 50
+    @property(Number)
+    moveSpeed: number = 50
 
     private isColliding: boolean = false;
     private collisionTimer: number = 0;
     private collisionDuration: number = 1; // 碰撞後移動的持續時間
-    private minRoamingDistance: number = 20; // 最小漫遊距離
-    private maxRoamingDistance: number = 50; // 最大漫遊距離
+    private minRoamingDistance: number = 2; // 最小漫遊距離
+    private maxRoamingDistance: number = 5; // 最大漫遊距離
+    private randomDistance: number = 0; // 隨機漫遊距離
     private EnemyManager = null
 
-  onLoad() {
-    cc.director.getPhysicsManager().enabled = true
-    cc.director.getCollisionManager().enabled = true
-    this.player = cc.find('Canvas/Player')
-    this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
-  }
-
-  start() {
-    this.isFrozen = false
-  }
-
-  update(dt) {
-    cc.log(this.playerLife.cur_life)
-    if (this.isFrozen == true) {
-      return
+    onLoad() {
+        cc.director.getPhysicsManager().enabled = true
+        cc.director.getCollisionManager().enabled = true
+        this.player = cc.find('Canvas/Player')
+        this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
     }
-    //this.node.x += 40 * dt;
 
-    // chase player's position
-    let playerPos = this.player.position
-    let enemyPos = this.node.position
-    let direction = playerPos.sub(enemyPos)
-    let normalizedDirection = direction.normalize()
-    this.node.position = enemyPos.add(
-      normalizedDirection.mul(this.moveSpeed * dt),
-    )
+    start() {
+        this.isFrozen = false
+    }
+
+    update(dt) {
+        //cc.log(this.playerLife.cur_life)
+        if (this.isFrozen == true) {
+            return
+        }
+        //this.node.x += 40 * dt;
+
+        // chase player's position
+        let playerPos = this.player.position
+        let enemyPos = this.node.position
+        let direction = playerPos.sub(enemyPos)
+        let normalizedDirection = direction.normalize()
+        this.node.position = enemyPos.add(
+            normalizedDirection.mul(this.moveSpeed * dt),
+        )
 
         // change enemy facing direction for x and -x 
         if (this.node.x > this.player.x) {
@@ -67,14 +68,15 @@ export default class TestEnemy extends cc.Component {
                 this.collisionTimer = 0;
             }
             else {
-                this.node.position = this.node.position.add(this.getRandomDirection().mul(this.moveSpeed * dt * 1.5));
+                this.randomDistance = this.randomIntFromInterval(this.minRoamingDistance, this.maxRoamingDistance);
+                this.node.position = this.node.position.add(this.getRandomDirection().mul(2));
             }
         }
-        
+
     }
 
-    gameTick (dt) {
-        
+    gameTick(dt) {
+
     }
 
     onBeginContact(contact, selfCollider, otherCollider) {
@@ -84,8 +86,8 @@ export default class TestEnemy extends cc.Component {
         if (otherCollider.node.name == "Bullet") {
             //this.node.destroy();
         }
-        if (otherCollider.node.name == "TestEnemy"){
-            cc.log("enemy hit enemy")
+        if (otherCollider.node.name == "TestEnemy") {
+            //cc.log("enemy hit enemy")
             this.isColliding = true;
         }
     }
@@ -94,26 +96,30 @@ export default class TestEnemy extends cc.Component {
         const randomDirectionX: number = Math.random() * 2 - 1; // 生成 -1 到 1 之間的隨機數
         const randomDirectionY: number = Math.random() * 2 - 1; // 生成 -1 到 1 之間的隨機數
         return cc.v2(randomDirectionX, randomDirectionY).normalize();
-  }
+    }
 
-  public init(node: cc.Node) {
-    this.isFrozen = false
-    this.player = cc.find('Canvas/Player')
-    this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
-    this.setInitPos(node)
-  }
+    randomIntFromInterval(min, max) { // min and max included 
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
 
-  setInitPos(node: cc.Node) {
-    this.node.parent = node
+    public init(node: cc.Node) {
+        this.isFrozen = false
+        this.player = cc.find('Canvas/Player')
+        this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
+        this.setInitPos(node)
+    }
 
-    this.node.position = cc.v3(0, 0, 0)
-    this.moveSpeed = 50
-  }
+    setInitPos(node: cc.Node) {
+        this.node.parent = node
 
-  // this function is called when the enemy manager calls "get" API.
-  reuse(EnemyManager) {
-    this.EnemyManager = EnemyManager
-  }
+        this.node.position = cc.v3(0, 0, 0)
+        this.moveSpeed = 50
+    }
 
-  
+    // this function is called when the enemy manager calls "get" API.
+    reuse(EnemyManager) {
+        this.EnemyManager = EnemyManager
+    }
+
+
 }
