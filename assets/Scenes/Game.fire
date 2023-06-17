@@ -324,7 +324,7 @@
     },
     "offset": {
       "__type__": "cc.Vec2",
-      "x": -1080,
+      "x": -960,
       "y": -700
     },
     "_id": "eetX/N7pFCMKD9Dt31pxXf"
@@ -1468,7 +1468,7 @@
       "__id__": 2
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 36
