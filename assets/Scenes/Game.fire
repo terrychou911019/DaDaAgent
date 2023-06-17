@@ -87,31 +87,31 @@
         "__id__": 13
       },
       {
-        "__id__": 95
+        "__id__": 88
       },
       {
-        "__id__": 97
+        "__id__": 90
       },
       {
         "__id__": 27
       },
       {
-        "__id__": 99
+        "__id__": 92
       },
       {
         "__id__": 70
       },
       {
-        "__id__": 101
+        "__id__": 94
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 103
+        "__id__": 96
       },
       {
-        "__id__": 104
+        "__id__": 97
       }
     ],
     "_prefab": null,
@@ -3754,9 +3754,6 @@
     "_children": [
       {
         "__id__": 82
-      },
-      {
-        "__id__": 89
       }
     ],
     "_active": true,
@@ -3811,7 +3808,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Goblin",
+    "_name": "TestEnemy",
     "_objFlags": 0,
     "_parent": {
       "__id__": 81
@@ -3835,210 +3832,6 @@
         "__id__": 87
       }
     ],
-    "_prefab": {
-      "__id__": 88
-    },
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 229,
-      "g": 141,
-      "b": 52,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 30,
-      "height": 30
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        210.525,
-        -74.998,
-        0,
-        0,
-        0,
-        0,
-        1,
-        5,
-        5,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "_id": "75L1elVotOgZ40OvgZSV1c"
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "8e36a621-8d64-4b82-917b-2f8722c6f050"
-    },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_atlas": {
-      "__uuid__": "8c0ea568-3f38-46c3-ae1c-e220ca65acc2"
-    },
-    "_id": "c59K6y7kBJ97wZ7r/+KnGl"
-  },
-  {
-    "__type__": "cc.RigidBody",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "_type": 2,
-    "_allowSleep": true,
-    "_gravityScale": 0,
-    "_linearDamping": 0,
-    "_angularDamping": 0,
-    "_linearVelocity": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_angularVelocity": 0,
-    "_fixedRotation": true,
-    "enabledContactListener": true,
-    "bullet": true,
-    "awakeOnLoad": true,
-    "_id": "5csWwkktZL+Zb+3Pbh0pQv"
-  },
-  {
-    "__type__": "cc.PhysicsBoxCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "tag": 0,
-    "_density": 1,
-    "_sensor": false,
-    "_friction": 0,
-    "_restitution": 0,
-    "body": null,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 8,
-      "height": 8
-    },
-    "_id": "fd+ovlENFKmIcLmButGGgv"
-  },
-  {
-    "__type__": "7e920l4AQhL3a+kiqjewECl",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "player": null,
-    "playerLife": null,
-    "moveSpeed": 50,
-    "_id": "6bSXkqfzZOyI90ACz1iVBU"
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "d81d9c0f-ee84-499d-be89-a9199f7bd9ec"
-    },
-    "_clips": [
-      {
-        "__uuid__": "d81d9c0f-ee84-499d-be89-a9199f7bd9ec"
-      }
-    ],
-    "playOnLoad": true,
-    "_id": "69Bb3sSbJCWJEmDvdjR+VK"
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 82
-    },
-    "asset": {
-      "__uuid__": "37dfeb6d-808b-463d-90a0-5f27f6169b2b"
-    },
-    "fileId": "",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "TestEnemy",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 81
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 90
-      },
-      {
-        "__id__": 91
-      },
-      {
-        "__id__": 92
-      },
-      {
-        "__id__": 93
-      },
-      {
-        "__id__": 94
-      }
-    ],
     "_prefab": null,
     "_opacity": 255,
     "_color": {
@@ -4050,8 +3843,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 30,
-      "height": 30
+      "width": 150,
+      "height": 150
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -4062,15 +3855,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -156.63,
-        94.459,
+        -158.972,
+        -13.261,
         0,
         0,
         0,
         0,
         1,
-        5,
-        5,
+        1,
+        1,
         1
       ]
     },
@@ -4092,7 +3885,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 89
+      "__id__": 82
     },
     "_enabled": true,
     "_materials": [
@@ -4126,7 +3919,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 89
+      "__id__": 82
     },
     "_enabled": true,
     "_type": 2,
@@ -4151,7 +3944,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 89
+      "__id__": 82
     },
     "_enabled": true,
     "tag": 0,
@@ -4163,12 +3956,12 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -10
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 8,
-      "height": 8
+      "width": 40,
+      "height": 40
     },
     "_id": "bdNdFN4KhK6ZQ7MPOTmrSt"
   },
@@ -4177,7 +3970,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 89
+      "__id__": 82
     },
     "_enabled": true,
     "player": null,
@@ -4190,18 +3983,22 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 89
+      "__id__": 82
     },
     "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "d81d9c0f-ee84-499d-be89-a9199f7bd9ec"
-    },
+    "_defaultClip": null,
     "_clips": [
       {
+        "__uuid__": "6e500a88-b02e-45dc-9862-beb9055b531f"
+      },
+      {
         "__uuid__": "d81d9c0f-ee84-499d-be89-a9199f7bd9ec"
+      },
+      {
+        "__uuid__": "4c87e6c8-88e5-4e3f-9894-c9a479ec1daf"
       }
     ],
-    "playOnLoad": true,
+    "playOnLoad": false,
     "_id": "f1h1b3tFNOYpSW92Sz35/z"
   },
   {
@@ -4215,7 +4012,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 96
+        "__id__": 89
       }
     ],
     "_prefab": null,
@@ -4271,7 +4068,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 95
+      "__id__": 88
     },
     "_enabled": true,
     "skillChooseModal": {
@@ -4293,7 +4090,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 98
+        "__id__": 91
       }
     ],
     "_prefab": null,
@@ -4349,7 +4146,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 97
+      "__id__": 90
     },
     "_enabled": true,
     "mainCamera": {
@@ -4375,7 +4172,7 @@
     },
     "weaponSpin": null,
     "TimeManager": {
-      "__id__": 99
+      "__id__": 92
     },
     "_id": "073Xq3+/tPZYK1EHnGAm+K"
   },
@@ -4390,7 +4187,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 100
+        "__id__": 93
       }
     ],
     "_prefab": null,
@@ -4446,7 +4243,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 99
+      "__id__": 92
     },
     "_enabled": true,
     "Minute": {
@@ -4471,7 +4268,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 102
+        "__id__": 95
       }
     ],
     "_prefab": null,
@@ -4527,7 +4324,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 101
+      "__id__": 94
     },
     "_enabled": true,
     "enemyPrefab": {
