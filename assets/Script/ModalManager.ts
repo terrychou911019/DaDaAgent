@@ -5,6 +5,9 @@ export default class ModalManager extends cc.Component {
     @property(cc.Prefab)
     skillChooseModal: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    pauseModal: cc.Prefab = null;
+
     @property(cc.Node)
     player: cc.Node = null;
     // LIFE-CYCLE CALLBACKS:
@@ -24,6 +27,12 @@ export default class ModalManager extends cc.Component {
         modal.setPosition(this.player.x, this.player.y);
     }
 
+    showPauseModal() {
+        const modal = cc.instantiate(this.pauseModal);
+        modal.parent = this.node;
+        modal.setPosition(this.player.x, this.player.y);
+    }
+    
     hideAll() {
         this.node.removeAllChildren();
     }

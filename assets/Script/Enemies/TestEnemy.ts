@@ -24,12 +24,14 @@ export default class TestEnemy extends cc.Component {
   private maxRoamingDistance: number = 5 // 最大漫遊距離
   private randomDistance: number = 0 // 隨機漫遊距離
   private EnemyManager = null
+  private gameManager = null
 
   onLoad() {
     cc.director.getPhysicsManager().enabled = true
     cc.director.getCollisionManager().enabled = true
     this.player = cc.find('Canvas/Player')
     this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
+    this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
   }
 
   start() {
@@ -37,6 +39,10 @@ export default class TestEnemy extends cc.Component {
   }
 
   update(dt) {
+    if(this.gameManager.isGamePaused){
+      return;
+    }
+
     //cc.log(this.playerLife.cur_life)
     if (this.isFrozen == true) {
       return
@@ -87,8 +93,6 @@ export default class TestEnemy extends cc.Component {
       cc.log('put enemy back to pool')
     }
   }
-
-  gameTick(dt) {}
 
   onBeginContact(contact, selfCollider, otherCollider) {
     if (otherCollider.node.name == 'Player') {
