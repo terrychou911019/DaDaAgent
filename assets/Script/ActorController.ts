@@ -57,6 +57,13 @@ export default class ActorController extends Controller {
   public get moveAxis2D() {
     return new cc.Vec2(this.moveAxisX, this.moveAxisY)
   }
+  public leftShift: ButtonState = ButtonState.Rest;
+
+  private canDash: boolean = true;
+  private isDashing: boolean = false;
+  private dashingPower: number = 2.5;
+  private dashingTime = 0.2;
+  private dashingCooldown = 1;
 
   checkstate() {
     if (
@@ -120,6 +127,7 @@ export default class ActorController extends Controller {
           : this.node.scaleX
       this.moveAxisX = this.inputSource.horizontalAxis
       this.moveAxisY = this.inputSource.verticalAxis
+      this.leftShift = this.inputSource.skill;
     }
     //check current state
     this.checkstate()
@@ -132,7 +140,23 @@ export default class ActorController extends Controller {
       this.playFlameWalkParticle();
     }
 
-    this.rigidBody.linearVelocity = this.moveAxis2D.mul(this.moveSpeed)
+    if(this.leftShift == ButtonState.Held && this.canDash) {
+      this.isDashing = true;
+      this.canDash = false;
+      this.scheduleOnce(() => {
+        this.canDash = true;
+      }, this.dashingCooldown);
+      this.scheduleOnce(() => {
+        this.isDashing = false;
+      }, this.dashingTime);
+    }
+
+    if(this.isDashing) {
+      this.rigidBody.linearVelocity = this.moveAxis2D.mul(this.dashingPower * this.moveSpeed);
+    }
+    else{
+      this.rigidBody.linearVelocity = this.moveAxis2D.mul(this.moveSpeed);
+    }
 
     this.node.position = this.node.position.add(
       new cc.Vec3(
@@ -151,4 +175,5 @@ export default class ActorController extends Controller {
       this.particleManager.getComponent('ParticleManager').spawnFlameWalkParticle(new cc.Vec2(this.node.position.x, this.node.position.y - this.node.height / 2));
     }
   }
+
 }
