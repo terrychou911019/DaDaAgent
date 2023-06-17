@@ -96,8 +96,6 @@ export default class TestEnemy extends cc.Component {
         return cc.v2(randomDirectionX, randomDirectionY).normalize();
   }
 
-  gameTick(dt) {}
-
   public init(node: cc.Node) {
     this.isFrozen = false
     this.player = cc.find('Canvas/Player')
@@ -117,12 +115,5 @@ export default class TestEnemy extends cc.Component {
     this.EnemyManager = EnemyManager
   }
 
-  onBeginContact(contact, selfCollider, otherCollider) {
-    if (otherCollider.node.name == 'Player') {
-      this.playerLife.minusLife(10)
-    }
-    if (otherCollider.node.name == 'Bullet') {
-      //this.node.destroy();
-    }
-  }
+  
 }
