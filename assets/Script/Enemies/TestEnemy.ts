@@ -112,6 +112,7 @@ export default class TestEnemy extends cc.Component {
 
   setInitPos(node: cc.Node) {
     this.node.parent = node
+    this.node.name = 'TestEnemy'
 
     this.moveSpeed = 50
     // n is from 0 to 1
