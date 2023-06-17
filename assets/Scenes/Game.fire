@@ -90,36 +90,31 @@
         "__id__": 44
       },
       {
-        "__id__": 88
+        "__id__": 95
       },
       {
         "__id__": 109
-        "__id__": 90
       },
       {
         "__id__": 105
       },
       {
         "__id__": 111
-        "__id__": 92
       },
       {
         "__id__": 84
       },
       {
         "__id__": 46
-        "__id__": 94
       }
     ],
     "_active": true,
     "_components": [
       {
         "__id__": 113
-        "__id__": 96
       },
       {
         "__id__": 114
-        "__id__": 97
       }
     ],
     "_prefab": null,
@@ -4408,7 +4403,6 @@
     "_components": [
       {
         "__id__": 100
-        "__id__": 82
       }
     ],
     "_prefab": null,
@@ -4462,8 +4456,6 @@
   {
     "__type__": "cc.Label",
     "_name": "",
-    "__type__": "cc.Node",
-    "_name": "TestEnemy",
     "_objFlags": 0,
     "node": {
       "__id__": 99
@@ -4603,9 +4595,6 @@
       "a": 255
     },
     "hoverColor": {
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
       "__type__": "cc.Color",
       "r": 255,
       "g": 255,
@@ -4624,21 +4613,6 @@
     },
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        -100000000000000,
-        6844.459,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0.1,
-        5,
-        1
-      ]
     },
     "pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
@@ -4648,19 +4622,6 @@
     },
     "hoverSprite": {
       "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "_id": "66vTDC7GtFOLYjqw+Cc+Kp"
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
     },
     "_N$disabledSprite": {
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
@@ -4674,74 +4635,11 @@
     "__type__": "cc.ClickEvent",
     "target": {
       "__id__": 105
-    "__type__": "cc.RigidBody",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
     },
     "component": "",
     "_componentId": "bd61bhUFkxBp7rT//rNarqp",
     "handler": "gainScore",
     "customEventData": ""
-  },
-  {
-    "__type__": "cc.PhysicsBoxCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "tag": 0,
-    "_density": 1,
-    "_sensor": false,
-    "_friction": 0,
-    "_restitution": 0,
-    "body": null,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 8,
-      "height": 8
-    },
-    "_id": "bdNdFN4KhK6ZQ7MPOTmrSt"
-  },
-  {
-    "__type__": "7e920l4AQhL3a+kiqjewECl",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "player": null,
-    "playerLife": null,
-    "moveSpeed": 50,
-    "_id": "13rkgS+RlHCJdNlIGUFrf3"
-  },
-  {
-    "__type__": "cc.Animation",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "d81d9c0f-ee84-499d-be89-a9199f7bd9ec"
-    },
-    "_clips": [
-      {
-        "__uuid__": "d81d9c0f-ee84-499d-be89-a9199f7bd9ec"
-      }
-    ],
-    "playOnLoad": true,
-    "_id": "f1h1b3tFNOYpSW92Sz35/z"
   },
   {
     "__type__": "cc.Node",
@@ -4755,7 +4653,6 @@
     "_components": [
       {
         "__id__": 106
-        "__id__": 89
       }
     ],
     "_prefab": null,
@@ -4812,7 +4709,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 105
-      "__id__": 88
     },
     "_enabled": true,
     "Score5": {
@@ -4846,16 +4742,6 @@
     "_cullingMask": 4294967295,
     "_clearFlags": 7,
     "_backgroundColor": {
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 91
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
       "__type__": "cc.Color",
       "r": 0,
       "g": 0,
@@ -4887,7 +4773,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 46
-      "__id__": 90
     },
     "_enabled": true,
     "target": {
@@ -4901,18 +4786,6 @@
     "smoothTime": 0.1,
     "_id": "19T4G8MaRJHonb+7UkGj9f"
   },
-    "particleManager": {
-      "__id__": 75
-    },
-    "enemyGroup": {
-      "__id__": 81
-    },
-    "weaponSpin": null,
-    "TimeManager": {
-      "__id__": 92
-    },
-    "_id": "073Xq3+/tPZYK1EHnGAm+K"
-  },
   {
     "__type__": "cc.Node",
     "_name": "TimeManager",
@@ -4925,7 +4798,6 @@
     "_components": [
       {
         "__id__": 110
-        "__id__": 93
       }
     ],
     "_prefab": null,
@@ -4982,7 +4854,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 109
-      "__id__": 92
     },
     "_enabled": true,
     "Minute": {
@@ -5008,7 +4879,6 @@
     "_components": [
       {
         "__id__": 112
-        "__id__": 95
       }
     ],
     "_prefab": null,
@@ -5065,7 +4935,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 111
-      "__id__": 94
     },
     "_enabled": true,
     "enemyGroup": {

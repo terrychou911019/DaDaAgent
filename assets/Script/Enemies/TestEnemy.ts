@@ -55,6 +55,10 @@ export default class TestEnemy extends cc.Component {
 
   update(dt) {
     //cc.log(this.playerLife.cur_life)
+    if(this.gameManager.isGamePaused){
+      return;
+    }
+    
     if (this.isFrozen == true) {
       return
     }
