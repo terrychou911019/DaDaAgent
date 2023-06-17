@@ -24,7 +24,7 @@ export default class WeaponSpin extends cc.Component {
     createWheels(cnt) {
         for (let i = 0; i < cnt; i++) {
             let wheel = cc.instantiate(this.wheelPrefab);
-            this.node.addChild(wheel);
+            this.node.addChild(wheel, 1, "wheel");
             this.wheels.push(wheel);
         }
     }

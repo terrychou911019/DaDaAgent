@@ -1313,8 +1313,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -179.671,
-        42.021,
+        -397.454,
+        -192.154,
         0,
         0,
         0,
@@ -1434,6 +1434,8 @@
     "player": null,
     "playerLife": null,
     "moveSpeed": 50,
+    "ExpManager": null,
+    "scoreManager": null,
     "_id": "13rkgS+RlHCJdNlIGUFrf3"
   },
   {
@@ -1466,7 +1468,7 @@
       "__id__": 2
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 36
