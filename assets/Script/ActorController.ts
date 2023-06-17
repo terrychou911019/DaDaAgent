@@ -73,17 +73,23 @@ export default class ActorController extends Controller {
     switch (this.cur_State) {
       case State.Idle:
         if (!this.idleAnimState.isPlaying) {
-          this._animation.play(this.idleAnimationName)
+          if (this.idleAnimationName) {
+            this._animation.play(this.idleAnimationName)
+          }
         }
         break
       case State.Walk:
         if (!this.walkAnimState.isPlaying) {
-          this._animation.play(this.walkAnimationName)
+          if (this.walkAnimationName) {
+            this._animation.play(this.walkAnimationName)
+          }
         }
         break
       case State.Die:
         if (!this.dieAnimState.isPlaying) {
-          this._animation.play(this.dieAnimationName)
+          if (this.dieAnimationName) {
+            this._animation.play(this.dieAnimationName)
+          }
         }
         break
       default:

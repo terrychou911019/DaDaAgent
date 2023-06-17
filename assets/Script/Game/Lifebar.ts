@@ -13,7 +13,7 @@ export default class NewClass extends cc.Component {
     @property(Number)
     Max_life:number = 100;
 
-    private cur_life:number;
+    public cur_life:number;
 
     private original_width = 30;
 
@@ -23,6 +23,13 @@ export default class NewClass extends cc.Component {
 
     start () {
         this.cur_life = this.Max_life;
+    }
+
+    minusLife(damage: number) {
+        this.cur_life -= damage;
+        if (this.cur_life <= 0) {
+            this.cur_life = 0;
+        }
     }
 
     update (dt) {
