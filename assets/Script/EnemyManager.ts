@@ -2,12 +2,19 @@ const { ccclass, property } = cc._decorator
 
 @ccclass
 export default class enemyManager extends cc.Component {
+  @property(cc.Node)
+  private enemyGroup: cc.Node = null
+
   @property(cc.Prefab)
   private enemyPrefab: cc.Prefab = null
 
   private enemyPool = null
 
+  private createCD = 0.5;
+
   onLoad() {
+    this.enemyGroup = cc.find('Canvas/EnemyGroup')
+
     this.enemyPool = new cc.NodePool('TestEnemy')
 
     let maxEnemyNum = 2000
@@ -16,9 +23,11 @@ export default class enemyManager extends cc.Component {
       let enemy = cc.instantiate(this.enemyPrefab)
 
       this.enemyPool.put(enemy)
+      // put enemy node under enemy groupx
     }
 
-    this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
+    this.createCD = 0.5;
+    //this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
   }
 
   //call this function to add new enemy to the scene.
@@ -28,5 +37,14 @@ export default class enemyManager extends cc.Component {
     if (this.enemyPool.size() > 0) enemy = this.enemyPool.get(this.enemyPool)
 
     if (enemy != null) enemy.getComponent('TestEnemy').init(this.node)
+  }
+
+  gameTick(dt) {
+    this.createCD -= dt;
+    if (this.createCD <= 0) {
+      this.createCD = 0.5;
+
+      this.createEnemy();
+    }
   }
 }

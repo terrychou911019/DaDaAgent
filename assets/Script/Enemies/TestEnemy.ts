@@ -24,6 +24,7 @@ export default class TestEnemy extends cc.Component {
   private maxRoamingDistance: number = 5 // 最大漫遊距離
   private randomDistance: number = 0 // 隨機漫遊距離
   private EnemyManager = null
+  private gameManager = null
 
   private enemyHealth: number = 100
   private isDead: boolean = false
@@ -38,6 +39,7 @@ export default class TestEnemy extends cc.Component {
     cc.director.getCollisionManager().enabled = true
     this.player = cc.find('Canvas/Player')
     this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
+    this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
     this.anim = this.getComponent(cc.Animation)
     this.rigidbody = this.getComponent(cc.RigidBody)
     this.collider = this.getComponent(cc.PhysicsBoxCollider)
@@ -52,29 +54,7 @@ export default class TestEnemy extends cc.Component {
   }
 
   update(dt) {
-    // goblins dead after 5 hits
-    if (this.enemyHealth <= 0) {
-      this.isDead = true
-      this.rigidbody.enabledContactListener = false
-      this.collider.enabled = false
-      this.scheduleOnce(() => {
-        this.anim.stop()
-        this.anim.play('goblin_die')
-      })
-
-      //let fade = cc.fadeOut(1)
-      let finished = cc.callFunc(() => {
-        this.EnemyManager.put(this.node)
-      })
-      //this.node.runAction(cc.sequence(fade, finished))
-      this.node.runAction(finished)
-
-      this.enemyHealth = 100
-      this.isDead = false
-      this.rigidbody.enabledContactListener = true
-      this.collider.enabled = true
-      this.anim.stop()
-    }
+    //cc.log(this.playerLife.cur_life)
     if (this.isFrozen == true) {
       return
     }
@@ -126,8 +106,6 @@ export default class TestEnemy extends cc.Component {
       cc.log('put enemy back to pool')
     }
   }
-
-  gameTick(dt) {}
 
   onBeginContact(contact, selfCollider, otherCollider) {
     if (otherCollider.node.name == 'Player') {

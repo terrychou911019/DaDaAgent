@@ -29,6 +29,9 @@ export default class GameManager extends cc.Component {
     @property(cc.Node)
     TimeManager: cc.Node = null;
 
+    @property(cc.Node)
+    enemyManager: cc.Node = null;
+
     isGamePaused = false;
     // LIFE-CYCLE CALLBACKS:
 
@@ -36,6 +39,10 @@ export default class GameManager extends cc.Component {
 
     start () {
 
+    }
+
+    debug(){
+        console.log(this.enemyGroup.children.length);
     }
 
     update (dt) {
@@ -52,10 +59,11 @@ export default class GameManager extends cc.Component {
         this.player.getComponent('ActorController').gameTick(dt);
         this.weapon.getComponent('Weapon').gameTick(dt);
         //this.particleManager.getComponent('ParticleManager').gameTick(dt);
-        this.enemyGroup.children.forEach((enemy) => {
-            enemy.getComponent('TestEnemy').gameTick(dt);
-        });
-        // this.weaponSpin.getComponent('WeaponSpin').gameTick(dt);
+        //this.enemyGroup.children.forEach((enemy) => {
+            //enemy.getComponent('TestEnemy').gameTick(dt);
+        //});
+        this.weaponSpin.getComponent('WeaponSpin').gameTick(dt);
+        this.enemyManager.getComponent('EnemyManager').gameTick(dt);
     }
 
     pauseGame() {
@@ -64,5 +72,16 @@ export default class GameManager extends cc.Component {
 
     resumeGame(){
         this.isGamePaused = false;
+    }
+
+    changeGame(){
+        if(this.isGamePaused){
+            this.isGamePaused = false;
+            this.resumeGame();
+        }
+        else{
+            this.isGamePaused = true;
+            this.pauseGame();
+        }
     }
 }
