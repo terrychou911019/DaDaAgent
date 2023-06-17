@@ -18,7 +18,11 @@ export default class TestEnemy extends cc.Component {
     @property(Number)
     moveSpeed: number = 50;
 
-    private enemyManager = null;
+    private isColliding: boolean = false;
+    private collisionTimer: number = 0;
+    private collisionDuration: number = 1; // 碰撞後移動的持續時間
+    private minRoamingDistance: number = 20; // 最小漫遊距離
+    private maxRoamingDistance: number = 50; // 最大漫遊距離
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;
@@ -31,11 +35,8 @@ export default class TestEnemy extends cc.Component {
         this.isFrozen = false;
     }
 
-    update() {
+    update(dt) {
         cc.log(this.playerLife.cur_life)
-    }
-
-    gameTick (dt) {
         if(this.isFrozen == true){
             return;
         }
@@ -47,6 +48,50 @@ export default class TestEnemy extends cc.Component {
         let direction = playerPos.sub(enemyPos);
         let normalizedDirection = direction.normalize();
         this.node.position = enemyPos.add(normalizedDirection.mul(this.moveSpeed * dt));
+
+        // change enemy facing direction for x and -x 
+        if (this.node.x > this.player.x) {
+            this.node.scaleX = -5;
+        }
+        else {
+            this.node.scaleX = 5;
+        }
+
+        // move enemy randomly when they collide
+        if (this.isColliding) {
+            this.collisionTimer += dt;
+            if (this.collisionTimer >= this.collisionDuration) {
+                this.isColliding = false;
+                this.collisionTimer = 0;
+            }
+            else {
+                this.node.position = this.node.position.add(this.getRandomDirection().mul(this.moveSpeed * dt * 1.5));
+            }
+        }
+        
+    }
+
+    gameTick (dt) {
+        
+    }
+
+    onBeginContact(contact, selfCollider, otherCollider) {
+        if (otherCollider.node.name == "Player") {
+            this.playerLife.minusLife(10);
+        }
+        if (otherCollider.node.name == "Bullet") {
+            //this.node.destroy();
+        }
+        if (otherCollider.node.name == "TestEnemy"){
+            cc.log("enemy hit enemy")
+            this.isColliding = true;
+        }
+    }
+
+    getRandomDirection(): cc.Vec2 {
+        const randomDirectionX: number = Math.random() * 2 - 1; // 生成 -1 到 1 之間的隨機數
+        const randomDirectionY: number = Math.random() * 2 - 1; // 生成 -1 到 1 之間的隨機數
+        return cc.v2(randomDirectionX, randomDirectionY).normalize();
     }
 
     public init(node: cc.Node) {
@@ -60,18 +105,11 @@ export default class TestEnemy extends cc.Component {
         this.node.position = cc.v3(0, 0, 0);
     }
 
-    reuse(enemyManager)
-    {
-        this.enemyManager = enemyManager;
-    }
+    // reuse(enemyManager)
+    // {
+    //     this.enemyManager = enemyManager;
+    // }
         
-    onBeginContact(contact, selfCollider, otherCollider) {
-        if (otherCollider.node.name == "Player") {
-            this.playerLife.minusLife(10);
-        }
-        if (otherCollider.node.name == "Bullet") {
-            //this.node.destroy();
-        }
-    }
+    
 
 }
