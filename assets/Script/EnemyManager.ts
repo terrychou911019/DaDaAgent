@@ -10,7 +10,7 @@ export default class enemyManager extends cc.Component {
   onLoad() {
     this.enemyPool = new cc.NodePool('TestEnemy')
 
-    let maxEnemyNum = 8
+    let maxEnemyNum = 20000
 
     for (let i: number = 0; i < maxEnemyNum; i++) {
       let enemy = cc.instantiate(this.enemyPrefab)
@@ -19,7 +19,7 @@ export default class enemyManager extends cc.Component {
       cc.log('enemyPool size: ' + this.enemyPool.size())
     }
 
-    this.schedule(this.createEnemy, 1) //set one enemy to the scene every 0.5s .
+    this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
   }
 
   //call this function to add new enemy to the scene.
