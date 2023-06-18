@@ -1,3 +1,5 @@
+import AudioManager, { AudioType } from "./AudioManager";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -12,10 +14,12 @@ export default class ModalManager extends cc.Component {
     player: cc.Node = null;
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    // onLoad () {
+        
+    // }
 
     start () {
-
+        this.node.zIndex = 2;
     }
 
     // update (dt) {}

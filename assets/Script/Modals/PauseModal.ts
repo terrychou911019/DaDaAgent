@@ -1,3 +1,5 @@
+import AudioManager from "../AudioManager";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -13,6 +15,8 @@ export default class PauseModal extends cc.Component {
         this.node.getChildByName('ResumeButton').on(cc.Node.EventType.MOUSE_DOWN, () => {
             this.gameManager.resumeGame();
             this.node.parent.getComponent('ModalManager').hideAll();
+
+            AudioManager.getInstance().resumeAll();
         });
     }
 

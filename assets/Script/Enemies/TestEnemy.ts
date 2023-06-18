@@ -1,4 +1,6 @@
 import lifebar from '../Game/Lifebar'
+import expManager from '../EXPManager'
+import ScoreManager from '../ScoreManager'
 
 const { ccclass, property } = cc._decorator
 
@@ -16,6 +18,12 @@ export default class TestEnemy extends cc.Component {
 
   @property(Number)
   moveSpeed: number = 50
+
+  @property(expManager)
+  ExpManager: expManager = null
+
+  @property(ScoreManager)
+  scoreManager: ScoreManager = null
 
   private isColliding: boolean = false
   private collisionTimer: number = 0
@@ -43,6 +51,10 @@ export default class TestEnemy extends cc.Component {
     this.anim = this.getComponent(cc.Animation)
     this.rigidbody = this.getComponent(cc.RigidBody)
     this.collider = this.getComponent(cc.PhysicsBoxCollider)
+    this.ExpManager = cc.find('Canvas/EXPManager').getComponent('EXPManager')
+    this.scoreManager = cc
+      .find('Canvas/ScoreManager')
+      .getComponent('ScoreManager')
   }
 
   start() {
@@ -131,7 +143,13 @@ export default class TestEnemy extends cc.Component {
     }
     if (otherCollider.node.name == 'Bullet') {
       //this.node.destroy();
-      this.enemyHealth -= 20
+      this.enemyHealth -= 10
+    }
+    if (otherCollider.node.name == 'wheel') {
+      this.enemyHealth -= 100
+      this.scheduleOnce(() => {
+        contact.disabled = true
+      })
     }
     if (
       otherCollider.node.name != 'Player' &&

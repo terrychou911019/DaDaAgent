@@ -47,5 +47,8 @@ export default class CameraFollow extends cc.Component {
         this.shakeMagnitude = shakeMagnitude;
     }
 
+    start(){
+        this.node.zIndex = 3;
+    }
     
 }
