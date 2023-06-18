@@ -5,6 +5,7 @@ const { ccclass, property } = cc._decorator
 @ccclass
 export default class TestEnemy extends cc.Component {
 	isFrozen: boolean = false
+	isHit: boolean = false
 
 	// LIFE-CYCLE CALLBACKS:
 
@@ -36,13 +37,20 @@ export default class TestEnemy extends cc.Component {
 
 	private EXPManager: any = null;
 	private ScoreManager: any = null;
+	private skillManager: any = null;
+
+	private weapon = null;
+	private weaponSpin = null;
 
 	onLoad() {
-		
+		this.weapon = cc.find("Canvas/Player/Weapon").getComponent("Weapon");
+		this.weaponSpin = cc.find("Canvas/WeaponSpin").getComponent("WeaponSpin");
+		this.skillManager = cc.find("Canvas/SkillManager").getComponent("SkillManager");
 	}
 
 	start() {
 		this.isFrozen = false
+		this.isHit = false
 	}
 
 	deadEffect() {
@@ -86,7 +94,7 @@ export default class TestEnemy extends cc.Component {
 			let direction = playerPos.sub(enemyPos)
 			let normalizedDirection = direction.normalize()
 			this.node.position = enemyPos.add(
-				normalizedDirection.mul(this.moveSpeed * dt),
+				normalizedDirection.mul(this.isHit ? this.moveSpeed * dt * (-1) : this.moveSpeed * dt),
 			)
 
 			// change enemy facing direction for x and -x
@@ -136,10 +144,29 @@ export default class TestEnemy extends cc.Component {
 		}
 		if (otherCollider.node.name == 'Bullet') {
 			//this.node.destroy();
-			this.enemyHealth -= 10
+			if (this.skillManager.skillMap["Thunder"] && this.skillManager.skillMap["Ice"]) {
+				let d = this.weapon.DAMAGE;
+				d += 15;
+				this.enemyHealth -= d;
+			}
+			else if (this.skillManager.skillMap["Thunder"]) {
+				let d = this.weapon.DAMAGE;
+				d += 10;
+				this.enemyHealth -= d;
+			}
+			else if (this.skillManager.skillMap["Ice"]) {
+				let d = this.weapon.DAMAGE;
+				d += 5;
+				this.enemyHealth -= d;
+			}
+			else {
+				this.enemyHealth -= this.weapon.DAMAGE;	
+			}	
+			cc.log(this.enemyHealth)
+			
 		}
 		if (otherCollider.node.name == 'wheel') {
-			this.enemyHealth -= 100
+			this.enemyHealth -= this.weaponSpin.damage
 			this.scheduleOnce(() => {
 				contact.disabled = true
 			})
@@ -179,6 +206,7 @@ export default class TestEnemy extends cc.Component {
 		this.enemyHealth = 100
 		this.isDead = false
 		this.isFrozen = false
+		this.isHit = false
 		this.node.opacity = 255
 		this.anim.play('goblin_walk')
 		this.rigidbody.enabledContactListener = true

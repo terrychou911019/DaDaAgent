@@ -152,7 +152,7 @@ export default class ActorController extends Controller {
 
 		if (this.skillManager.getComponent('SkillManager').skillMap['FlameWalk'] == true) {
 			this.playFlameWalkParticle();
-
+			this.moveSpeed = 5;
 			// too noisy
 			//AudioManager.getInstance().playSoundEffect(AudioType.FlameWalk);
 		}

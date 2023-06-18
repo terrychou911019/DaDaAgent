@@ -16,6 +16,8 @@ export default class WeaponSpin extends cc.Component {
 
     private wheels: cc.Node[] = [];
 
+    private damage: number = 10;
+
     start() {
         this.createWheels(4);
         this.setWheelsPosition();
