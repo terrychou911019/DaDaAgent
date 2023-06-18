@@ -2135,9 +2135,7 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -2259,9 +2257,7 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -2916,24 +2912,12 @@
       "b": 120,
       "a": 200
     },
-    "_N$normalSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "_N$pressedSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "pressedSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "_N$hoverSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "hoverSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "_N$disabledSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
+    "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
     "_N$target": {
       "__id__": 42
     },
@@ -3219,24 +3203,12 @@
       "b": 120,
       "a": 200
     },
-    "_N$normalSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "_N$pressedSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "pressedSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "_N$hoverSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "hoverSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
-    "_N$disabledSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
-    },
+    "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
     "_N$target": {
       "__id__": 45
     },
@@ -3825,9 +3797,7 @@
       "b": 120,
       "a": 200
     },
-    "_N$normalSprite": {
-      "__uuid__": "d014988d-b2a5-4cef-b123-ce6fb4f65cf1"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "730cdb5a-5931-4857-a758-6a9a2736f8b2"
     },
