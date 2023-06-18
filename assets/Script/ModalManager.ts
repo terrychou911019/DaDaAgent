@@ -1,3 +1,5 @@
+import AudioManager, { AudioType } from "./AudioManager";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
