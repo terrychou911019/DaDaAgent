@@ -48,7 +48,7 @@ export default class EXPManager extends cc.Component {
             cc.find('Canvas/GameManager').getComponent('GameManager').pauseGame();
             cc.find('Canvas/ModalManager').getComponent('ModalManager').showSkillChooseModal();
         
-            AudioManager.getInstance().playSoundEffect(AudioType.ChooseSkill);
+            //AudioManager.getInstance().playSoundEffect(AudioType.ChooseSkill);
         }
         
         if (this.curLevel === this.MAXLEVEL) {
