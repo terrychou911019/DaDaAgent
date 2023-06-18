@@ -215,6 +215,7 @@ export default class NewClass extends cc.Component {
             await firebase.database().ref(userInfo.user.uid).set({
                 id:userInfo.user.uid,
                 username:username, 
+                highscore:0
             }).then(()=>{
                 console.log("signup successful")
                 this.changeScene();
