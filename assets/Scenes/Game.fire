@@ -3348,6 +3348,9 @@
     "Second0": {
       "__id__": 46
     },
+    "enemyManager": {
+      "__id__": 71
+    },
     "_id": "66kICI01tFCr2IypZ7CsmS"
   },
   {
@@ -3425,6 +3428,9 @@
     },
     "enemyPrefab": {
       "__uuid__": "37dfeb6d-808b-463d-90a0-5f27f6169b2b"
+    },
+    "boss": {
+      "__uuid__": "0515db20-3109-4198-81a4-b14ad6eb3938"
     },
     "_id": "28j1v+XNVCBK9YLg1F+LGv"
   },

@@ -17,6 +17,9 @@ export default class TimeManager extends cc.Component {
     timeUP: boolean = false;
     timer: any = null;
 
+    @property(cc.Node)
+    enemyManager: cc.Node = null;
+
     countDown() {
         if (this.curMinute === 0 && this.curSecond === 0) {
             alert("Time UP!");
@@ -50,6 +53,12 @@ export default class TimeManager extends cc.Component {
         if (this.countDownCD <= 0) {
             this.countDownCD = 1;
             this.countDown();
+        }
+
+        // summon the boss in the last 30 seconds
+        // if (this.curMinute === 0 && this.curSecond === 30) {
+        if (this.curMinute === 2 && this.curSecond === 55) {
+            this.enemyManager.getComponent('EnemyManager').summonBoss();
         }
     }
 }
