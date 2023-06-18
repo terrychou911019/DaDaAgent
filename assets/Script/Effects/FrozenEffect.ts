@@ -7,11 +7,11 @@ export default class FrozenEffect extends cc.Component {
     // onLoad () {}
  
     start () {
-        // destroy this node after 2 second
+        // destroy this node after 2.5 second
         this.scheduleOnce(function() {
             this.node.destroy();
         }
-        , 2);
+        , 2.5);
     }
  
     // update (dt) {}

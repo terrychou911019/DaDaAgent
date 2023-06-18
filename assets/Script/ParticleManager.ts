@@ -17,10 +17,12 @@ export default class ParticleManager extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    // onLoad () {
+        
+    // }
 
     start () {
-
+        this.node.zIndex = 1;
     }
 
     // update (dt) {}

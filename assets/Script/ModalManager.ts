@@ -12,10 +12,12 @@ export default class ModalManager extends cc.Component {
     player: cc.Node = null;
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    // onLoad () {
+        
+    // }
 
     start () {
-
+        this.node.zIndex = 2;
     }
 
     // update (dt) {}
