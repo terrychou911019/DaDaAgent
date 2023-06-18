@@ -117,6 +117,10 @@ export default class ActorController extends Controller {
 
     //get the charater's name and assign the animation
     let character = cc.sys.localStorage.getItem('charater')
+    //default character
+    if (!character) {
+      character = "LittleRed";
+    }
     this.idleAnimationName = character + "_idle";
     this.walkAnimationName = character + "_walk";
     this.dieAnimationName = character + "_die";
