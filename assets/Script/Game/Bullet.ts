@@ -1,3 +1,5 @@
+import AudioManager, { AudioType } from "../AudioManager"
+
 interface SHOOTRANGE {
   x: number
   y: number
@@ -35,12 +37,16 @@ export default class Bullet extends cc.Component {
       if (this.skillManager.skillMap['Thunder'] == true) {
         this.particleManager
           .getComponent('ParticleManager')
-          .spawnThunderEffect(other.node.position)
+          .spawnThunderEffect(other.node.position);
+        
+        AudioManager.getInstance().playSoundEffect(AudioType.Explosion);
       }
       if (this.skillManager.skillMap['Ice'] == true) {
         this.particleManager
           .getComponent('ParticleManager')
-          .spawnIceParticle(other.node.position)
+          .spawnIceParticle(other.node.position);
+
+        AudioManager.getInstance().playSoundEffect(AudioType.Ice);
       }
       if (this.skillManager.skillMap['Frozen'] == true) {
         // if enemy is already frozen, then do nothing
@@ -55,7 +61,9 @@ export default class Bullet extends cc.Component {
         other.node.getComponent('TestEnemy').scheduleOnce(function () {
           console.log('unfroze')
           other.node.getComponent('TestEnemy').isFrozen = false
-        }, 2)
+        }, 2);
+
+        AudioManager.getInstance().playSoundEffect(AudioType.Frozen);
       }
     }
   }
@@ -71,6 +79,9 @@ export default class Bullet extends cc.Component {
     if (this.skillManager.skillMap['LightBullet'] == false) {
       // cancel child visible
       this.node.getChildByName('wake').active = false
+    }
+    else{
+      AudioManager.getInstance().playSoundEffect(AudioType.LightBullet);
     }
 
     this.scheduleOnce(() => {

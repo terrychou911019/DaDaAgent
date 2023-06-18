@@ -1,3 +1,4 @@
+import AudioManager, { AudioType } from "../AudioManager";
 import ParticleManager from "../ParticleManager";
 
 const {ccclass, property} = cc._decorator;
@@ -66,6 +67,8 @@ export default class Weapon extends cc.Component {
 
         if(this.skillManager.getComponent('SkillManager').skillMap['StrongBullet'] == true){
             this.Camera.getComponent('MainCamera').setShakeMagnitude(2);
+
+            AudioManager.getInstance().playSoundEffect(AudioType.StrongBullet);
         }
         
         this.createBullet(0);
@@ -82,6 +85,9 @@ export default class Weapon extends cc.Component {
         // render bullet number
         this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
         this.BulletNode.getChildByName("LoadingBar").width = 0;
+
+        // play sound effect
+        AudioManager.getInstance().playSoundEffect(AudioType.LaserShoot);
     }
 
     createBullet(adjustAngle: number){

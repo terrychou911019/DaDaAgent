@@ -1,3 +1,5 @@
+import AudioManager, { AudioType } from "../AudioManager";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -88,6 +90,8 @@ export default class SkillChooseModal extends cc.Component {
                 this.skillManager.chooseSkill(availableSkills[i]);
                 this.gameManager.resumeGame();
                 this.node.parent.getComponent('ModalManager').hideAll();
+
+                AudioManager.getInstance().playSoundEffect(AudioType.LevelUp);
             });
         }
 

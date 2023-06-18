@@ -5,6 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import AudioManager, { AudioType } from './AudioManager'
 import Controller from './Input/Controller'
 import { ButtonState } from './Input/IInputControl'
 
@@ -138,6 +139,9 @@ export default class ActorController extends Controller {
     
     if(this.skillManager.getComponent('SkillManager').skillMap['FlameWalk'] == true) {
       this.playFlameWalkParticle();
+
+      // too noisy
+      //AudioManager.getInstance().playSoundEffect(AudioType.FlameWalk);
     }
 
     if(this.leftShift == ButtonState.Held && this.canDash) {
@@ -149,6 +153,8 @@ export default class ActorController extends Controller {
       this.scheduleOnce(() => {
         this.isDashing = false;
       }, this.dashingTime);
+
+      AudioManager.getInstance().playSoundEffect(AudioType.Dash);
     }
 
     if(this.isDashing) {

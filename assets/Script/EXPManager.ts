@@ -1,3 +1,5 @@
+import AudioManager, { AudioType } from "./AudioManager";
+
 var expTable = {
     1: 280,
     2: 380,
@@ -43,6 +45,8 @@ export default class EXPManager extends cc.Component {
             this.levelLabel.getComponent(cc.Label).string = `${this.curLevel}`;
             cc.find('Canvas/GameManager').getComponent('GameManager').pauseGame();
             cc.find('Canvas/ModalManager').getComponent('ModalManager').showSkillChooseModal();
+        
+            AudioManager.getInstance().playSoundEffect(AudioType.ChooseSkill);
         }
         
         if (this.curLevel === this.MAXLEVEL) {

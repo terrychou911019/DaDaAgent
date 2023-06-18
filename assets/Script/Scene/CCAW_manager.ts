@@ -60,11 +60,15 @@ export default class CCAW extends cc.Component {
         ))
     }
 
+    moveToGame(){
+        this.turnOutButton()
+        this.MaskFadeinAction();
+    }
+
     turnOutButton(){//let all button uninteractable
         const allNodes = cc.find('Canvas').children;
         for (let i = 0; i < allNodes.length; i++) {
             const node = allNodes[i];
-            console.log(node.name)
             const button = node.getComponent(cc.Button);
             if (button) {
                 button.interactable = false;
@@ -76,7 +80,6 @@ export default class CCAW extends cc.Component {
         const allNodes = cc.find('Canvas').children;
         for (let i = 0; i < allNodes.length; i++) {
             const node = allNodes[i];
-            console.log(node.name)
             const button = node.getComponent(cc.Button);
             if (button) {
                 button.interactable = true;
@@ -90,15 +93,22 @@ export default class CCAW extends cc.Component {
             cc.delayTime(1),
             cc.fadeTo(1, 0),
             cc.callFunc(()=>{
-                this.maskAction();
+                this.maskFadeoutAction();
             })
         ))
     }
 
-    maskAction(){
+    maskFadeoutAction(){
         this.mask.runAction(cc.sequence(
             cc.delayTime(0.5),
             cc.fadeTo(1, 0)
+        ))
+    }
+
+    MaskFadeinAction(){
+        this.mask.runAction(cc.sequence(
+            cc.delayTime(0.5),
+            cc.fadeTo(255, 0)
         ))
     }
 

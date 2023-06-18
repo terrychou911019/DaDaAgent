@@ -52,8 +52,8 @@ export default class WeaponSpin extends cc.Component {
     }
 
     gameTick(dt) {
-        this.rotateWheels(dt);
         this.followPlayer();
+        this.rotateWheels(dt);
     }
 
     followPlayer() {
