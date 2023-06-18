@@ -91,30 +91,39 @@ export default class SkillChooseModal extends cc.Component {
                 this.gameManager.resumeGame();
                 this.node.parent.getComponent('ModalManager').hideAll();
 
-                AudioManager.getInstance().playSoundEffect(AudioType.LevelUp);
+                //AudioManager.getInstance().playSoundEffect(AudioType.LevelUp);
             });
         }
 
         // how many children in this node
         // console.log(this.node.childrenCount);
-        if(this.node.childrenCount == 0){
+        if(this.node.childrenCount == 1){
             this.gameManager.resumeGame();
             this.node.parent.getComponent('ModalManager').hideAll();
             console.log('no skill available');
         }
-        else if(this.node.childrenCount == 1){
-            // nothing
-        }
         else if(this.node.childrenCount == 2){
-            // adjust children position
-            this.node.children[0].x -= 100;
-            this.node.children[1].x += 100;
+            // nothing
+            this.node.children[1].y -= 20;
+            this.node.children[2].y -= 20;
+            this.node.children[3].y -= 20;
         }
         else if(this.node.childrenCount == 3){
             // adjust children position
-            this.node.children[0].x -= 200;
-            this.node.children[1].x += 0;
-            this.node.children[2].x += 200;
+            this.node.children[1].x -= 80;
+            this.node.children[2].x += 80;
+            this.node.children[1].y -= 20;
+            this.node.children[2].y -= 20;
+            this.node.children[3].y -= 20;
+        }
+        else if(this.node.childrenCount == 4){
+            // adjust children position
+            this.node.children[1].x -= 160;
+            this.node.children[2].x += 0;
+            this.node.children[3].x += 160;
+            this.node.children[1].y -= 20;
+            this.node.children[2].y -= 20;
+            this.node.children[3].y -= 20;
         }
         
     }

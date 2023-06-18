@@ -34,21 +34,28 @@ export default class Bullet extends cc.Component {
 	onBeginContact(contact, self, other) {
 		// if other is enemy, then let enemy take damage and destroy self
 		if (other.node.name == 'goblin') {
-			other.getComponent('TestEnemy').enemyHealth -= this.damage;
+			//other.getComponent('TestEnemy').enemyHealth -= this.damage;
+			if (this.skillManager.skillMap['StrongBullet']) {
+				other.node.getComponent("TestEnemy").isHit = true;
+				//cc.log(other.node.getComponent("TestEnemy").isHit);
+				other.node.getComponent('TestEnemy').scheduleOnce(function () {
+					other.node.getComponent('TestEnemy').isHit = false;
+				}, 0.25)
+			}
 
 			if (this.skillManager.skillMap['Thunder'] == true) {
 				this.particleManager
 					.getComponent('ParticleManager')
 					.spawnThunderEffect(other.node.position)
 
-				AudioManager.getInstance().playSoundEffect(AudioType.Explosion)
+				//AudioManager.getInstance().playSoundEffect(AudioType.Explosion)
 			}
 			if (this.skillManager.skillMap['Ice'] == true) {
 				this.particleManager
 					.getComponent('ParticleManager')
 					.spawnIceParticle(other.node.position)
 
-				AudioManager.getInstance().playSoundEffect(AudioType.Ice)
+				//AudioManager.getInstance().playSoundEffect(AudioType.Ice)
 			}
 			if (this.skillManager.skillMap['Frozen'] == true) {
 				// if enemy is already frozen, then do nothing
@@ -65,10 +72,12 @@ export default class Bullet extends cc.Component {
 					other.node.getComponent('TestEnemy').isFrozen = false
 				}, 2)
 
-				AudioManager.getInstance().playSoundEffect(AudioType.Frozen)
+				//AudioManager.getInstance().playSoundEffect(AudioType.Frozen)
 			}
 
-			this.node.destroy();
+			if (!this.skillManager.skillMap['LightBullet']) {
+				this.node.destroy();
+			}
 		}
 	}
 
@@ -86,7 +95,7 @@ export default class Bullet extends cc.Component {
 			this.node.getChildByName('wake').active = false
 		}
 		else {
-			AudioManager.getInstance().playSoundEffect(AudioType.LightBullet);
+			//AudioManager.getInstance().playSoundEffect(AudioType.LightBullet);
 		}
 
 		this.scheduleOnce(() => {

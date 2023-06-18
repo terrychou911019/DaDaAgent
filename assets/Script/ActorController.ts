@@ -152,7 +152,7 @@ export default class ActorController extends Controller {
 
 		if (this.skillManager.getComponent('SkillManager').skillMap['FlameWalk'] == true) {
 			this.playFlameWalkParticle();
-
+			this.moveSpeed = 5;
 			// too noisy
 			//AudioManager.getInstance().playSoundEffect(AudioType.FlameWalk);
 		}
@@ -167,7 +167,7 @@ export default class ActorController extends Controller {
 				this.isDashing = false;
 			}, this.dashingTime);
 
-			AudioManager.getInstance().playSoundEffect(AudioType.Dash);
+			//AudioManager.getInstance().playSoundEffect(AudioType.Dash);
 		}
 
 		if (this.isDashing) {

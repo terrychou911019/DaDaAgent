@@ -3,9 +3,8 @@ import lifebar from '../Game/Lifebar'
 const { ccclass, property } = cc._decorator
 
 @ccclass
-export default class TestEnemy extends cc.Component {
+export default class Boss extends cc.Component {
 	isFrozen: boolean = false
-	isHit: boolean = false
 
 	// LIFE-CYCLE CALLBACKS:
 
@@ -37,20 +36,43 @@ export default class TestEnemy extends cc.Component {
 
 	private EXPManager: any = null;
 	private ScoreManager: any = null;
-	private skillManager: any = null;
 
-	private weapon = null;
-	private weaponSpin = null;
+    private isChargingDash: boolean = false;
+    private canDash: boolean = true;
+	private isDashing: boolean = false;
+	private dashingPower: number = 2.5;
+	private dashingTime = 0.2;
+	private dashingCooldown = 3;
+    private chargingDashTime = 2;
+    private dashDirection: cc.Vec3;
 
 	onLoad() {
-		this.weapon = cc.find("Canvas/Player/Weapon").getComponent("Weapon");
-		this.weaponSpin = cc.find("Canvas/WeaponSpin").getComponent("WeaponSpin");
-		this.skillManager = cc.find("Canvas/SkillManager").getComponent("SkillManager");
+		
 	}
 
 	start() {
+		this.isFrozen = false;
+
+        cc.director.getPhysicsManager().enabled = true
+		cc.director.getCollisionManager().enabled = true
+		this.player = cc.find('Canvas/Player')
+		this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
+		this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
+		this.anim = this.getComponent(cc.Animation)
+		this.rigidbody = this.getComponent(cc.RigidBody)
+		this.collider = this.getComponent(cc.PhysicsBoxCollider)
+		this.EXPManager = cc.find('Canvas/EXPManager').getComponent('EXPManager');
+		this.ScoreManager = cc.find('Canvas/ScoreManager').getComponent('ScoreManager');
+		//this.moveSpeed = 50
+		this.enemyHealth = 100
+		this.isDead = false
 		this.isFrozen = false
-		this.isHit = false
+		this.node.opacity = 255
+		this.anim.play('boss_walk')
+		this.rigidbody.enabledContactListener = true
+		this.collider.enabled = true
+
+        // set init position
 	}
 
 	deadEffect() {
@@ -73,9 +95,10 @@ export default class TestEnemy extends cc.Component {
 			this.collider.enabled = false
 			// let fade = cc.fadeOut(1)
 			this.anim.stop()
-			this.anim.play('goblin_die')
+			this.anim.play('mushroom_die')
 			this.scheduleOnce(() => {
-				this.EnemyManager.put(this.node)
+				//this.EnemyManager.put(this.node)
+                this.node.destroy();
 			}, 1)
 
 			this.isDead = false
@@ -93,16 +116,56 @@ export default class TestEnemy extends cc.Component {
 			let enemyPos = this.node.position
 			let direction = playerPos.sub(enemyPos)
 			let normalizedDirection = direction.normalize()
-			this.node.position = enemyPos.add(
-				normalizedDirection.mul(this.isHit ? this.moveSpeed * dt * (-1) : this.moveSpeed * dt),
-			)
 
-			// change enemy facing direction for x and -x
-			if (this.node.x > this.player.x) {
-				this.node.scaleX = -1
-			} else {
-				this.node.scaleX = 1
-			}
+            // if distance between player and enemy is less than 100, enemy will charge dash
+            // and if canDash is true, enemy will dash toward the player
+            // and if not dashing, enemy will walk toward the player
+            let distance = direction.mag();
+            if (distance < 350 && !this.isChargingDash && this.canDash) {
+                this.dashDirection = normalizedDirection;
+
+                this.canDash = false;
+                this.isChargingDash = true;
+
+                this.scheduleOnce(() => {
+                    this.isChargingDash = false;
+                    this.isDashing = true;
+
+                    this.scheduleOnce(() => {
+                        this.isDashing = false;
+                    }, this.dashingTime);
+
+                }, this.chargingDashTime);
+
+                this.scheduleOnce(() => {
+                    this.canDash = true;
+                }, this.dashingCooldown);
+            }
+
+            if(this.isChargingDash) {
+                // charging dash, stop movement
+            }
+            else if(this.isDashing){
+                this.node.position = enemyPos.add(
+                    this.dashDirection.mul(this.moveSpeed * dt * 10),
+                );
+            }
+            else{
+                // not charging dash, walk toward the player
+                // walk toward the player
+                this.node.position = enemyPos.add(
+                    normalizedDirection.mul(this.moveSpeed * dt),
+                );
+            }
+
+            if(!this.isChargingDash){
+                // change enemy facing direction for x and -x
+                if (this.node.x > this.player.x) {
+                    this.node.scaleX = -1
+                } else {
+                    this.node.scaleX = 1
+                }
+            }
 
 			// move enemy randomly when they collide
 			if (this.isColliding) {
@@ -123,50 +186,31 @@ export default class TestEnemy extends cc.Component {
 		}
 
 		// if the node is out of the screen, put it in the pool
-		this.boundingDetect()
+		//this.boundingDetect()
 	}
 
-	boundingDetect() {
-		if (
-			(this.node && this.node.x > this.player.x + 600) ||
-			this.node.x < this.player.x - 600 ||
-			this.node.y > this.player.y + 400 ||
-			this.node.y < this.player.y - 400
-		) {
-			this.EnemyManager.put(this.node)
-		}
-	}
+	// boundingDetect() {
+	// 	if (
+	// 		(this.node && this.node.x > this.player.x + 600) ||
+	// 		this.node.x < this.player.x - 600 ||
+	// 		this.node.y > this.player.y + 400 ||
+	// 		this.node.y < this.player.y - 400
+	// 	) {
+	// 		this.EnemyManager.put(this.node)
+	// 	}
+	// }
 
 	onBeginContact(contact, selfCollider, otherCollider) {
 		if (otherCollider.node.name == 'Player') {
 			this.playerLife.minusLife(10)
-			cc.log('enemy hit player')
+			cc.log('boss hit player')
 		}
 		if (otherCollider.node.name == 'Bullet') {
 			//this.node.destroy();
-			if (this.skillManager.skillMap["Thunder"] && this.skillManager.skillMap["Ice"]) {
-				let d = this.weapon.DAMAGE;
-				d += 15;
-				this.enemyHealth -= d;
-			}
-			else if (this.skillManager.skillMap["Thunder"]) {
-				let d = this.weapon.DAMAGE;
-				d += 10;
-				this.enemyHealth -= d;
-			}
-			else if (this.skillManager.skillMap["Ice"]) {
-				let d = this.weapon.DAMAGE;
-				d += 5;
-				this.enemyHealth -= d;
-			}
-			else {
-				this.enemyHealth -= this.weapon.DAMAGE;	
-			}	
-			cc.log(this.enemyHealth)
-			
+			this.enemyHealth -= 10
 		}
 		if (otherCollider.node.name == 'wheel') {
-			this.enemyHealth -= this.weaponSpin.damage
+			this.enemyHealth -= 100
 			this.scheduleOnce(() => {
 				contact.disabled = true
 			})
@@ -206,9 +250,8 @@ export default class TestEnemy extends cc.Component {
 		this.enemyHealth = 100
 		this.isDead = false
 		this.isFrozen = false
-		this.isHit = false
 		this.node.opacity = 255
-		this.anim.play('goblin_walk')
+		this.anim.play('boss_walk')
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
 
@@ -217,7 +260,7 @@ export default class TestEnemy extends cc.Component {
 
 	setInitPos(node: cc.Node) {
 		this.node.parent = node
-		this.node.name = 'goblin'
+		this.node.name = 'Boss'
 
 		// n is from 0 to 1
 		let n = Math.random()
@@ -249,7 +292,7 @@ export default class TestEnemy extends cc.Component {
 	}
 
 	// this function is called when the enemy manager calls "get" API.
-	reuse(EnemyManager) {
-		this.EnemyManager = EnemyManager
-	}
+	// reuse(EnemyManager) {
+	// 	this.EnemyManager = EnemyManager
+	// }
 }
