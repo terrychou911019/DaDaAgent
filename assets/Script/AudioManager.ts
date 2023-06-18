@@ -66,4 +66,20 @@ export default class AudioManager extends cc.Component {
     resumeAll(){
         cc.audioEngine.resumeAll();
     }
+
+    setEffectsVolume(volume: number){
+        cc.audioEngine.setEffectsVolume(volume);
+    }
+
+    setMusicVolume(volume: number){
+        cc.audioEngine.setMusicVolume(volume);
+    }
+
+    getEffectsVolume(){
+        return cc.audioEngine.getEffectsVolume();
+    }
+
+    getMusicVolume(){
+        return cc.audioEngine.getMusicVolume();
+    }
 }

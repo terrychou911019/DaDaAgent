@@ -34,6 +34,9 @@ export default class NewClass extends cc.Component {
     @property(cc.EditBox)
     private signupPassword: cc.EditBox = null;
 
+    @property(cc.Node)
+    private messasge: cc.Node = null;
+
 
 
     private backgroundNodes: cc.Node[] = [];
@@ -49,6 +52,8 @@ export default class NewClass extends cc.Component {
     private dir = 1;
 
     private mask: cc.Node = null;
+    
+    private error: boolean = false;
 
     
 
@@ -160,6 +165,7 @@ export default class NewClass extends cc.Component {
         const email = this.loginEmail.string;
         const password = this.loginPassword.string;
         if (!email||!password) {
+            this.errorMessage("Please enter the password and email")
             console.log("Should enter the password and email")
             return;
         }
@@ -167,20 +173,28 @@ export default class NewClass extends cc.Component {
     }
 
     async logIn(email:string, password:string){
-        let userInfo = await firebase.auth().signInWithEmailAndPassword(email, password);
-        await firebase.database().ref(userInfo.user.uid).once('value', (snapshot)=>{
-            const userdata = snapshot.val();
-            const jsonStr = JSON.stringify(userdata);
-            cc.sys.localStorage.setItem('userdata', jsonStr);
-            // turn jsonStr back to userdata
-            // const jsonStr = cc.sys.localStorage.getItem('userdata');
-            // const data = JSON.parse(jsonStr);
-        }).then(()=>{
-            console.log("login successful")
-            this.changeScene();
-        }).catch((e)=>{
+        try {
+            let userInfo = await firebase.auth().signInWithEmailAndPassword(email, password);
+            await firebase.database().ref(userInfo.user.uid).once('value', (snapshot)=>{
+                const userdata = snapshot.val();
+                const jsonStr = JSON.stringify(userdata);
+                cc.sys.localStorage.setItem('userdata', jsonStr);
+                // turn jsonStr back to userdata
+                // const jsonStr = cc.sys.localStorage.getItem('userdata');
+                // const data = JSON.parse(jsonStr);
+            }).then(()=>{
+                console.log("login successful")
+                this.changeScene();
+            })
+        } catch (e) {
             console.log(e);
-        })
+            if (e.code == 'auth/user-not-found') {
+                this.errorMessage("Can't find the user!")
+            } else {
+                this.errorMessage(e.message);
+            }
+           
+        }
     }
 
     clickSignUpBtn(){
@@ -188,6 +202,7 @@ export default class NewClass extends cc.Component {
         const email = this.signupEmail.string;
         const password = this.signupPassword.string;
         if (!username||!email||!password) {
+            this.errorMessage("Please enter the username, password and email")
             console.log("username or email or password haven't enter")
             return;
         }
@@ -195,43 +210,44 @@ export default class NewClass extends cc.Component {
     }
 
     async signUp(username, email, password){
-        let userInfo = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        await firebase.database().ref(userInfo.user.uid).set({
-            id:userInfo.user.uid,
-            username:username, 
-        }).then(()=>{
-            console.log("signup successful")
-            this.changeScene();
-        }).catch((e)=>{
-            console.log(e);
-        })
+        try{
+            let userInfo = await firebase.auth().createUserWithEmailAndPassword(email, password);
+            await firebase.database().ref(userInfo.user.uid).set({
+                id:userInfo.user.uid,
+                username:username, 
+            }).then(()=>{
+                console.log("signup successful")
+                this.changeScene();
+            })
+        }catch(e){
+            this.errorMessage(e.message);
+            console.log(e.message);
+        }
     }
 
     //google login
-    async loginwithGoogle(){
-        const provider = new firebase.auth.GoogleAuthProvider();
-        try{
-            const credential = await firebase.auth().signInWithPopup(provider);
-            const user = credential.user;
-            await firebase.database().ref(user.uid).once('value', (snapshot)=>{
-                const userdata = snapshot.val();
-                if (userdata === null) {
-                    firebase.database().ref(user.uid).set({
-                        id:user.uid,
-                        username:user.displayName, 
-                    }).then(()=>{
-                        console.log("login with google successfully")
-                    }).catch((e)=>{
-                        console.log(e);
-                    })
-                } else {
-                    const jsonStr = JSON.stringify(userdata);
-                    cc.sys.localStorage.setItem('userdata', jsonStr);
-                }
-            }, this.changeScene)
-        }catch(error) {
-            console.log(error);
+    loginwithGoogle(){
+        this.errorMessage("Sorry, You can't use Google to login in")
+    }
+
+    //set error message 
+    errorMessage(S:string){
+        if (!this.error) {
+            console.log('error message')
+            this.error = true;
+            const label = this.messasge.getComponentInChildren(cc.Label)
+            label.string = S;
+            this.messasge.runAction(cc.sequence(
+                cc.moveTo(1, 0, 265), 
+                cc.delayTime(1.5),
+                cc.moveTo(1, 0, 375),
+                cc.callFunc(()=>{
+                    this.error = false;
+                    label.string = '';
+                })
+            ))
         }
+        
     }
 
     //change to CCAW(choose character and weapon)

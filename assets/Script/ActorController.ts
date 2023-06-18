@@ -33,15 +33,18 @@ export default class ActorController extends Controller {
   @property(cc.Float)
   moveSpeed = 10
 
-  @property(cc.String)
-  idleAnimationName: string = ''
-  @property(cc.String)
-  walkAnimationName: string = ''
-  @property(cc.String)
-  dieAnimationName: string = ''
-  idleAnimState: cc.AnimationState = null
-  walkAnimState: cc.AnimationState = null
-  dieAnimState: cc.AnimationState = null
+  private idleAnimationName: string = ''
+
+  private walkAnimationName: string = ''
+
+  private dieAnimationName: string = ''
+
+  private idleAnimState: cc.AnimationState = null
+
+  private walkAnimState: cc.AnimationState = null
+
+  private dieAnimState: cc.AnimationState = null
+
 
   private _animation: cc.Animation = null
 
@@ -107,17 +110,23 @@ export default class ActorController extends Controller {
 
   onLoad() {
     this.node.scaleX =
-      this.initialFacingDirection == FacingDirection.Right ? 1 : -1
+    this.initialFacingDirection == FacingDirection.Right ? 1 : -1
     this._animation = this.node.getComponent(cc.Animation)
     // this._rigidBody = this.node.getComponent(cc.RigidBody);
     // if (!this._rigidBody) console.warn(`ActorController: Component cc.Rigidbody missing on node ${this.node.name}`);
+
+    //get the charater's name and assign the animation
+    let character = cc.sys.localStorage.getItem('charater')
+    this.idleAnimationName = character + "_idle";
+    this.walkAnimationName = character + "_walk";
+    this.dieAnimationName = character + "_die";
   }
 
   start() {
     super.start()
-    this.idleAnimState = this._animation.getAnimationState('idle')
-    this.walkAnimState = this._animation.getAnimationState('walk')
-    this.dieAnimState = this._animation.getAnimationState('die')
+    this.idleAnimState = this._animation.getAnimationState(this.idleAnimationName);
+    this.walkAnimState = this._animation.getAnimationState(this.walkAnimationName);
+    this.dieAnimState = this._animation.getAnimationState(this.dieAnimationName);
   }
 
   gameTick(dt) {
