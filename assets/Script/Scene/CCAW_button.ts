@@ -106,6 +106,7 @@ export default class CCAW_button extends cc.Component {
             cc.moveTo(2, characterNode.x + 50, characterNode.y),
             cc.callFunc(()=>{
                 console.log("choose the weapon and enter the game");
+                this.ccawManager.moveToGame();
             })
             
         ))
