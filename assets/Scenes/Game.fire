@@ -437,9 +437,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 14,
-      "g": 12,
-      "b": 2,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -629,7 +629,7 @@
       "__id__": 10
     },
     "_enabled": true,
-    "weaponName": "Shuriken",
+    "weaponName": "Bow",
     "bulletPrefab": {
       "__uuid__": "a06ab3e9-8792-432a-9aa0-1a6a96880b06"
     },
