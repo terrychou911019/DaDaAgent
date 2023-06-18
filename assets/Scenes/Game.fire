@@ -985,9 +985,9 @@
       "__id__": 19
     },
     "moveSpeed": 3,
-    "idleAnimationName": "idle",
-    "walkAnimationName": "walk",
-    "dieAnimationName": "die",
+    "idleAnimationName": "",
+    "walkAnimationName": "",
+    "dieAnimationName": "",
     "skillManager": {
       "__id__": 13
     },
@@ -1142,6 +1142,15 @@
       },
       {
         "__uuid__": "e73eac47-e1fc-4ccb-97ce-c475efc922cc"
+      },
+      {
+        "__uuid__": "2923c55d-0267-4f0a-82d8-a9264241600c"
+      },
+      {
+        "__uuid__": "0a3f8d8b-b2a7-455a-ba78-3859445d8c5d"
+      },
+      {
+        "__uuid__": "1ed29dd5-5f3a-4f4d-9b3f-d4863fd09767"
       }
     ],
     "playOnLoad": false,

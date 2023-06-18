@@ -50,18 +50,9 @@ export default class CCAW_button extends cc.Component {
 
     changeAnimation(S:string){
         const animation:cc.Animation = this.goalNode.getComponent(cc.Animation);
-        switch (S) {
-            case 'walk':
-                animation.stop();
-                animation.play('walk');
-                break;
-            case 'idle':
-                animation.stop();
-                animation.play('idle');
-                break;
-            default:
-                break;
-        }
+        const animationName = this.goalNode.name + "_" + S;
+        animation.stop()
+        animation.play(animationName);
     }
 
     changeToCW(){//change to choose weapon state
