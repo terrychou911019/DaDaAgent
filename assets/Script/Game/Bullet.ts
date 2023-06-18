@@ -59,9 +59,9 @@ export default class Bullet extends cc.Component {
 			}
 			if (this.skillManager.skillMap['Frozen'] == true) {
 				// if enemy is already frozen, then do nothing
-				if (other.node.getComponent('TestEnemy').isFrozen == true) {
-					return
-				}
+				// if (other.node.getComponent('TestEnemy').isFrozen == true) {
+				// 	return
+				// }
 				this.particleManager
 					.getComponent('ParticleManager')
 					.spawnFrozenEffect(other.node.position)

@@ -42,10 +42,13 @@ export default class TestEnemy extends cc.Component {
 	private weapon = null;
 	private weaponSpin = null;
 
+	private lifebar = null;
+
 	onLoad() {
 		this.weapon = cc.find("Canvas/Player/Weapon").getComponent("Weapon");
 		this.weaponSpin = cc.find("Canvas/WeaponSpin").getComponent("WeaponSpin");
 		this.skillManager = cc.find("Canvas/SkillManager").getComponent("SkillManager");
+		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
 	}
 
 	start() {
@@ -58,7 +61,7 @@ export default class TestEnemy extends cc.Component {
 	}
 
 	update(dt) {
-		if (this.gameManager.isGamePaused) {
+		if (this.gameManager.isGamePaused || this.lifebar.cur_life <= 0) {
 			return
 		}
 
@@ -81,46 +84,51 @@ export default class TestEnemy extends cc.Component {
 			this.isDead = false
 			this.enemyHealth = 100
 		}
+
 		if (this.isFrozen == true) {
-			return
+			this.node.position = this.node.position
 		}
-
-		//this.node.x += 40 * dt;
-
-		if (!this.isDead) {
-			// chase player's position
-			let playerPos = this.player.position
-			let enemyPos = this.node.position
-			let direction = playerPos.sub(enemyPos)
-			let normalizedDirection = direction.normalize()
-			this.node.position = enemyPos.add(
-				normalizedDirection.mul(this.isHit ? this.moveSpeed * dt * (-1) : this.moveSpeed * dt),
-			)
-
-			// change enemy facing direction for x and -x
-			if (this.node.x > this.player.x) {
-				this.node.scaleX = -1
-			} else {
-				this.node.scaleX = 1
-			}
-
-			// move enemy randomly when they collide
-			if (this.isColliding) {
-				this.collisionTimer += dt
-				if (this.collisionTimer >= this.collisionDuration) {
-					this.isColliding = false
-					this.collisionTimer = 0
+		else {
+			if (!this.isDead) {
+				// chase player's position
+				let playerPos = this.player.position
+				let enemyPos = this.node.position
+				let direction = playerPos.sub(enemyPos)
+				let normalizedDirection = direction.normalize()
+				this.node.position = enemyPos.add(
+					normalizedDirection.mul(this.isHit ? this.moveSpeed * dt * (-1) : this.moveSpeed * dt),
+				)
+	
+				// change enemy facing direction for x and -x
+				if (this.node.x > this.player.x) {
+					this.node.scaleX = -1
 				} else {
-					this.randomDistance = this.randomIntFromInterval(
-						this.minRoamingDistance,
-						this.maxRoamingDistance,
-					)
-					this.node.position = this.node.position.add(
-						cc.v3(this.getRandomDirection().mul(2), 0)
-					)
+					this.node.scaleX = 1
+				}
+	
+				// move enemy randomly when they collide
+				if (this.isColliding) {
+					
+					this.collisionTimer += dt
+					if (this.collisionTimer >= this.collisionDuration) {
+						this.isColliding = false
+						this.collisionTimer = 0
+					} else {
+						this.randomDistance = this.randomIntFromInterval(
+							this.minRoamingDistance,
+							this.maxRoamingDistance,
+						)
+						this.node.position = this.node.position.add(
+							cc.v3(this.getRandomDirection().mul(2), 0)
+						)
+					}
 				}
 			}
 		}
+
+		
+		
+		
 
 		// if the node is out of the screen, put it in the pool
 		this.boundingDetect()
@@ -171,12 +179,17 @@ export default class TestEnemy extends cc.Component {
 				contact.disabled = true
 			})
 		}
-		if (
-			otherCollider.node.name != 'Player' &&
-			otherCollider.node.name != 'Bullet'
-		) {
+		if (otherCollider.node.name == "goblin") {
 			//cc.log("enemy hit enemy")
-			this.isColliding = true
+			
+			if (this.isFrozen) {
+				this.scheduleOnce(() => {
+					contact.disabled = true
+				})
+			}
+			else {
+				this.isColliding = true;
+			}
 		}
 	}
 
