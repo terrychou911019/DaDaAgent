@@ -13,6 +13,15 @@ export default class CCAW extends cc.Component {
     @property(cc.Node)
     private camera: cc.Node = null;
 
+    @property(cc.Node)
+    private leaderboardButton: cc.Node = null;
+
+    @property(cc.Node)
+    private backCCButton: cc.Node = null;
+
+    @property(cc.Node)
+    private backbutton: cc.Node = null;
+
     private label: cc.Node = null;
 
     private mask: cc.Node = null;
@@ -22,6 +31,7 @@ export default class CCAW extends cc.Component {
     private cameraMoveEndX = 1040;
 
     private chosenButton: cc.Node = null;
+    
 
 
     unableBackButton(){
@@ -41,11 +51,37 @@ export default class CCAW extends cc.Component {
         }
     }
 
+    moveToLeaderboard(){
+        this.turnOutButton();
+        this.leaderboardButton.active = false;
+        this.camera.runAction(cc.sequence(
+            cc.moveTo(3, -1000, this.camera.y),
+            cc.callFunc(()=>{
+                this.backCCButton.active = true;
+                this.turnOnButton()
+            })
+        ))
+    }
+
+    moveBackToCC(){
+        this.turnOutButton();
+        this.backCCButton.active = false;
+        this.camera.runAction(cc.sequence(
+            cc.moveTo(3, 0, this.camera.y),
+            cc.callFunc(()=>{
+                this.leaderboardButton.active = true;
+                this.turnOnButton()
+            })
+        ))
+    }
+
     moveToCW(){//camera move to choose weapon
         this.turnOutButton();
+        this.leaderboardButton.active = false;
         this.camera.runAction(cc.sequence(
             cc.moveTo(8, this.cameraMoveEndX, this.camera.y),
             cc.callFunc(()=>{
+                this.backbutton.active = true;
                 this.turnOnButton()
             })
         ))
@@ -53,9 +89,11 @@ export default class CCAW extends cc.Component {
 
     moveToCC(){//camera move to choose character
         this.turnOutButton();
+        this.backbutton.active = false;
         this.camera.runAction(cc.sequence(
             cc.moveTo(8, this.cameraMoveStartX, this.camera.y),
             cc.callFunc(()=>{
+                this.leaderboardButton.active  = true;
                 this.turnOnButton()
             })
         ))
@@ -139,6 +177,10 @@ export default class CCAW extends cc.Component {
         this.mask = cc.find('Canvas/Mask');
         this.mask.opacity = 255;
         this.labelAction();
+        //button
+        this.leaderboardButton.active = true;
+        this.backCCButton.active = false;
+        this.backbutton.active = false;
     }
 
     start () {
