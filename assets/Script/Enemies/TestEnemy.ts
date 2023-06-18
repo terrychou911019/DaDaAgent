@@ -54,29 +54,27 @@ export default class TestEnemy extends cc.Component {
   }
 
   update(dt) {
-    if (this.enemyHealth <= 0) {
-      this.isDead = true;
-      this.rigidbody.enabledContactListener = false;
-      this.collider.enabled = false;
-      this.anim.stop();
-      this.anim.play("goblin_die");
-      this.EnemyManager.put(this.node);
-      
-      this.enemyHealth = 100;
-      this.isDead = false;
-      this.rigidbody.enabledContactListener = true;
-      this.collider.enabled = true;
-      
-      this.anim.play("goblin_walk");
-    }
     //cc.log(this.playerLife.cur_life)
-    if(this.gameManager.isGamePaused){
-      return;
+    if (this.gameManager.isGamePaused) {
+      return
     }
-    
+
+    if (this.enemyHealth <= 0) {
+      this.isDead = true
+      this.rigidbody.enabledContactListener = false
+      this.collider.enabled = false
+      this.anim.stop()
+      let fade = cc.fadeOut(1)
+      let finish = cc.callFunc(() => {
+        this.EnemyManager.put(this.node)
+      })
+      this.node.runAction(cc.sequence(fade, finish))
+      this.EnemyManager.put(this.node)
+    }
     if (this.isFrozen == true) {
       return
     }
+
     //this.node.x += 40 * dt;
 
     if (!this.isDead) {
@@ -116,10 +114,10 @@ export default class TestEnemy extends cc.Component {
 
     // if the node is out of the screen, put it in the pool
     if (
-      this.node.x > this.player.x + 1000 ||
-      this.node.x < this.player.x - 1000 ||
-      this.node.y > this.player.y + 700 ||
-      this.node.y < this.player.y - 700
+      this.node.x > this.player.x + 600 ||
+      this.node.x < this.player.x - 600 ||
+      this.node.y > this.player.y + 400 ||
+      this.node.y < this.player.y - 400
     ) {
       this.EnemyManager.put(this.node)
       cc.log('put enemy back to pool')
@@ -129,6 +127,7 @@ export default class TestEnemy extends cc.Component {
   onBeginContact(contact, selfCollider, otherCollider) {
     if (otherCollider.node.name == 'Player') {
       this.playerLife.minusLife(10)
+      cc.log('enemy hit player')
     }
     if (otherCollider.node.name == 'Bullet') {
       //this.node.destroy();
@@ -155,41 +154,46 @@ export default class TestEnemy extends cc.Component {
   }
 
   public init(node: cc.Node) {
+    this.isDead = false
+    this.enemyHealth = 100
+    this.node.opacity = 255
     this.isFrozen = false
     this.player = cc.find('Canvas/Player')
     this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
     this.setInitPos(node)
+    this.rigidbody.enabledContactListener = true
+    this.collider.enabled = true
+    this.moveSpeed = 50
+    this.anim.play('goblin_walk')
   }
 
   setInitPos(node: cc.Node) {
     this.node.parent = node
     this.node.name = 'TestEnemy'
-    this.anim.play('goblin_walk')
 
-    this.moveSpeed = 50
     // n is from 0 to 1
     let n = Math.random()
     if (n >= 0 && n < 0.25) {
       this.node.position = cc.v3(
         this.player.x - 480 + Math.random() * 960,
-        this.player.y,
+        this.player.y + 320,
         0,
       )
     } else if (n >= 0.25 && n < 0.5) {
       this.node.position = cc.v3(
         this.player.x - 480 + Math.random() * 960,
-        this.player.y * -1,
+        this.player.y - 320,
         0,
       )
     } else if (n >= 0.5 && n < 0.75) {
       this.node.position = cc.v3(
-        this.player.x,
+        this.player.x + 480,
         this.player.y - 320 + Math.random() * 640,
         0,
       )
     } else {
       this.node.position = cc.v3(
-        this.player.x * -1,
+        this.player.x - 480,
         this.player.y - 320 + Math.random() * 640,
         0,
       )
