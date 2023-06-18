@@ -8,17 +8,29 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class LDButton extends cc.Component {
 
-    @property(cc.Label)
-    label: cc.Label = null;
+    private score: cc.Node = null;
 
-    @property
-    text: string = 'hello';
+    private playerName: cc.Node = null;
 
+    onButtonLeave() {
+        this.score.active = this.playerName.active = false;
+    }
+
+    onButtonEnter() {
+        this.score.active = this.playerName.active = true;
+    }
+    
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad () {
+        this.score = this.node.getChildByName('score');
+        this.playerName = this.node.getChildByName('name');
+        this.score.active = this.playerName.active = false
+        this.node.on(cc.Node.EventType.MOUSE_ENTER, this.onButtonEnter, this);
+        this.node.on(cc.Node.EventType.MOUSE_LEAVE, this.onButtonLeave, this);
+    }
 
     start () {
 
@@ -26,3 +38,5 @@ export default class NewClass extends cc.Component {
 
     // update (dt) {}
 }
+
+
