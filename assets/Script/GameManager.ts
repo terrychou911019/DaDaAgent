@@ -35,10 +35,9 @@ export default class GameManager extends cc.Component {
     isGamePaused = false;
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
-
-    start () {
-
+    onLoad () {
+        cc.director.getPhysicsManager().enabled = true
+		cc.director.getCollisionManager().enabled = true
     }
 
     debug(){

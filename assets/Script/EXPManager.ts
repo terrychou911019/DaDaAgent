@@ -35,13 +35,15 @@ export default class EXPManager extends cc.Component {
     curEXP: number = 0;
     curLevel: number = 1;
 
-    // The first parameter(event) need to be deleted when our enemy is finish
-    // It exists because we need to test our EXPManager by button, and button will pass a event parameter
-    gainEXP(event, exp: number = 46) {
+    gainEXP(exp: number = 46) {
         this.curEXP += exp;
+        this.render();
+
         if (this.curEXP >= expTable[this.curLevel] && this.curLevel < this.MAXLEVEL) {
             this.curEXP -= expTable[this.curLevel];
             this.curLevel ++;
+            this.render();
+
             this.levelLabel.getComponent(cc.Label).string = `${this.curLevel}`;
             cc.find('Canvas/GameManager').getComponent('GameManager').pauseGame();
             cc.find('Canvas/ModalManager').getComponent('ModalManager').showSkillChooseModal();
@@ -54,6 +56,9 @@ export default class EXPManager extends cc.Component {
             this.expBar.x = 0;
             return;
         }
+    }
+
+    render() {
         this.expBar.width = this.MAXWIDTH * this.curEXP / expTable[this.curLevel];
         this.expBar.x = -(this.MAXWIDTH / 2) + this.expBar.width / 2;
     }

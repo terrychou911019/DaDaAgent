@@ -10,8 +10,8 @@ export default class enemyManager extends cc.Component {
 
 	private enemyPool = null
 
-	private createCD = 0.5;
-	private createTimer = 0;
+  private createCD = 0.5
+  private createTimer = 0
 
 	onLoad() {
 		this.enemyGroup = cc.find('Canvas/EnemyGroup')
@@ -27,9 +27,9 @@ export default class enemyManager extends cc.Component {
 			// put enemy node under enemy groupx
 		}
 
-		this.createTimer = 0;
-		//this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
-	}
+    this.createTimer = 0
+    //this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
+  }
 
 	//call this function to add new enemy to the scene.
 	private createEnemy() {
@@ -40,12 +40,12 @@ export default class enemyManager extends cc.Component {
 		if (enemy != null) enemy.getComponent('TestEnemy').init(this.node)
 	}
 
-	gameTick(dt) {
-		this.createTimer += dt;
-		if (this.createTimer >= this.createCD) {
-			this.createTimer = 0;
+  gameTick(dt) {
+    this.createTimer += dt
+    if (this.createTimer >= this.createCD) {
+      this.createTimer = 0
 
-			this.createEnemy();
-		}
-	}
+      this.createEnemy()
+    }
+  }
 }

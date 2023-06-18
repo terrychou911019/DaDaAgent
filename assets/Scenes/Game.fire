@@ -629,7 +629,7 @@
       "__id__": 10
     },
     "_enabled": true,
-    "weaponName": "Shuriken",
+    "weaponName": "Bow",
     "bulletPrefab": {
       "__uuid__": "a06ab3e9-8792-432a-9aa0-1a6a96880b06"
     },
@@ -977,9 +977,6 @@
       "__id__": 19
     },
     "moveSpeed": 3,
-    "idleAnimationName": "idle",
-    "walkAnimationName": "walk",
-    "dieAnimationName": "die",
     "skillManager": {
       "__id__": 13
     },
