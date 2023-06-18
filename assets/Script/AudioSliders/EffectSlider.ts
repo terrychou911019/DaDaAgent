@@ -6,7 +6,7 @@ const {ccclass, property} = cc._decorator;
 export default class EffectSlider extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
-        this.getComponent(cc.Slider).progress = AudioManager.getInstance().getEffectsVolume();
+        //this.getComponent(cc.Slider).progress = AudioManager.getInstance().getEffectsVolume();
 
         this.node.on("slide", this.onSlide, this);
     }
@@ -19,6 +19,6 @@ export default class EffectSlider extends cc.Component {
 
     onSlide(slider: cc.Slider){
         console.log(slider.progress);
-        AudioManager.getInstance().setEffectsVolume(slider.progress);
+        //AudioManager.getInstance().setEffectsVolume(slider.progress);
     }
 }

@@ -91,7 +91,7 @@ export default class SkillChooseModal extends cc.Component {
                 this.gameManager.resumeGame();
                 this.node.parent.getComponent('ModalManager').hideAll();
 
-                AudioManager.getInstance().playSoundEffect(AudioType.LevelUp);
+                //AudioManager.getInstance().playSoundEffect(AudioType.LevelUp);
             });
         }
 
