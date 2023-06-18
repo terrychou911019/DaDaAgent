@@ -46,8 +46,10 @@ export default class Boss extends cc.Component {
     private chargingDashTime = 2;
     private dashDirection: cc.Vec3;
 
+	private lifebar = null;
+
 	onLoad() {
-		
+		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
 	}
 
 	start() {
@@ -80,7 +82,7 @@ export default class Boss extends cc.Component {
 	}
 
 	update(dt) {
-		if (this.gameManager.isGamePaused) {
+		if (this.gameManager.isGamePaused || this.lifebar.cur_life <= 0) {
 			return
 		}
 

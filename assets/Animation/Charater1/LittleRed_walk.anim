@@ -1,12 +1,12 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "run",
+  "_name": "LittleRed_walk",
   "_objFlags": 0,
   "_native": "",
   "_duration": 0.6666666666666666,
   "sample": 60,
   "speed": 1,
-  "wrapMode": 2,
+  "wrapMode": 1,
   "curveData": {
     "comps": {
       "cc.Sprite": {

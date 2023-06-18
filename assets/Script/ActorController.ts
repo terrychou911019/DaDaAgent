@@ -69,8 +69,13 @@ export default class ActorController extends Controller {
 	private dashingTime = 0.2;
 	private dashingCooldown = 1;
 
+	private lifebar = null;
+
 	checkstate() {
-		if (
+		if (this.lifebar.cur_life <= 0) {
+			this.cur_State = State.Die;
+		}
+		else if (
 			this.inputSource.horizontalAxis == 0 &&
 			this.inputSource.verticalAxis == 0
 		) {
@@ -124,6 +129,8 @@ export default class ActorController extends Controller {
 		this.idleAnimationName = character + "_idle";
 		this.walkAnimationName = character + "_walk";
 		this.dieAnimationName = character + "_die";
+
+		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
 	}
 
 	start() {

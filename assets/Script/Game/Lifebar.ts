@@ -8,12 +8,12 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class Lifebar extends cc.Component {
 
     @property(Number)
     Max_life:number = 100;
 
-    public cur_life:number;
+    public cur_life:number = 0;
 
     private original_width = 30;
 
