@@ -1,6 +1,4 @@
 import lifebar from '../Game/Lifebar'
-import expManager from '../EXPManager'
-import ScoreManager from '../ScoreManager'
 
 const { ccclass, property } = cc._decorator
 
@@ -19,12 +17,6 @@ export default class TestEnemy extends cc.Component {
 	@property(Number)
 	moveSpeed: number = 50
 
-	@property(expManager)
-	ExpManager: expManager = null
-
-	@property(ScoreManager)
-	scoreManager: ScoreManager = null
-
 	private isColliding: boolean = false
 	private collisionTimer: number = 0
 	private collisionDuration: number = 1 // 碰撞後移動的持續時間
@@ -42,6 +34,13 @@ export default class TestEnemy extends cc.Component {
 	private rigidbody: cc.RigidBody = null
 	private collider: cc.PhysicsBoxCollider = null
 
+	private EXPManager: any = null;
+	private ScoreManager: any = null;
+
+	onLoad() {
+		
+	}
+
 	start() {
 		this.isFrozen = false
 	}
@@ -56,6 +55,10 @@ export default class TestEnemy extends cc.Component {
 		}
 
 		if (this.enemyHealth <= 0) {
+			// player gain exp and score	
+			this.EXPManager.gainEXP(46);
+			this.ScoreManager.gainScore(149);
+
 			this.moveSpeed = 0
 			this.isDead = true
 			this.rigidbody.enabledContactListener = false
@@ -105,7 +108,7 @@ export default class TestEnemy extends cc.Component {
 						this.maxRoamingDistance,
 					)
 					this.node.position = this.node.position.add(
-						this.getRandomDirection().mul(2),
+						cc.v3(this.getRandomDirection().mul(2), 0)
 					)
 				}
 			}
@@ -170,11 +173,8 @@ export default class TestEnemy extends cc.Component {
 		this.anim = this.getComponent(cc.Animation)
 		this.rigidbody = this.getComponent(cc.RigidBody)
 		this.collider = this.getComponent(cc.PhysicsBoxCollider)
-		this.ExpManager = cc.find('Canvas/EXPManager').getComponent('EXPManager')
-		this.scoreManager = cc
-			.find('Canvas/ScoreManager')
-			.getComponent('ScoreManager')
-
+		this.EXPManager = cc.find('Canvas/EXPManager').getComponent('EXPManager');
+		this.ScoreManager = cc.find('Canvas/ScoreManager').getComponent('ScoreManager');
 		this.moveSpeed = 50
 		this.enemyHealth = 100
 		this.isDead = false
