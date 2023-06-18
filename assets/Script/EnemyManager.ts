@@ -8,10 +8,15 @@ export default class enemyManager extends cc.Component {
 	@property(cc.Prefab)
 	private enemyPrefab: cc.Prefab = null
 
+	@property(cc.Prefab)
+	boss: cc.Prefab = null
+
 	private enemyPool = null
 
 	private createCD = 0.5
 	private createTimer = 0
+
+	private isBossSummoned = false;
 
 	onLoad() {
 		this.enemyGroup = cc.find('Canvas/EnemyGroup')
@@ -27,7 +32,8 @@ export default class enemyManager extends cc.Component {
 			// put enemy node under enemy groupx
 		}
 
-		this.createTimer = 0
+		this.createTimer = 0;
+		this.isBossSummoned = false;
 		//this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
 	}
 
@@ -50,4 +56,16 @@ export default class enemyManager extends cc.Component {
 			this.createEnemy()
 		}
 	}
+
+	summonBoss() {
+		if(this.isBossSummoned){
+			return;
+		}
+
+		this.isBossSummoned = true;
+
+		let boss = cc.instantiate(this.boss);
+		boss.parent = this.enemyGroup;
+	}
+
 }
