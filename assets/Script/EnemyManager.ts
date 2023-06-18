@@ -10,8 +10,8 @@ export default class enemyManager extends cc.Component {
 
 	private enemyPool = null
 
-  private createCD = 0.5
-  private createTimer = 0
+	private createCD = 0.5
+	private createTimer = 0
 
 	onLoad() {
 		this.enemyGroup = cc.find('Canvas/EnemyGroup')
@@ -27,25 +27,27 @@ export default class enemyManager extends cc.Component {
 			// put enemy node under enemy groupx
 		}
 
-    this.createTimer = 0
-    //this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
-  }
+		this.createTimer = 0
+		//this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
+	}
 
 	//call this function to add new enemy to the scene.
 	private createEnemy() {
 		let enemy = null
 
-		if (this.enemyPool.size() > 0) enemy = this.enemyPool.get(this.enemyPool)
+		if (this.enemyPool.size() > 0) {
+			enemy = this.enemyPool.get(this.enemyPool)
+		}
 
+		// access the script on Goblin 001 and call a function
 		if (enemy != null) enemy.getComponent('TestEnemy').init(this.node)
 	}
 
-  gameTick(dt) {
-    this.createTimer += dt
-    if (this.createTimer >= this.createCD) {
-      this.createTimer = 0
-
-      this.createEnemy()
-    }
-  }
+	gameTick(dt) {
+		this.createTimer += dt
+		if (this.createTimer >= this.createCD) {
+			this.createTimer = 0
+			this.createEnemy()
+		}
+	}
 }

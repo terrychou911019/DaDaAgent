@@ -42,19 +42,6 @@ export default class TestEnemy extends cc.Component {
 	private rigidbody: cc.RigidBody = null
 	private collider: cc.PhysicsBoxCollider = null
 
-	onLoad() {
-		this.player = cc.find('Canvas/Player')
-		this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
-		this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
-		this.anim = this.getComponent(cc.Animation)
-		this.rigidbody = this.getComponent(cc.RigidBody)
-		this.collider = this.getComponent(cc.PhysicsBoxCollider)
-		this.ExpManager = cc.find('Canvas/EXPManager').getComponent('EXPManager')
-		this.scoreManager = cc
-			.find('Canvas/ScoreManager')
-			.getComponent('ScoreManager')
-	}
-
 	start() {
 		this.isFrozen = false
 	}
@@ -64,29 +51,24 @@ export default class TestEnemy extends cc.Component {
 	}
 
 	update(dt) {
-		//cc.log(this.playerLife.cur_life)
 		if (this.gameManager.isGamePaused) {
 			return
 		}
 
 		if (this.enemyHealth <= 0) {
-			// player gain EXP and score
-			let EXPManager = cc.find('Canvas/EXPManager');
-			let ScoreManager = cc.find('Canvas/ScoreManager');
-			EXPManager.getComponent('EXPManager').gainEXP();
-			ScoreManager.getComponent('ScoreManager').gainScore();
-
-
+			this.moveSpeed = 0
 			this.isDead = true
 			this.rigidbody.enabledContactListener = false
 			this.collider.enabled = false
+			// let fade = cc.fadeOut(1)
 			this.anim.stop()
-			let fade = cc.fadeOut(1)
-			let finish = cc.callFunc(() => {
+			this.anim.play('goblin_die')
+			this.scheduleOnce(() => {
 				this.EnemyManager.put(this.node)
-			})
-			this.node.runAction(cc.sequence(fade, finish))
-			this.EnemyManager.put(this.node)
+			}, 1)
+
+			this.isDead = false
+			this.enemyHealth = 100
 		}
 		if (this.isFrozen == true) {
 			return
@@ -123,21 +105,24 @@ export default class TestEnemy extends cc.Component {
 						this.maxRoamingDistance,
 					)
 					this.node.position = this.node.position.add(
-						cc.v3(this.getRandomDirection().mul(2), 0)
+						this.getRandomDirection().mul(2),
 					)
 				}
 			}
 		}
 
 		// if the node is out of the screen, put it in the pool
+		this.boundingDetect()
+	}
+
+	boundingDetect() {
 		if (
-			this.node.x > this.player.x + 600 ||
+			(this.node && this.node.x > this.player.x + 600) ||
 			this.node.x < this.player.x - 600 ||
 			this.node.y > this.player.y + 400 ||
 			this.node.y < this.player.y - 400
 		) {
 			this.EnemyManager.put(this.node)
-			cc.log('put enemy back to pool')
 		}
 	}
 
@@ -177,22 +162,34 @@ export default class TestEnemy extends cc.Component {
 	}
 
 	public init(node: cc.Node) {
-		this.isDead = false
-		this.enemyHealth = 100
-		this.node.opacity = 255
-		this.isFrozen = false
+		cc.director.getPhysicsManager().enabled = true
+		cc.director.getCollisionManager().enabled = true
 		this.player = cc.find('Canvas/Player')
 		this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
-		this.setInitPos(node)
+		this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
+		this.anim = this.getComponent(cc.Animation)
+		this.rigidbody = this.getComponent(cc.RigidBody)
+		this.collider = this.getComponent(cc.PhysicsBoxCollider)
+		this.ExpManager = cc.find('Canvas/EXPManager').getComponent('EXPManager')
+		this.scoreManager = cc
+			.find('Canvas/ScoreManager')
+			.getComponent('ScoreManager')
+
+		this.moveSpeed = 50
+		this.enemyHealth = 100
+		this.isDead = false
+		this.isFrozen = false
+		this.node.opacity = 255
+		this.anim.play('goblin_walk')
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
-		this.moveSpeed = 50
-		this.anim.play('goblin_walk')
+
+		this.setInitPos(node)
 	}
 
 	setInitPos(node: cc.Node) {
 		this.node.parent = node
-		this.node.name = 'TestEnemy'
+		this.node.name = 'goblin'
 
 		// n is from 0 to 1
 		let n = Math.random()

@@ -1,4 +1,4 @@
-import AudioManager, { AudioType } from "../AudioManager"
+import AudioManager, { AudioType } from '../AudioManager'
 
 interface SHOOTRANGE {
 	x: number
@@ -33,22 +33,20 @@ export default class Bullet extends cc.Component {
 	// LIFE-CYCLE CALLBACKS:
 	onBeginContact(contact, self, other) {
 		// if other is enemy, then let enemy take damage and destroy self
-		if (other.node.name == 'TestEnemy') {
-			other.getComponent('TestEnemy').enemyHealth -= this.damage;
-
+		if (other.node.name == 'goblin') {
 			if (this.skillManager.skillMap['Thunder'] == true) {
 				this.particleManager
 					.getComponent('ParticleManager')
-					.spawnThunderEffect(other.node.position);
+					.spawnThunderEffect(other.node.position)
 
-				AudioManager.getInstance().playSoundEffect(AudioType.Explosion);
+				AudioManager.getInstance().playSoundEffect(AudioType.Explosion)
 			}
 			if (this.skillManager.skillMap['Ice'] == true) {
 				this.particleManager
 					.getComponent('ParticleManager')
-					.spawnIceParticle(other.node.position);
+					.spawnIceParticle(other.node.position)
 
-				AudioManager.getInstance().playSoundEffect(AudioType.Ice);
+				AudioManager.getInstance().playSoundEffect(AudioType.Ice)
 			}
 			if (this.skillManager.skillMap['Frozen'] == true) {
 				// if enemy is already frozen, then do nothing
@@ -63,14 +61,13 @@ export default class Bullet extends cc.Component {
 				other.node.getComponent('TestEnemy').scheduleOnce(function () {
 					console.log('unfroze')
 					other.node.getComponent('TestEnemy').isFrozen = false
-				}, 2);
+				}, 2)
 
-				AudioManager.getInstance().playSoundEffect(AudioType.Frozen);
+				AudioManager.getInstance().playSoundEffect(AudioType.Frozen)
 			}
-
-			this.node.destroy();
 		}
 	}
+
 
 	onLoad() {
 		this.shootRange.x = this.node.x + this.moveSpeed * this.direction[0] * 2
