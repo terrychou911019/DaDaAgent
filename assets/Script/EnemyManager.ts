@@ -35,8 +35,11 @@ export default class enemyManager extends cc.Component {
   private createEnemy() {
     let enemy = null
 
-    if (this.enemyPool.size() > 0) enemy = this.enemyPool.get(this.enemyPool)
+    if (this.enemyPool.size() > 0) {
+      enemy = this.enemyPool.get(this.enemyPool)
+    }
 
+    // access the script on Goblin 001 and call a function
     if (enemy != null) enemy.getComponent('TestEnemy').init(this.node)
   }
 
@@ -44,7 +47,6 @@ export default class enemyManager extends cc.Component {
     this.createTimer += dt
     if (this.createTimer >= this.createCD) {
       this.createTimer = 0
-
       this.createEnemy()
     }
   }
