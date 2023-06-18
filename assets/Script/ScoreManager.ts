@@ -20,9 +20,7 @@ export default class ScoreManager extends cc.Component {
     curScore: number = 0;
     renderScore: number = 0;
 
-    // The first parameter(event) need to be deleted when our enemy is finish
-    // It exists because we need to test our EXPManager by button, and button will pass a event parameter
-    gainScore(event, score: number = 14900) {
+    gainScore(event, score: number = 149) {
         this.curScore += score;
         this.render();
     }

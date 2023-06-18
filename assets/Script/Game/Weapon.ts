@@ -5,10 +5,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class Weapon extends cc.Component {
-    @property(cc.SpriteFrame)
-    weaponImg: cc.SpriteFrame = null;
-    @property(cc.SpriteFrame)
-    bulletImg: cc.SpriteFrame = null;
+    @property(cc.String)
+    weaponName: string = '';
 
     @property(cc.Prefab)
     bulletPrefab: cc.Prefab = null;
@@ -24,6 +22,12 @@ export default class Weapon extends cc.Component {
     RELOAD_TIME_SEC: number = 0;
     DAMAGE: number = 0;
     CAPACITY: number = 0;
+    MoveSpeed: number = 0;
+    AngularSpeed: number = 0;
+
+    weaponImg: cc.SpriteFrame = null;
+    bulletImg: cc.SpriteFrame = null;
+    bulletImgWidth: number = 0;
 
     bulletNum: number = 0;
     attactCD: number = 0;
@@ -90,9 +94,9 @@ export default class Weapon extends cc.Component {
         AudioManager.getInstance().playSoundEffect(AudioType.LaserShoot);
     }
 
-    createBullet(adjustAngle: number){
+    createBullet(adjustAngle: number) {
         let bullet = cc.instantiate(this.bulletPrefab);
-        bullet.width = 16 * 168 / 512;  // 168 is the width of the bullet image, 512 is the height of the bullet image
+        bullet.width = 16 * this.bulletImgWidth / 512;  // 168 is the width of the bullet image, 512 is the height of the bullet image
         if (this.Player.scaleX === 1)
             bullet.position = cc.v3(this.Player.position.x + 16, this.Player.position.y + 16, 0);
         else
@@ -100,11 +104,12 @@ export default class Weapon extends cc.Component {
 
         bullet.getComponent(cc.Sprite).spriteFrame = this.bulletImg;
         bullet.getComponent(cc.Sprite).node.angle = this.rotateAngle - 90 + adjustAngle;
+        bullet.getComponent(cc.RigidBody).angularVelocity = this.AngularSpeed;
 
         let bulletNode = bullet.getComponent('Bullet');
         bulletNode.damage = this.DAMAGE;
-        bulletNode.moveSpeed = 500;
-        //bulletNode.direction = this.direction;
+        bulletNode.moveSpeed = this.MoveSpeed;
+
         // adjust directoin according to the adjustangle
         let radian = (this.rotateAngle + adjustAngle) * Math.PI / 180;
         bulletNode.direction = [Math.cos(radian), Math.sin(radian)];
@@ -163,11 +168,56 @@ export default class Weapon extends cc.Component {
         this.Camera.on('mousedown', this.onMouseDown, this);
         this.Camera.on('mouseup', this.onMouseUp, this);
         this.Camera.on('mousemove', this.onMouseMove, this);
+
+        switch (this.weaponName) {
+            case 'Bow':
+                cc.resources.load("weapon/bow", cc.SpriteFrame, (err, spriteFrame) => {
+                    if (err) {
+                        cc.error(err.message || err);
+                        return;
+                    }
+
+                    // Showing error is right, the code in cocos' document is same as the code below
+                    this.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                });
+
+                cc.resources.load("weapon/arrow", cc.SpriteFrame, (err, spriteFrame) => {
+                    if (err) {
+                        cc.error(err.message || err);
+                        return;
+                    }
+                    this.getComponent('Weapon').bulletImg = spriteFrame;
+                });
+                this.bulletImgWidth = 168;
+                this.bulletNum = this.CAPACITY = 8;
+                this.ATTACT_SPEED_SEC = 0.25;
+                this.reloadCD = this.RELOAD_TIME_SEC = 0.5;
+                this.DAMAGE = 20;
+                this.MoveSpeed = 500;
+                break;
+
+            case 'Shuriken':
+                cc.resources.load("weapon/shuriken", cc.SpriteFrame, (err, spriteFrame) => {
+                    if (err) {
+                        cc.error(err.message || err);
+                        return;
+                    }
+
+                    // Showing error is right, the code in cocos' document is same as the code below
+                    this.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                    this.getComponent('Weapon').bulletImg = spriteFrame;
+                });
+                this.bulletImgWidth = 512;
+                this.bulletNum = this.CAPACITY = 16;
+                this.ATTACT_SPEED_SEC = 0.125;
+                this.reloadCD = this.RELOAD_TIME_SEC = 0.25;
+                this.DAMAGE = 10;
+                this.MoveSpeed = 300;
+                this.AngularSpeed = Math.PI * 2 * 125;  // 12.5 rounds per second
+                break;
+        }
         
-        this.bulletNum = this.CAPACITY = 8;
-        this.ATTACT_SPEED_SEC = 0.125;
-        this.reloadCD = this.RELOAD_TIME_SEC = 0.5;
-        this.DAMAGE = 10;
+        
 
         this.BulletNode.getComponent(cc.Label).string = `${this.bulletNum}`;
     }
