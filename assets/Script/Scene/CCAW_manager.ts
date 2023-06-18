@@ -23,6 +23,7 @@ export default class CCAW extends cc.Component {
 
     private chosenButton: cc.Node = null;
 
+
     unableBackButton(){
         const node = cc.find('Canvas/back_button');
         node.active = true;
@@ -61,8 +62,14 @@ export default class CCAW extends cc.Component {
     }
 
     moveToGame(){
-        this.turnOutButton()
-        this.MaskFadeinAction();
+        //set charater's name in loacal storage
+        const script = this.chosenButton.getComponent('CCAW_button');
+        if (script) {
+            let charater = script.goalNode.name
+            cc.sys.localStorage.setItem('charater', charater);
+        }
+        this.turnOutButton();
+        this.enterGameAction();
     }
 
     turnOutButton(){//let all button uninteractable
@@ -105,10 +112,14 @@ export default class CCAW extends cc.Component {
         ))
     }
 
-    MaskFadeinAction(){
+    enterGameAction(){
+        this.mask.setPosition(this.camera.getPosition())
         this.mask.runAction(cc.sequence(
             cc.delayTime(0.5),
-            cc.fadeTo(255, 0)
+            cc.fadeTo(1, 255),
+            cc.callFunc(()=>{
+                cc.director.loadScene('Game');
+            })
         ))
     }
 
