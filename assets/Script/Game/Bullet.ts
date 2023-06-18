@@ -34,6 +34,8 @@ export default class Bullet extends cc.Component {
 	onBeginContact(contact, self, other) {
 		// if other is enemy, then let enemy take damage and destroy self
 		if (other.node.name == 'goblin') {
+			other.getComponent('TestEnemy').enemyHealth -= this.damage;
+
 			if (this.skillManager.skillMap['Thunder'] == true) {
 				this.particleManager
 					.getComponent('ParticleManager')
@@ -65,6 +67,8 @@ export default class Bullet extends cc.Component {
 
 				AudioManager.getInstance().playSoundEffect(AudioType.Frozen)
 			}
+
+			this.node.destroy();
 		}
 	}
 

@@ -35,7 +35,7 @@ export default class EXPManager extends cc.Component {
     curEXP: number = 0;
     curLevel: number = 1;
 
-    gainEXP(exp: number = 46) {
+    gainEXP(event, exp: number = 46) {
         this.curEXP += exp;
         this.render();
 
