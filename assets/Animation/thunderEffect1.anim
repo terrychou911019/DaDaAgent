@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "thunderEffect2",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.26666666666666666,
+  "sample": 60,
+  "speed": 1.5,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "2bf7f3c0-f1bd-4f67-86ad-7e463b173610"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "5b9ef68c-a4f4-4119-a15b-e6dede4aa963"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "5b4702a3-3447-4f66-add1-85a1155b6ff0"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "eabdbaba-fa7c-4901-b8c9-07234623f12c"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

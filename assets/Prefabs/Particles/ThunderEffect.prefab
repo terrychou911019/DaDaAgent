@@ -24,10 +24,13 @@
       },
       {
         "__id__": 3
+      },
+      {
+        "__id__": 4
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 5
     },
     "_opacity": 255,
     "_color": {
@@ -39,27 +42,27 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 70,
-      "height": 693
+      "width": 112,
+      "height": 112
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.95,
-      "y": 0
+      "x": 0.2,
+      "y": 0.1
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -14.832,
-        -231.254,
+        0,
+        0,
         0,
         0,
         0,
         0,
         1,
-        0.5,
         1,
+        2,
         1
       ]
     },
@@ -92,7 +95,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "5acd7232-8330-42d2-bd11-7200cd577f16"
+      "__uuid__": "fe206f52-5598-45be-92c4-7609b254b8f6"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -105,7 +108,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "a9375b4d-df26-408d-a129-9d1133c89d27"
+    },
     "_id": ""
   },
   {
@@ -116,6 +121,29 @@
       "__id__": 1
     },
     "_enabled": true,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_defaultClip": null,
+    "_clips": [
+      {
+        "__uuid__": "2e13cf30-9c05-4391-a8ad-f870b11b7a24"
+      },
+      {
+        "__uuid__": "8b7e3ce6-c488-4dff-b4a3-12e6fb41139f"
+      },
+      {
+        "__uuid__": "98171c60-855f-4525-915e-799462ed7b8d"
+      }
+    ],
+    "playOnLoad": false,
     "_id": ""
   },
   {
