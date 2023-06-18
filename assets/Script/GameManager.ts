@@ -32,12 +32,15 @@ export default class GameManager extends cc.Component {
     @property(cc.Node)
     enemyManager: cc.Node = null;
 
+    private lifebar = null;
+
     isGamePaused = false;
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true
 		cc.director.getCollisionManager().enabled = true
+        this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
     }
 
     debug(){
@@ -45,7 +48,7 @@ export default class GameManager extends cc.Component {
     }
 
     update (dt) {
-        if(this.isGamePaused){
+        if(this.isGamePaused || this.lifebar.cur_life <= 0) {
             return;
         }
 
