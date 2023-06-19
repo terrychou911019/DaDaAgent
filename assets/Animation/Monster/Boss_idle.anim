@@ -1,0 +1,85 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Boss_idle",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.8333333333333334,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "42fa069b-0e7b-4524-9489-d3c44114ccf6"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "503d3ad1-c375-417e-ba2d-7fa08d7b6f88"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "4b1edefd-1a3f-4b17-bbdf-e70b0cc67bdc"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "b9751282-987c-4d5c-985a-abc70d1ef375"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "ef623b24-d303-431a-89b7-6d4a1b7eb44d"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "b73da2ee-4740-4114-9732-be9343895b17"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "08463d42-59cb-4fe6-b8ae-5c1bcd4a3c4f"
+            }
+          },
+          {
+            "frame": 0.5833333333333334,
+            "value": {
+              "__uuid__": "5d16f42a-cae1-40a7-8e99-2acfff5904d9"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "d718a901-f7ab-4212-89cd-7acf258f95e7"
+            }
+          },
+          {
+            "frame": 0.75,
+            "value": {
+              "__uuid__": "7688e621-65ae-4d33-9f11-efe10a36bc15"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.8333333333333334,
+      "func": "",
+      "params": []
+    }
+  ]
+}

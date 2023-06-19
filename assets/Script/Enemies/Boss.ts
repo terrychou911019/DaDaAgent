@@ -73,7 +73,7 @@ export default class Boss extends cc.Component {
 		this.isDead = false
 		this.isFrozen = false
 		this.node.opacity = 255
-		this.anim.play('boss_walk')
+		this.anim.play('Boss_walk')
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
 
@@ -99,12 +99,16 @@ export default class Boss extends cc.Component {
 			this.rigidbody.enabledContactListener = false
 			this.collider.enabled = false
 			// let fade = cc.fadeOut(1)
-			this.anim.stop()
-			this.anim.play('mushroom_die')
-			this.scheduleOnce(() => {
-				//this.EnemyManager.put(this.node)
-                this.node.destroy();
-			}, 1)
+			//destroy the node after animation finished
+			this.anim.stop();
+			this.anim.play('Boss_die');
+			this.anim.on('finished', ()=>{
+				this.node.destroy();
+			})
+			// this.scheduleOnce(() => {
+			// 	//this.EnemyManager.put(this.node)
+            //     this.node.destroy();
+			// }, 2)
 
 			this.isDead = false
 			this.enemyHealth = 100
@@ -131,6 +135,8 @@ export default class Boss extends cc.Component {
 
                 this.canDash = false;
                 this.isChargingDash = true;
+				this.anim.stop()
+				this.anim.play('Boss_attack')
 
                 this.scheduleOnce(() => {
                     this.isChargingDash = false;
@@ -138,6 +144,8 @@ export default class Boss extends cc.Component {
 
                     this.scheduleOnce(() => {
                         this.isDashing = false;
+						this.anim.stop()
+						this.anim.play('Boss_walk')
                     }, this.dashingTime);
 
                 }, this.chargingDashTime);
@@ -256,7 +264,7 @@ export default class Boss extends cc.Component {
 		this.isDead = false
 		this.isFrozen = false
 		this.node.opacity = 255
-		this.anim.play('boss_walk')
+		this.anim.play('Boss_walk')
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
 

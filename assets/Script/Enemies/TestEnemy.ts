@@ -81,7 +81,7 @@ export default class TestEnemy extends cc.Component {
 			this.anim.play('goblin_die')
 			this.scheduleOnce(() => {
 				this.EnemyManager.put(this.node)
-			}, 1)
+			}, 0.8)
 
 			this.isDead = false
 			this.enemyHealth = 100
