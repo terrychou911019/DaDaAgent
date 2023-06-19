@@ -20,7 +20,7 @@ export default class UltManager extends cc.Component {
     @property(cc.Node)
     player: cc.Node = null;
 
-    ultCD = 5;
+    ultCD = 30;
     ultTimer = 0;
 
     // LIFE-CYCLE CALLBACKS:
@@ -36,12 +36,13 @@ export default class UltManager extends cc.Component {
     gameTick(dt){
         // change button label in 'ULT in Xs'
         let label = this.ultButton.getChildByName('Background').getChildByName('Label');
-        label.getComponent('cc.Label').string = 'ULT in ' + (this.ultCD - this.ultTimer).toFixed(1) + 's';
-
+        label.getComponent('cc.Label').string = (this.ultCD - this.ultTimer).toFixed(0);
+        
         this.ultTimer += dt;
         if(this.ultTimer >= this.ultCD){
             this.ultTimer = this.ultCD;
             //this.ultButton.active = true;
+            label.getComponent('cc.Label').string = 'Ready';
         }
     }
 
