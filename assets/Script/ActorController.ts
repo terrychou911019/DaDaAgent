@@ -73,6 +73,8 @@ export default class ActorController extends Controller {
 
 	private playDeathAnimation = false;
 
+	private timeManager = null;
+
 	@property(cc.Node)
 	playerIcon: cc.Node = null;
 
@@ -101,7 +103,7 @@ export default class ActorController extends Controller {
 			case State.Idle:
 				if (!this.idleAnimState.isPlaying) {
 					if (this.idleAnimationName) {
-						//this._animation.play(this.idleAnimationName)
+						this._animation.play(this.idleAnimationName)
 					}
 				}
 				break
@@ -115,7 +117,7 @@ export default class ActorController extends Controller {
 			case State.Die:
 				if (!this.dieAnimState.isPlaying) {
 					if (this.dieAnimationName) {
-						this._animation.play(this.dieAnimationName)
+						//this._animation.play(this.dieAnimationName)
 					}
 				}
 				break
@@ -151,6 +153,8 @@ export default class ActorController extends Controller {
 			this.playerIcon.getComponent(cc.Sprite).spriteFrame = this.abaoIcon;
 			this.playerIcon.scale = 4;
 		}
+
+		this.timeManager = cc.find("Canvas/TimeManager").getComponent("TimeManager");
 	}
 
 	start() {
@@ -167,15 +171,31 @@ export default class ActorController extends Controller {
 
 	gameTick(dt) {
 		//check current state
-		this.checkstate()
+		if (this.cur_State != State.Die) {
+			this.checkstate()
+		}
+		// else {
+		// 	if (!this.gameover) {
+		// 		this.scheduleOnce(() => {
+		// 			cc.log("gameover")
+					
+		// 		}, 2);
+		// 	}
+		// 	this.gameover = true;
+		// }
 
 		//play animation
 		this.playanimation()
 
-		if (this.lifebar.cur_life <= 0 && this.playDeathAnimation == false) {
-			this._animation.play(this.dieAnimationName)
-			this.playDeathAnimation = true;
+		if (this.lifebar.cur_life <= 0) {
+			if (!this.playDeathAnimation) {
+				this.playDeathAnimation = true;
+				this._animation.play(this.dieAnimationName)
+			}
 			return
+		}
+		if (this.timeManager.timeUP) {
+			return;
 		}
 
 		if (this.inputSource) {

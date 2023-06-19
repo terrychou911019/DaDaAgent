@@ -37,6 +37,14 @@ export default class GameManager extends cc.Component {
 
     private lifebar = null;
 
+    private mask = null;
+
+    private gameover = false;
+
+    private gamewin = false;
+
+    private scoreManager = null;
+
     isGamePaused = false;
     // LIFE-CYCLE CALLBACKS:
 
@@ -44,6 +52,10 @@ export default class GameManager extends cc.Component {
         cc.director.getPhysicsManager().enabled = true
 		cc.director.getCollisionManager().enabled = true
         this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
+        this.mask = cc.find("Canvas/Main Camera/Mask");
+        this.mask.opacity = 0;
+        this.mask.color = cc.Color.BLACK;
+        this.scoreManager = cc.find("Canvas/ScoreManager").getComponent("ScoreManager");
     }
 
     debug(){
@@ -51,8 +63,30 @@ export default class GameManager extends cc.Component {
     }
 
     update (dt) {
+        //this.mask.position = this.mainCamera.position;
+        if (this.TimeManager.getComponent('TimeManager').timeUP) {
+            if (!this.gamewin) {
+				this.scheduleOnce(() => {
+                    cc.sys.localStorage.setItem('score', this.scoreManager.curScore);
+					cc.log("gamewin")
+					this.toGameWin();
+				}, 2);
+			}
+			this.gamewin = true;
+        }
+        if (this.player.getComponent('ActorController').cur_State == 2) {
+            if (!this.gameover) {
+				this.scheduleOnce(() => {
+                    cc.sys.localStorage.setItem('score', this.scoreManager.curScore);
+					cc.log("gameover")
+					this.toGameOver();
+				}, 2);
+			}
+			this.gameover = true;
+        }
+
         this.player.getComponent('ActorController').gameTick(dt);
-        if(this.isGamePaused || this.lifebar.cur_life <= 0) {
+        if(this.isGamePaused || this.lifebar.cur_life <= 0 || this.TimeManager.getComponent('TimeManager').timeUP) {
             return;
         }
 
@@ -90,5 +124,23 @@ export default class GameManager extends cc.Component {
             this.isGamePaused = true;
             this.pauseGame();
         }
+    }
+
+    toGameOver() {
+        this.mask.runAction(cc.sequence(
+            cc.fadeTo(1.5, 255), 
+            cc.callFunc(() => {
+                cc.director.loadScene('GameOver');
+            })
+        ));   
+    }
+
+    toGameWin() {
+        this.mask.runAction(cc.sequence(
+            cc.fadeTo(1.5, 255), 
+            cc.callFunc(() => {
+                cc.director.loadScene('GameWin');
+            })
+        ));   
     }
 }
