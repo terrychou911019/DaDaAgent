@@ -93,7 +93,12 @@ export default class Boss extends cc.Component {
 		}
 
 		if (this.enemyHealth <= 0) {
+			this.moveSpeed = 0
+			this.isDead = true
+			this.rigidbody.enabledContactListener = false
+			this.collider.enabled = false
 			if (this.bossDeath == false) {
+				console.log("Boss die")
 				this.bossDeath = true;
 				this.anim.stop();
 				this.anim.play('Boss_die');
@@ -107,10 +112,7 @@ export default class Boss extends cc.Component {
 				this.ScoreManager.gainScore(149);
 			}, 0.9)
 
-			this.moveSpeed = 0
-			this.isDead = true
-			this.rigidbody.enabledContactListener = false
-			this.collider.enabled = false
+			
 			// let fade = cc.fadeOut(1)
 			//destroy the node after animation finished
 
@@ -161,9 +163,11 @@ export default class Boss extends cc.Component {
 					this.isDashing = true;
 
 					this.scheduleOnce(() => {
-						this.isDashing = false;
-						this.anim.stop()
-						this.anim.play('Boss_walk')
+						if (!this.isDead) {
+							this.isDashing = false;
+							this.anim.stop()
+							this.anim.play('Boss_walk')
+						}
 					}, this.dashingTime);
 
 				}, this.chargingDashTime);

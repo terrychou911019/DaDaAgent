@@ -21,6 +21,9 @@ export default class ParticleManager extends cc.Component {
     @property(cc.Prefab)
     UITEffect2: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    bloodEffect: cc.Prefab = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {
@@ -67,6 +70,12 @@ export default class ParticleManager extends cc.Component {
         let UITEffect = cc.instantiate(this.UITEffect2);
         UITEffect.position = cc.v3(pos, 0);
         this.node.addChild(UITEffect);
+    }
+
+    spawnBloodEffect(pos: cc.Vec2){
+        let bloodEffect = cc.instantiate(this.bloodEffect);
+        bloodEffect.position = cc.v3(pos, 0);
+        this.node.addChild(bloodEffect);
     }
     
 }

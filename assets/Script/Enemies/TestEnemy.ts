@@ -186,7 +186,7 @@ export default class TestEnemy extends cc.Component {
 			// 	contact.disabled = true
 			// })
 		}
-		if (otherCollider.node.name == "goblin") {
+		if (otherCollider.node.name == "goblin" || otherCollider.node.name == "Boss") {
 			//cc.log("enemy hit enemy")
 			
 			if (this.isFrozen) {

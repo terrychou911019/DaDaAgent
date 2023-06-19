@@ -34,6 +34,8 @@ export default class Bullet extends cc.Component {
 	onBeginContact(contact, self, other) {
 		// if other is enemy, then let enemy take damage and destroy self
 		if (other.node.name == "Boss") {
+			//any way, let blood spread!!
+			this.particleManager.getComponent('ParticleManager').spawnBloodEffect(other.node.position);
 			if (this.skillManager.skillMap['Thunder'] == true) {
 				this.particleManager
 					.getComponent('ParticleManager')
@@ -53,6 +55,8 @@ export default class Bullet extends cc.Component {
 			}
 		}
 		if (other.node.name == 'goblin') {
+			//any way, let blood spread!!
+			this.particleManager.getComponent('ParticleManager').spawnBloodEffect(other.node.position);
 			//other.getComponent('TestEnemy').enemyHealth -= this.damage;
 			if (this.skillManager.skillMap['StrongBullet']) {
 				other.node.getComponent("TestEnemy").isHit = true;

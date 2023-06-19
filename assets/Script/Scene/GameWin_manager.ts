@@ -7,6 +7,8 @@
 
 const { ccclass, property } = cc._decorator;
 
+import type firebase from '../firebase';
+declare const firebase: any;
 @ccclass
 export default class GameWin_manager extends cc.Component {
     private gamewin_label: cc.Label = null;
@@ -21,6 +23,8 @@ export default class GameWin_manager extends cc.Component {
 
     private character = null;
 
+    private userdata = null;
+
     @property(cc.SpriteFrame)
     littleRedIcon: cc.SpriteFrame = null;
 
@@ -34,6 +38,8 @@ export default class GameWin_manager extends cc.Component {
     abaoAnim: cc.AnimationClip = null;
 
     private _animation: cc.Animation = null;
+
+    private updateFinished: boolean = false;
 
     onLoad() {
         this.gamewin_label = cc.find("Canvas/gamewin").getComponent(cc.Label);
@@ -55,6 +61,35 @@ export default class GameWin_manager extends cc.Component {
             this.character.scale = 2;
             this._animation.play("Abao_walk");
         }
+
+        const jsonStr = cc.sys.localStorage.getItem('userdata')
+        this.userdata = JSON.parse(jsonStr)    
+
+        this.updateUserdata();
+        this.blink();
+    }
+
+    async updateUserdata(){
+        if (cc.sys.localStorage.getItem("score") > this.userdata.highscore) {
+            this.userdata.highscore = parseInt(cc.sys.localStorage.getItem("score"))
+            this.userdata.character = this.character_name;
+        }
+        try {
+            await firebase.database().ref("users/" + this.userdata.id).set(this.userdata).catch((e)=>{
+                console.log(e);
+            })
+            console.log(this.userdata)
+            await firebase.database().ref("leaderboard/" + this.userdata.id).set({
+                score:this.userdata.highscore
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+        const jsonStr = JSON.stringify(this.userdata);
+        cc.sys.localStorage.setItem('userdata', jsonStr);
+        
+        this.updateFinished = true;
     }
 
     start() {
@@ -83,12 +118,14 @@ export default class GameWin_manager extends cc.Component {
         switch (e.keyCode) {
             case cc.macro.KEY.enter:
                 this.scheduleOnce(() => {
-                    this.mask.runAction(cc.sequence(
+                    if (this.updateFinished) {
+                        this.mask.runAction(cc.sequence(
                         cc.fadeTo(1.5, 255),
                         cc.callFunc(() => {
                             cc.director.loadScene('CCAW');
                         })
                     ));
+                    }
                 });
                 break
             default:
