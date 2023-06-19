@@ -27,7 +27,7 @@ export default class TestEnemy extends cc.Component {
 	private EnemyManager = null
 	private gameManager = null
 
-	private enemyHealth: number = 100
+	enemyHealth: number = 100
 	private isDead: boolean = false
 
 	private anim: cc.Animation = null

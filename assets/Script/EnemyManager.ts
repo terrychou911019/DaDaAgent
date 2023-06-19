@@ -68,4 +68,11 @@ export default class enemyManager extends cc.Component {
 		boss.parent = this.enemyGroup;
 	}
 
+	playerUseUlt() {
+		for (let i = 0; i < this.node.children.length; i++) {
+			let enemy = this.node.children[i];
+			enemy.getComponent('TestEnemy').enemyHealth -= 100;
+		}
+	}
+
 }
