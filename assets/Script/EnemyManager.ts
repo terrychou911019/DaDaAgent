@@ -9,6 +9,9 @@ export default class enemyManager extends cc.Component {
 	private enemyPrefab: cc.Prefab = null
 
 	@property(cc.Prefab)
+	private enemyPrefab2: cc.Prefab = null
+
+	@property(cc.Prefab)
 	boss: cc.Prefab = null
 
 	@property(cc.Node)
@@ -28,6 +31,8 @@ export default class enemyManager extends cc.Component {
 
 	private particleManager = null;
 
+	private enemyList = [];
+
 	onLoad() {
 		this.enemyGroup = cc.find('Canvas/EnemyGroup')
 
@@ -36,7 +41,13 @@ export default class enemyManager extends cc.Component {
 		let maxEnemyNum = 2000
 
 		for (let i: number = 0; i < maxEnemyNum; i++) {
-			let enemy = cc.instantiate(this.enemyPrefab)
+			let enemy = null;
+			if (i % 2 == 0) {
+				enemy = cc.instantiate(this.enemyPrefab2)
+			}
+			else {
+				enemy = cc.instantiate(this.enemyPrefab)
+			}
 
 			this.enemyPool.put(enemy)
 			// put enemy node under enemy groupx
@@ -47,6 +58,9 @@ export default class enemyManager extends cc.Component {
 		//this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
 
 		this.particleManager = cc.find('Canvas/ParticleManager');
+
+		this.enemyList.push(this.enemyPrefab);
+		this.enemyList.push(this.enemyPrefab2);
 	}
 
 	//call this function to add new enemy to the scene.

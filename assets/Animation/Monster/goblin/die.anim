@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "goblin_die",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6666666666666666,
+  "sample": 60,
+  "speed": 2,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "df2bdd03-e77d-48f8-b0c3-47614bc98b37"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "96a5083f-7365-43ab-a0bb-fbfe96c0304b"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "3e759627-340c-4a82-bdb5-1ce26d0a71b0"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "b8d4635b-a45e-4d69-974c-138255bd2848"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.6666666666666666,
+      "func": "",
+      "params": []
+    }
+  ]
+}
