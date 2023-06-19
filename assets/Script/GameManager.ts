@@ -31,6 +31,9 @@ export default class GameManager extends cc.Component {
 
     @property(cc.Node)
     enemyManager: cc.Node = null;
+    
+    @property(cc.Node)
+    ultManager: cc.Node = null;
 
     private lifebar = null;
 
@@ -66,6 +69,7 @@ export default class GameManager extends cc.Component {
         //});
         this.weaponSpin.getComponent('WeaponSpin').gameTick(dt);
         this.enemyManager.getComponent('EnemyManager').gameTick(dt);
+        this.ultManager.getComponent('UltManager').gameTick(dt);
     }
 
     pauseGame() {
