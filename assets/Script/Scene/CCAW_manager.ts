@@ -30,7 +30,9 @@ export default class CCAW extends cc.Component {
 
     private cameraMoveEndX = 1040;
 
-    private chosenButton: cc.Node = null;
+    private characterButton: cc.Node = null;
+
+    private weaponButton: cc.Node = null;
     
 
 
@@ -45,7 +47,7 @@ export default class CCAW extends cc.Component {
     }
 
     backButtinClick(){//the back button been clicked
-        const script = this.chosenButton.getComponent('CCAW_button');
+        const script = this.characterButton.getComponent('CCAW_button');
         if (script) {
             script.changeToCC();
         }
@@ -101,10 +103,15 @@ export default class CCAW extends cc.Component {
 
     moveToGame(){
         //set charater's name in loacal storage
-        const script = this.chosenButton.getComponent('CCAW_button');
-        if (script) {
-            let charater = script.goalNode.name
+        const script1 = this.characterButton.getComponent('CCAW_button');
+        if (script1) {
+            let charater = script1.goalNode.name;
             cc.sys.localStorage.setItem('charater', charater);
+        }
+        const script2 = this.weaponButton.getComponent('CCAW_button');
+        if (script2) {
+            let weapon = script2.goalNode.name;
+            cc.sys.localStorage.setItem('weapon', weapon);
         }
         this.turnOutButton();
         this.enterGameAction();
@@ -161,12 +168,20 @@ export default class CCAW extends cc.Component {
         ))
     }
 
-    setChosenButton(N:cc.Node){
-        this.chosenButton = N;
+    setCharacterButton(N:cc.Node){
+        this.characterButton = N;
     }
 
-    getChosenButton(){
-        return this.chosenButton;
+    getCharacterButton(){
+        return this.characterButton;
+    }
+
+    setWeaponButton(N:cc.Node){
+        this.weaponButton = N;
+    }
+
+    getWeaponButton(){
+        return this.weaponButton;
     }
 
     // LIFE-CYCLE CALLBACKS:

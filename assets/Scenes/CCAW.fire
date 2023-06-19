@@ -3492,7 +3492,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "weapon1",
+    "_name": "Bow",
     "_objFlags": 0,
     "_parent": {
       "__id__": 72
@@ -3616,7 +3616,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "weapon2",
+    "_name": "Shuriken",
     "_objFlags": 0,
     "_parent": {
       "__id__": 72
@@ -3695,7 +3695,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
+      "__uuid__": "784fcdcb-7e9a-4985-a8bb-074c2ccf3bd1"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -4645,7 +4645,7 @@
       "a": 200
     },
     "_N$normalSprite": {
-      "__uuid__": "2f51f85c-e2b6-4cb4-a30f-1aa370a5e997"
+      "__uuid__": "784fcdcb-7e9a-4985-a8bb-074c2ccf3bd1"
     },
     "_N$pressedSprite": null,
     "pressedSprite": null,

@@ -67,8 +67,11 @@ export default class TestEnemy extends cc.Component {
 
 		if (this.enemyHealth <= 0) {
 			// player gain exp and score	
-			this.EXPManager.gainEXP(46);
-			this.ScoreManager.gainScore(149);
+			this.scheduleOnce(()=>{
+				this.EXPManager.gainEXP(46);
+				this.ScoreManager.gainScore(149);
+			}, 0.8)
+			
 
 			this.moveSpeed = 0
 			this.isDead = true

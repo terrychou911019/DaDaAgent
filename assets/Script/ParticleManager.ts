@@ -15,6 +15,12 @@ export default class ParticleManager extends cc.Component {
     @property(cc.Prefab)
     frozenEffect: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    UITEffect1: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    UITEffect2: cc.Prefab = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {
@@ -49,6 +55,18 @@ export default class ParticleManager extends cc.Component {
         let frozenEffect = cc.instantiate(this.frozenEffect);
         frozenEffect.position = cc.v3(pos, 0);
         this.node.addChild(frozenEffect);
+    }
+
+    spawnUITEffect1(pos: cc.Vec2){
+        let UITEffect = cc.instantiate(this.UITEffect1);
+        UITEffect.position = cc.v3(pos, 0);
+        this.node.addChild(UITEffect);
+    }
+
+    spawnUITEffect2(pos: cc.Vec2){
+        let UITEffect = cc.instantiate(this.UITEffect2);
+        UITEffect.position = cc.v3(pos, 0);
+        this.node.addChild(UITEffect);
     }
     
 }
