@@ -26,7 +26,8 @@ export default class Boss extends cc.Component {
 	private EnemyManager = null
 	private gameManager = null
 
-	private enemyHealth: number = 100
+	enemyFullHealth: number = 1000
+	enemyHealth: number = 1000
 	private isDead: boolean = false
 
 	private anim: cc.Animation = null
@@ -66,7 +67,7 @@ export default class Boss extends cc.Component {
 		this.EXPManager = cc.find('Canvas/EXPManager').getComponent('EXPManager');
 		this.ScoreManager = cc.find('Canvas/ScoreManager').getComponent('ScoreManager');
 		//this.moveSpeed = 50
-		this.enemyHealth = 100
+		//this.enemyHealth = 100
 		this.isDead = false
 		this.isFrozen = false
 		this.node.opacity = 255

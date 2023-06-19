@@ -173,8 +173,9 @@ export default class TestEnemy extends cc.Component {
 			cc.log(this.enemyHealth)
 			
 		}
-		if (otherCollider.node.name == 'wheel') {
+		if (otherCollider.node.name == 'Wheel') {
 			this.enemyHealth -= this.weaponSpin.damage
+			contact.disabled = true;
 			this.scheduleOnce(() => {
 				contact.disabled = true
 			})

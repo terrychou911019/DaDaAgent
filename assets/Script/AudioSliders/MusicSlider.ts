@@ -7,7 +7,7 @@ export default class MusicSlider extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
         // change progress to current music volum
-        //this.getComponent(cc.Slider).progress = AudioManager.getInstance().getMusicVolume();
+        this.getComponent(cc.Slider).progress = AudioManager.getInstance().getMusicVolume();
 
         this.node.on("slide", this.onSlide, this);
     }
@@ -20,6 +20,6 @@ export default class MusicSlider extends cc.Component {
 
     onSlide(slider: cc.Slider){
         console.log(slider.progress);
-        //AudioManager.getInstance().setMusicVolume(slider.progress);
+        AudioManager.getInstance().setMusicVolume(slider.progress);
     }
 }

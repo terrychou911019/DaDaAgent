@@ -72,7 +72,7 @@ export default class Weapon extends cc.Component {
         if(this.skillManager.getComponent('SkillManager').skillMap['StrongBullet'] == true){
             this.Camera.getComponent('MainCamera').setShakeMagnitude(2);
 
-            //AudioManager.getInstance().playSoundEffect(AudioType.StrongBullet);
+            AudioManager.getInstance().playSoundEffect(AudioType.StrongBullet);
         }
         
         this.createBullet(0);
@@ -91,7 +91,7 @@ export default class Weapon extends cc.Component {
         this.BulletNode.getChildByName("LoadingBar").width = 0;
 
         // play sound effect
-        //AudioManager.getInstance().playSoundEffect(AudioType.LaserShoot);
+        AudioManager.getInstance().playSoundEffect(AudioType.LaserShoot);
     }
 
     createBullet(adjustAngle: number) {
