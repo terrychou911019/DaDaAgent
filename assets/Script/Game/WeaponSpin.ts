@@ -9,7 +9,7 @@ export default class WeaponSpin extends cc.Component {
     radius: number = 100; // Adjust the radius as desired
 
     @property(Number)
-    spinSpeed: number = 20; // Adjust the rotation speed in degrees per second
+    spinSpeed: number = 10; // Adjust the rotation speed in degrees per second
 
     @property(cc.Node)
     player: cc.Node = null;

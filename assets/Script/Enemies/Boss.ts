@@ -38,18 +38,20 @@ export default class Boss extends cc.Component {
 	private EXPManager: any = null;
 	private ScoreManager: any = null;
 
-    private isChargingDash: boolean = false;
-    private canDash: boolean = true;
+	private isChargingDash: boolean = false;
+	private canDash: boolean = true;
 	private isDashing: boolean = false;
 	private dashingPower: number = 2.5;
 	private dashingTime = 0.2;
 	private dashingCooldown = 3;
-    private chargingDashTime = 2;
-    private dashDirection: cc.Vec3;
+	private chargingDashTime = 2;
+	private dashDirection: cc.Vec3;
 
 	private lifebar = null;
 
 	private timeManager = null;
+
+	private bossDeath: boolean = false;
 
 	onLoad() {
 		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
@@ -59,7 +61,7 @@ export default class Boss extends cc.Component {
 	start() {
 		this.isFrozen = false;
 
-        cc.director.getPhysicsManager().enabled = true
+		cc.director.getPhysicsManager().enabled = true
 		cc.director.getCollisionManager().enabled = true
 		this.player = cc.find('Canvas/Player')
 		this.playerLife = cc.find('Canvas/Player/lifebar').getComponent("Lifebar")
@@ -78,7 +80,7 @@ export default class Boss extends cc.Component {
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
 
-        // set init position
+		// set init position
 	}
 
 	deadEffect() {
@@ -91,9 +93,19 @@ export default class Boss extends cc.Component {
 		}
 
 		if (this.enemyHealth <= 0) {
+			if (this.bossDeath == false) {
+				this.bossDeath = true;
+				this.anim.stop();
+				this.anim.play('Boss_die');
+				this.scheduleOnce(() => {
+					this.node.destroy();
+				}, 0.9)
+			}
 			// player gain exp and score	
-			this.EXPManager.gainEXP(46);
-			this.ScoreManager.gainScore(149);
+			this.scheduleOnce(() => {
+				this.EXPManager.gainEXP(46);
+				this.ScoreManager.gainScore(149);
+			}, 0.9)
 
 			this.moveSpeed = 0
 			this.isDead = true
@@ -101,15 +113,19 @@ export default class Boss extends cc.Component {
 			this.collider.enabled = false
 			// let fade = cc.fadeOut(1)
 			//destroy the node after animation finished
-			this.anim.stop();
-			this.anim.play('Boss_die');
-			this.anim.on('finished', ()=>{
-				console.log("Boss destroy");
-				this.node.destroy();
-			})
+
+			// this.anim.on('finished', ()=>{
+			// 	console.log("Boss destroy");
+			// 	this.node.destroy();
+			// })
+
+			// this.scheduleOnce(() => {
+			// 	this.node.destroy();
+			// }, 0.9)
+
 			// this.scheduleOnce(() => {
 			// 	//this.EnemyManager.put(this.node)
-            //     this.node.destroy();
+			//     this.node.destroy();
 			// }, 2)
 
 			//this.isDead = false
@@ -128,59 +144,59 @@ export default class Boss extends cc.Component {
 			let direction = playerPos.sub(enemyPos)
 			let normalizedDirection = direction.normalize()
 
-            // if distance between player and enemy is less than 100, enemy will charge dash
-            // and if canDash is true, enemy will dash toward the player
-            // and if not dashing, enemy will walk toward the player
-            let distance = direction.mag();
-            if (distance < 350 && !this.isChargingDash && this.canDash) {
-                this.dashDirection = normalizedDirection;
+			// if distance between player and enemy is less than 100, enemy will charge dash
+			// and if canDash is true, enemy will dash toward the player
+			// and if not dashing, enemy will walk toward the player
+			let distance = direction.mag();
+			if (distance < 350 && !this.isChargingDash && this.canDash) {
+				this.dashDirection = normalizedDirection;
 
-                this.canDash = false;
-                this.isChargingDash = true;
+				this.canDash = false;
+				this.isChargingDash = true;
 				this.anim.stop()
 				this.anim.play('Boss_attack')
 
-                this.scheduleOnce(() => {
-                    this.isChargingDash = false;
-                    this.isDashing = true;
+				this.scheduleOnce(() => {
+					this.isChargingDash = false;
+					this.isDashing = true;
 
-                    this.scheduleOnce(() => {
-                        this.isDashing = false;
+					this.scheduleOnce(() => {
+						this.isDashing = false;
 						this.anim.stop()
 						this.anim.play('Boss_walk')
-                    }, this.dashingTime);
+					}, this.dashingTime);
 
-                }, this.chargingDashTime);
+				}, this.chargingDashTime);
 
-                this.scheduleOnce(() => {
-                    this.canDash = true;
-                }, this.dashingCooldown);
-            }
+				this.scheduleOnce(() => {
+					this.canDash = true;
+				}, this.dashingCooldown);
+			}
 
-            if(this.isChargingDash) {
-                // charging dash, stop movement
-            }
-            else if(this.isDashing){
-                this.node.position = enemyPos.add(
-                    this.dashDirection.mul(this.moveSpeed * dt * 10),
-                );
-            }
-            else{
-                // not charging dash, walk toward the player
-                // walk toward the player
-                this.node.position = enemyPos.add(
-                    normalizedDirection.mul(this.moveSpeed * dt),
-                );
-            }
+			if (this.isChargingDash) {
+				// charging dash, stop movement
+			}
+			else if (this.isDashing) {
+				this.node.position = enemyPos.add(
+					this.dashDirection.mul(this.moveSpeed * dt * 10),
+				);
+			}
+			else {
+				// not charging dash, walk toward the player
+				// walk toward the player
+				this.node.position = enemyPos.add(
+					normalizedDirection.mul(this.moveSpeed * dt),
+				);
+			}
 
-            if(!this.isChargingDash){
-                // change enemy facing direction for x and -x
-                if (this.node.x > this.player.x) {
-                    this.node.scaleX = -1
-                } else {
-                    this.node.scaleX = 1
-                }
-            }
+			if (!this.isChargingDash) {
+				// change enemy facing direction for x and -x
+				if (this.node.x > this.player.x) {
+					this.node.scaleX = -1
+				} else {
+					this.node.scaleX = 1
+				}
+			}
 
 			// move enemy randomly when they collide
 			if (this.isColliding) {

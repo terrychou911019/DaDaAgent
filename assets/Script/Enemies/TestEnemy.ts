@@ -175,14 +175,16 @@ export default class TestEnemy extends cc.Component {
 			else {
 				this.enemyHealth -= this.weapon.DAMAGE;	
 			}	
-			cc.log(this.enemyHealth)
+
 			
 		}
+		//cc.log(otherCollider.node.name)
 		if (otherCollider.node.name == 'wheel') {
-			this.enemyHealth -= 20
-			this.scheduleOnce(() => {
-				contact.disabled = true
-			})
+			cc.log("in wheel")
+			this.enemyHealth -= 100
+			// this.scheduleOnce(() => {
+			// 	contact.disabled = true
+			// })
 		}
 		if (otherCollider.node.name == "goblin") {
 			//cc.log("enemy hit enemy")
