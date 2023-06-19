@@ -888,7 +888,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 198.33,
+      "width": 147.78,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -940,8 +940,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "LOGIN IN",
-    "_N$string": "LOGIN IN",
+    "_string": "LOG IN",
+    "_N$string": "LOG IN",
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -7905,7 +7905,7 @@
       }
     ],
     "_prefab": null,
-    "_opacity": 0,
+    "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
       "r": 0,
@@ -7927,7 +7927,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -960,
         0,
         0,
         0,

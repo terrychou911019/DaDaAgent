@@ -175,7 +175,7 @@ export default class NewClass extends cc.Component {
     async logIn(email:string, password:string){
         try {
             let userInfo = await firebase.auth().signInWithEmailAndPassword(email, password);
-            await firebase.database().ref(userInfo.user.uid).once('value', (snapshot)=>{
+            await firebase.database().ref("users/" + userInfo.user.uid).once('value', (snapshot)=>{
                 const userdata = snapshot.val();
                 const jsonStr = JSON.stringify(userdata);
                 cc.sys.localStorage.setItem('userdata', jsonStr);
@@ -189,7 +189,9 @@ export default class NewClass extends cc.Component {
         } catch (e) {
             console.log(e);
             if (e.code == 'auth/user-not-found') {
-                this.errorMessage("Can't find the user!")
+                this.errorMessage("Can't find the user!");
+            } else if(e.code == 'auth/wrong-password') {
+                this.errorMessage("The password is wrong");
             } else {
                 this.errorMessage(e.message);
             }
@@ -212,11 +214,16 @@ export default class NewClass extends cc.Component {
     async signUp(username, email, password){
         try{
             let userInfo = await firebase.auth().createUserWithEmailAndPassword(email, password);
-            await firebase.database().ref(userInfo.user.uid).set({
+            let userdata = {
                 id:userInfo.user.uid,
                 username:username, 
-                highscore:0
-            }).then(()=>{
+                highscore:0,
+                character:"LittleRed"
+            }
+            await firebase.database().ref("users/" + userInfo.user.uid).set(userdata).then(()=>{
+                //set localstrage
+                const jsonStr = JSON.stringify(userdata);
+                cc.sys.localStorage.setItem('userdata', jsonStr);
                 console.log("signup successful")
                 this.changeScene();
             })
@@ -253,12 +260,26 @@ export default class NewClass extends cc.Component {
 
     //change to CCAW(choose character and weapon)
     changeScene(){
+        this.mask.opacity = 0;
+        this.mask.setPosition(0, 0);
         this.mask.runAction(cc.sequence(
             cc.fadeTo(1.5, 255), 
             cc.callFunc(() => {
                 cc.director.loadScene('CCAW');
             })
         ));
+    }
+    //enter this scene
+
+    enterTitle(){
+        this.mask.opacity = 255;
+        this.mask.setPosition(0, 0);
+        this.mask.runAction(cc.sequence(
+            cc.fadeTo(1, 0),
+            cc.callFunc(()=>{
+                console.log('Enter the title');
+            })
+        ))
     }
 
     // LIFE-CYCLE CALLBACKS:
@@ -273,9 +294,9 @@ export default class NewClass extends cc.Component {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         //Mask
         this.mask = cc.find('Canvas/Mask');
-        console.log(this.mask)
-        this.mask.opacity = 0;
-        this.mask.color = cc.Color.BLACK;
+
+        //title Action
+        this.enterTitle();
     }
 
     start () {

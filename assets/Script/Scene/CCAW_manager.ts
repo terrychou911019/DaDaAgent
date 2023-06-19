@@ -7,6 +7,9 @@
 
 const {ccclass, property} = cc._decorator;
 
+import type firebase from '../firebase';
+declare const firebase: any;
+
 @ccclass
 export default class CCAW extends cc.Component {
 
@@ -22,9 +25,18 @@ export default class CCAW extends cc.Component {
     @property(cc.Node)
     private backbutton: cc.Node = null;
 
+    @property(cc.Node)
+    private logOutButton: cc.Node = null;
+
     private label: cc.Node = null;
 
+    private label2: cc.Node = null;
+
+    private usernameUI: cc.Node = null;
+
     private mask: cc.Node = null;
+
+    private userdata = null;
 
     private cameraMoveStartX = 0;
 
@@ -33,18 +45,6 @@ export default class CCAW extends cc.Component {
     private characterButton: cc.Node = null;
 
     private weaponButton: cc.Node = null;
-    
-
-
-    unableBackButton(){
-        const node = cc.find('Canvas/back_button');
-        node.active = true;
-    }
-
-    disableBackButton(){
-        const node = cc.find('Canvas/back_button')
-        node.active = false;
-    }
 
     backButtinClick(){//the back button been clicked
         const script = this.characterButton.getComponent('CCAW_button');
@@ -56,6 +56,8 @@ export default class CCAW extends cc.Component {
     moveToLeaderboard(){
         this.turnOutButton();
         this.leaderboardButton.active = false;
+        this.logOutButton.active = false;
+        this.usernameUI.active = false;
         this.camera.runAction(cc.sequence(
             cc.moveTo(3, -1000, this.camera.y),
             cc.callFunc(()=>{
@@ -72,6 +74,8 @@ export default class CCAW extends cc.Component {
             cc.moveTo(3, 0, this.camera.y),
             cc.callFunc(()=>{
                 this.leaderboardButton.active = true;
+                this.logOutButton.active = true;
+                this.usernameUI.active = true;
                 this.turnOnButton()
             })
         ))
@@ -80,6 +84,8 @@ export default class CCAW extends cc.Component {
     moveToCW(){//camera move to choose weapon
         this.turnOutButton();
         this.leaderboardButton.active = false;
+        this.logOutButton.active = false;
+        this.usernameUI.active = false;
         this.camera.runAction(cc.sequence(
             cc.moveTo(8, this.cameraMoveEndX, this.camera.y),
             cc.callFunc(()=>{
@@ -96,6 +102,8 @@ export default class CCAW extends cc.Component {
             cc.moveTo(8, this.cameraMoveStartX, this.camera.y),
             cc.callFunc(()=>{
                 this.leaderboardButton.active  = true;
+                this.logOutButton.active = true;
+                this.usernameUI.active = true;
                 this.turnOnButton()
             })
         ))
@@ -140,6 +148,8 @@ export default class CCAW extends cc.Component {
     }
 
     labelAction(){
+        this.label.opacity = 0;
+        this.label.setPosition(0, 0);
         this.label.runAction(cc.sequence(
             cc.fadeTo(1, 255),
             cc.delayTime(1),
@@ -151,6 +161,8 @@ export default class CCAW extends cc.Component {
     }
 
     maskFadeoutAction(){
+        this.mask.opacity = 255
+        this.mask.setPosition(0, 0);
         this.mask.runAction(cc.sequence(
             cc.delayTime(0.5),
             cc.fadeTo(1, 0)
@@ -158,12 +170,37 @@ export default class CCAW extends cc.Component {
     }
 
     enterGameAction(){
+        this.mask.opacity = 0;
         this.mask.setPosition(this.camera.getPosition())
         this.mask.runAction(cc.sequence(
             cc.delayTime(0.5),
             cc.fadeTo(1, 255),
             cc.callFunc(()=>{
                 cc.director.loadScene('Game');
+            })
+        ))
+    }
+
+    logOutMaskAction(){
+        this.mask.opacity = 0;
+        this.mask.setPosition(0, 0);
+        this.mask.runAction(cc.sequence(
+            cc.fadeTo(1, 255),
+            cc.callFunc(()=>{
+                this.logOutLabelAction();
+            })
+        ))
+    }
+
+    logOutLabelAction(){
+        this.label2.opacity = 0;
+        this.label2.setPosition(0, 0);
+        this.label2.runAction(cc.sequence(
+            cc.fadeTo(1, 255),
+            cc.delayTime(1),
+            cc.fadeTo(1, 0),
+            cc.callFunc(()=>{
+                cc.director.loadScene('Title');
             })
         ))
     }
@@ -187,15 +224,35 @@ export default class CCAW extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.label  = cc.find('Canvas/Label');
+        this.label = cc.find('Canvas/Label');
         this.label.opacity = 0;
+        this.label2 = cc.find('Canvas/Label2');
+        this.label2.opacity = 0;
         this.mask = cc.find('Canvas/Mask');
         this.mask.opacity = 255;
+        this.usernameUI = cc.find('Canvas/usernameUI')
         this.labelAction();
+        //get userdata
+        const jsonStr = cc.sys.localStorage.getItem('userdata');
+        this.userdata = JSON.parse(jsonStr);
+        console.log(this.userdata)
         //button
         this.leaderboardButton.active = true;
         this.backCCButton.active = false;
         this.backbutton.active = false;
+
+        //set user name
+        this.usernameUI.getChildByName('username').getComponent(cc.Label).string = this.userdata.username;
+    }
+
+    logOut(){
+        firebase.auth().signOut().then(() => {
+            console.log("log out successful")
+            cc.sys.localStorage.setItem('userdata', null);
+            this.logOutMaskAction();
+        }).catch((e)=>{
+            console.log(e);
+        })
     }
 
     start () {
