@@ -33,7 +33,26 @@ export default class Bullet extends cc.Component {
 	// LIFE-CYCLE CALLBACKS:
 	onBeginContact(contact, self, other) {
 		// if other is enemy, then let enemy take damage and destroy self
-		if (other.node.name == 'goblin' || other.node.name == "Boss") {
+		if (other.node.name == "Boss") {
+			if (this.skillManager.skillMap['Thunder'] == true) {
+				this.particleManager
+					.getComponent('ParticleManager')
+					.spawnThunderEffect(other.node.position)
+
+				AudioManager.getInstance().playSoundEffect(AudioType.Explosion)
+			}
+			if (this.skillManager.skillMap['Ice'] == true) {
+				this.particleManager
+					.getComponent('ParticleManager')
+					.spawnIceParticle(other.node.position)
+
+				AudioManager.getInstance().playSoundEffect(AudioType.Ice)
+			}
+			if (!this.skillManager.skillMap['LightBullet']) {
+				this.node.destroy();
+			}
+		}
+		if (other.node.name == 'goblin') {
 			//other.getComponent('TestEnemy').enemyHealth -= this.damage;
 			if (this.skillManager.skillMap['StrongBullet']) {
 				other.node.getComponent("TestEnemy").isHit = true;

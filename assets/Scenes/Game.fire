@@ -3083,7 +3083,9 @@
     "enemyPrefab": {
       "__uuid__": "37dfeb6d-808b-463d-90a0-5f27f6169b2b"
     },
-    "enemyPrefab2": null,
+    "enemyPrefab2": {
+      "__uuid__": "ca76efdd-f187-4ee0-8359-49b232db723f"
+    },
     "boss": {
       "__uuid__": "0515db20-3109-4198-81a4-b14ad6eb3938"
     },
