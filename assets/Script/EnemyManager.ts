@@ -18,6 +18,8 @@ export default class enemyManager extends cc.Component {
 
 	private isBossSummoned = false;
 
+	private particleManager = null;
+
 	onLoad() {
 		this.enemyGroup = cc.find('Canvas/EnemyGroup')
 
@@ -35,7 +37,8 @@ export default class enemyManager extends cc.Component {
 		this.createTimer = 0;
 		this.isBossSummoned = false;
 		//this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
-		//this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
+
+		this.particleManager = cc.find('Canvas/ParticleManager');
 	}
 
 	//call this function to add new enemy to the scene.
@@ -73,6 +76,13 @@ export default class enemyManager extends cc.Component {
 		for (let i = 0; i < this.node.children.length; i++) {
 			let enemy = this.node.children[i];
 			enemy.getComponent('TestEnemy').enemyHealth -= 100;
+		}
+	}
+
+	UITEffect(){
+		for (let i = 0; i < this.node.children.length; i++) {
+			let enemy = this.node.children[i];
+			this.particleManager.getComponent('ParticleManager').spawnUITEffect2(enemy.position)
 		}
 	}
 

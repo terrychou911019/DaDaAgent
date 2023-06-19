@@ -30,8 +30,8 @@ export class Background extends cc.Component {
         backgroundNode.destroy();
         
         // Calculate rows and columns
-        this.rows = Math.ceil(cc.winSize.height / this.nodeSize) + 5;
-        this.columns = Math.ceil(cc.winSize.width / this.nodeSize) + 7;
+        this.rows = Math.ceil(cc.winSize.height / this.nodeSize) + 10;
+        this.columns = Math.ceil(cc.winSize.width / this.nodeSize) + 10;
         
         // this.rows = 4;
         // this.columns = 6;
