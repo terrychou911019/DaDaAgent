@@ -43,8 +43,6 @@ export default class GameManager extends cc.Component {
 
     private lifebar = null;
 
-    private mask = null;
-
     private gameover = false;
 
     private gamewin = false;
@@ -66,6 +64,8 @@ export default class GameManager extends cc.Component {
         this.label.opacity = 0;
         this.mask.opacity = 255;
         this.labelAction();
+
+        this.scoreManager = cc.find("Canvas/ScoreManager").getComponent("ScoreManager");
     }
 
     debug(){
@@ -94,9 +94,11 @@ export default class GameManager extends cc.Component {
 			}
 			this.gameover = true;
         }
-
+        if (this.isGamePaused) {
+            return;
+        }
         this.player.getComponent('ActorController').gameTick(dt);
-        if(this.isGamePaused || this.lifebar.cur_life <= 0 || this.TimeManager.getComponent('TimeManager').timeUP) {
+        if(this.lifebar.cur_life <= 0 || this.TimeManager.getComponent('TimeManager').timeUP) {
             return;
         }
 
@@ -168,6 +170,8 @@ export default class GameManager extends cc.Component {
     }
 
     toGameOver() {
+        this.mask.setPosition(this.player.getPosition());
+        this.mask.color = cc.color(0, 0, 0);
         this.mask.runAction(cc.sequence(
             cc.fadeTo(1.5, 255), 
             cc.callFunc(() => {
@@ -177,6 +181,8 @@ export default class GameManager extends cc.Component {
     }
 
     toGameWin() {
+        this.mask.setPosition(this.player.getPosition());
+        this.mask.color = cc.color(0, 0, 0);
         this.mask.runAction(cc.sequence(
             cc.fadeTo(1.5, 255), 
             cc.callFunc(() => {
