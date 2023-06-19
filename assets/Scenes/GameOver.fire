@@ -606,10 +606,18 @@
       "__id__": 11
     },
     "_enabled": true,
-    "littleRedIcon": null,
-    "abaoIcon": null,
-    "littleRedAnim": null,
-    "abaoAnim": null,
+    "littleRedIcon": {
+      "__uuid__": "730cdb5a-5931-4857-a758-6a9a2736f8b2"
+    },
+    "abaoIcon": {
+      "__uuid__": "c0ae1508-a1b1-4c51-9733-ea7ea7d68186"
+    },
+    "littleRedAnim": {
+      "__uuid__": "7b064a74-61eb-4c15-a62b-d526f20974db"
+    },
+    "abaoAnim": {
+      "__uuid__": "0a3f8d8b-b2a7-455a-ba78-3859445d8c5d"
+    },
     "_id": "e54u/4gnhHJ6EBJnTTXmkH"
   },
   {
