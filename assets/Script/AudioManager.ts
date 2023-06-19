@@ -29,6 +29,18 @@ export default class AudioManager extends cc.Component {
     audioClips: [cc.AudioClip] = [null];
     // LIFE-CYCLE CALLBACKS:
 
+    @property(cc.AudioClip)
+    titleBGM: cc.AudioClip = null;
+
+    @property(cc.AudioClip)
+    gameWinBGM: cc.AudioClip = null;
+
+    @property(cc.AudioClip)
+    gameOverBGM: cc.AudioClip = null;
+
+    @property(cc.AudioClip)
+    selectBGM: cc.AudioClip = null;
+
     onLoad() {
         // Ensure only one instance exists
         if (AudioManager.instance && AudioManager.instance !== this) {
@@ -44,12 +56,36 @@ export default class AudioManager extends cc.Component {
 
     start() {
         // Your start logic here
-        this.playBGM(AudioType.Tiktok1);
+        this.playTitleBGM();
     }
 
     // update(dt) {
     //     Your update logic here
     // }
+
+    stopBGM() {
+        cc.audioEngine.stopMusic();
+    }
+
+    playTitleBGM() {
+        cc.audioEngine.playMusic(this.titleBGM, true);
+    }
+
+    playGameWinBGM() {
+        cc.audioEngine.playMusic(this.gameWinBGM, true);
+    }
+
+    playGameOverBGM() {
+        cc.audioEngine.playMusic(this.gameOverBGM, true);
+    }
+
+    playSelectBGM() {
+        cc.audioEngine.playMusic(this.selectBGM, true);
+    }
+
+    playGameBGM(){
+        cc.audioEngine.playMusic(this.audioClips[AudioType.Tiktok1], true);
+    }
 
     playSoundEffect(type: AudioType) {
         cc.audioEngine.playEffect(this.audioClips[type], false);

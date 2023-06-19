@@ -35,6 +35,8 @@ export default class GameOver_manager extends cc.Component {
 
     private _animation: cc.Animation = null;
 
+    private audioManager = null;
+
     onLoad() {
         this.gameover_label = cc.find("Canvas/gameover").getComponent(cc.Label);
         this.score_label = cc.find("Canvas/score").getComponent(cc.Label);
@@ -55,6 +57,10 @@ export default class GameOver_manager extends cc.Component {
             this.character.scale = 2;
             this._animation.play("Abao_walk");
         }
+
+        this.audioManager = cc.find("AudioManager");
+        this.audioManager.getComponent("AudioManager").stopBGM();
+        this.audioManager.getComponent("AudioManager").playGameOverBGM();
     }
 
     start() {

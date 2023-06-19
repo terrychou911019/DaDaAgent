@@ -46,6 +46,8 @@ export default class CCAW extends cc.Component {
 
     private weaponButton: cc.Node = null;
 
+    private audioManager: cc.Node = null;
+
     backButtinClick(){//the back button been clicked
         const script = this.characterButton.getComponent('CCAW_button');
         if (script) {
@@ -243,6 +245,10 @@ export default class CCAW extends cc.Component {
 
         //set user name
         this.usernameUI.getChildByName('username').getComponent(cc.Label).string = this.userdata.username;
+        
+        this.audioManager = cc.find('AudioManager')
+        this.audioManager.getComponent('AudioManager').stopBGM();
+        this.audioManager.getComponent('AudioManager').playSelectBGM();
     }
 
     logOut(){

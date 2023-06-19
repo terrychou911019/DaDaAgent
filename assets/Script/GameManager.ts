@@ -50,6 +50,8 @@ export default class GameManager extends cc.Component {
     private scoreManager = null;
 
     isGamePaused = false;
+
+    private audioManager = null;
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -66,6 +68,10 @@ export default class GameManager extends cc.Component {
         this.labelAction();
 
         this.scoreManager = cc.find("Canvas/ScoreManager").getComponent("ScoreManager");
+        
+        this.audioManager = cc.find("AudioManager");
+        this.audioManager.getComponent("AudioManager").stopBGM();
+        this.audioManager.getComponent("AudioManager").playGameBGM();
     }
 
     debug(){
