@@ -51,6 +51,7 @@ export default class GameManager extends cc.Component {
     }
 
     update (dt) {
+        this.player.getComponent('ActorController').gameTick(dt);
         if(this.isGamePaused || this.lifebar.cur_life <= 0) {
             return;
         }
@@ -61,7 +62,7 @@ export default class GameManager extends cc.Component {
         this.bulletGroup.children.forEach((bullet) => {
             bullet.getComponent('Bullet').gameTick(dt);
         });
-        this.player.getComponent('ActorController').gameTick(dt);
+        
         this.weapon.getComponent('Weapon').gameTick(dt);
         //this.particleManager.getComponent('ParticleManager').gameTick(dt);
         //this.enemyGroup.children.forEach((enemy) => {

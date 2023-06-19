@@ -71,6 +71,8 @@ export default class ActorController extends Controller {
 
 	private lifebar = null;
 
+	private playDeathAnimation = false;
+
 	@property(cc.Node)
 	playerIcon: cc.Node = null;
 
@@ -82,7 +84,7 @@ export default class ActorController extends Controller {
 
 	checkstate() {
 		if (this.lifebar.cur_life <= 0) {
-			this.cur_State = State.Die;
+			this.cur_State = State.Die
 		}
 		else if (
 			this.inputSource.horizontalAxis == 0 &&
@@ -99,7 +101,7 @@ export default class ActorController extends Controller {
 			case State.Idle:
 				if (!this.idleAnimState.isPlaying) {
 					if (this.idleAnimationName) {
-						this._animation.play(this.idleAnimationName)
+						//this._animation.play(this.idleAnimationName)
 					}
 				}
 				break
@@ -158,7 +160,24 @@ export default class ActorController extends Controller {
 		this.dieAnimState = this._animation.getAnimationState(this.dieAnimationName);
 	}
 
+	update() {
+		//this.checkstate()
+		//cc.log(this.lifebar.cur_life)
+	}
+
 	gameTick(dt) {
+		//check current state
+		this.checkstate()
+
+		//play animation
+		this.playanimation()
+
+		if (this.lifebar.cur_life <= 0 && this.playDeathAnimation == false) {
+			this._animation.play(this.dieAnimationName)
+			this.playDeathAnimation = true;
+			return
+		}
+
 		if (this.inputSource) {
 			this.node.scaleX =
 				this.inputSource.horizontalAxis != 0
@@ -168,12 +187,6 @@ export default class ActorController extends Controller {
 			this.moveAxisY = this.inputSource.verticalAxis
 			this.leftShift = this.inputSource.skill;
 		}
-		//check current state
-		this.checkstate()
-
-		//play animation
-		this.playanimation()
-
 
 		if (this.skillManager.getComponent('SkillManager').skillMap['FlameWalk'] == true) {
 			this.playFlameWalkParticle();
