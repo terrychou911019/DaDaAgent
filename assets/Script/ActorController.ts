@@ -56,6 +56,7 @@ export default class ActorController extends Controller {
 	@property(cc.Node)
 	particleManager: cc.Node = null;
 
+
 	public moveAxisX: number = 0
 	public moveAxisY: number = 0
 	public get moveAxis2D() {
@@ -71,6 +72,10 @@ export default class ActorController extends Controller {
 
 	private lifebar = null;
 
+	private playDeathAnimation = false;
+
+	private timeManager = null;
+
 	@property(cc.Node)
 	playerIcon: cc.Node = null;
 
@@ -80,9 +85,15 @@ export default class ActorController extends Controller {
 	@property(cc.SpriteFrame)
 	abaoIcon: cc.SpriteFrame = null;
 
+	@property(cc.SpriteFrame)
+	littleRedSprite: cc.SpriteFrame = null;
+
+	@property(cc.SpriteFrame)
+	abaoSprite: cc.SpriteFrame = null;
+
 	checkstate() {
 		if (this.lifebar.cur_life <= 0) {
-			this.cur_State = State.Die;
+			this.cur_State = State.Die
 		}
 		else if (
 			this.inputSource.horizontalAxis == 0 &&
@@ -113,7 +124,7 @@ export default class ActorController extends Controller {
 			case State.Die:
 				if (!this.dieAnimState.isPlaying) {
 					if (this.dieAnimationName) {
-						this._animation.play(this.dieAnimationName)
+						//this._animation.play(this.dieAnimationName)
 					}
 				}
 				break
@@ -142,13 +153,22 @@ export default class ActorController extends Controller {
 		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
 
 		if(character == "LittleRed"){
+			//set spriteFrame
+			this.node.getComponent(cc.Sprite).spriteFrame = this.littleRedSprite;
+			//set icon
 			this.playerIcon.getComponent(cc.Sprite).spriteFrame = this.littleRedIcon;
 			this.playerIcon.scale = 3;
 		}
 		else{
+			//set spriteFrame
+			this.node.getComponent(cc.Sprite).spriteFrame = this.abaoSprite;
+			//set icon
 			this.playerIcon.getComponent(cc.Sprite).spriteFrame = this.abaoIcon;
 			this.playerIcon.scale = 4;
 		}
+
+		this.timeManager = cc.find("Canvas/TimeManager").getComponent("TimeManager");
+		
 	}
 
 	start() {
@@ -158,7 +178,40 @@ export default class ActorController extends Controller {
 		this.dieAnimState = this._animation.getAnimationState(this.dieAnimationName);
 	}
 
+	update() {
+		//this.checkstate()
+		//cc.log(this.lifebar.cur_life)
+	}
+
 	gameTick(dt) {
+		//check current state
+		if (this.cur_State != State.Die) {
+			this.checkstate()
+		}
+		// else {
+		// 	if (!this.gameover) {
+		// 		this.scheduleOnce(() => {
+		// 			cc.log("gameover")
+					
+		// 		}, 2);
+		// 	}
+		// 	this.gameover = true;
+		// }
+
+		//play animation
+		this.playanimation()
+
+		if (this.lifebar.cur_life <= 0) {
+			if (!this.playDeathAnimation) {
+				this.playDeathAnimation = true;
+				this._animation.play(this.dieAnimationName)
+			}
+			return
+		}
+		if (this.timeManager.timeUP) {
+			return;
+		}
+
 		if (this.inputSource) {
 			this.node.scaleX =
 				this.inputSource.horizontalAxis != 0
@@ -168,12 +221,6 @@ export default class ActorController extends Controller {
 			this.moveAxisY = this.inputSource.verticalAxis
 			this.leftShift = this.inputSource.skill;
 		}
-		//check current state
-		this.checkstate()
-
-		//play animation
-		this.playanimation()
-
 
 		if (this.skillManager.getComponent('SkillManager').skillMap['FlameWalk'] == true) {
 			this.playFlameWalkParticle();

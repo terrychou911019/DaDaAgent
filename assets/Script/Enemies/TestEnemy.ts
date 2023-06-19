@@ -38,6 +38,7 @@ export default class TestEnemy extends cc.Component {
 	private EXPManager: any = null;
 	private ScoreManager: any = null;
 	private skillManager: any = null;
+	private timeManager = null;
 
 	private weapon = null;
 	private weaponSpin = null;
@@ -49,6 +50,7 @@ export default class TestEnemy extends cc.Component {
 		this.weaponSpin = cc.find("Canvas/WeaponSpin").getComponent("WeaponSpin");
 		this.skillManager = cc.find("Canvas/SkillManager").getComponent("SkillManager");
 		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
+		this.timeManager = cc.find("Canvas/TimeManager").getComponent("TimeManager");
 	}
 
 	start() {
@@ -61,14 +63,17 @@ export default class TestEnemy extends cc.Component {
 	}
 
 	update(dt) {
-		if (this.gameManager.isGamePaused || this.lifebar.cur_life <= 0) {
+		if (this.gameManager.isGamePaused || this.lifebar.cur_life <= 0 || this.timeManager.timeUP) {
 			return
 		}
 
 		if (this.enemyHealth <= 0) {
 			// player gain exp and score	
-			this.EXPManager.gainEXP(46);
-			this.ScoreManager.gainScore(149);
+			this.scheduleOnce(()=>{
+				this.EXPManager.gainEXP(46);
+				this.ScoreManager.gainScore(149);
+			}, 0.8)
+			
 
 			this.moveSpeed = 0
 			this.isDead = true
@@ -79,7 +84,7 @@ export default class TestEnemy extends cc.Component {
 			this.anim.play('goblin_die')
 			this.scheduleOnce(() => {
 				this.EnemyManager.put(this.node)
-			}, 1)
+			}, 0.8)
 
 			this.isDead = false
 			this.enemyHealth = 100
@@ -173,9 +178,8 @@ export default class TestEnemy extends cc.Component {
 			cc.log(this.enemyHealth)
 			
 		}
-		if (otherCollider.node.name == 'Wheel') {
-			this.enemyHealth -= this.weaponSpin.damage
-			contact.disabled = true;
+		if (otherCollider.node.name == 'wheel') {
+			this.enemyHealth -= 20
 			this.scheduleOnce(() => {
 				contact.disabled = true
 			})

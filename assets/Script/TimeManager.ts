@@ -22,7 +22,7 @@ export default class TimeManager extends cc.Component {
 
     countDown() {
         if (this.curMinute === 0 && this.curSecond === 0) {
-            alert("Time UP!");
+            //alert("Time UP!");
             this.timeUP = true;
             return;
         }

@@ -33,7 +33,7 @@ export default class Bullet extends cc.Component {
 	// LIFE-CYCLE CALLBACKS:
 	onBeginContact(contact, self, other) {
 		// if other is enemy, then let enemy take damage and destroy self
-		if (other.node.name == 'goblin') {
+		if (other.node.name == 'goblin' || other.node.name == "Boss") {
 			//other.getComponent('TestEnemy').enemyHealth -= this.damage;
 			if (this.skillManager.skillMap['StrongBullet']) {
 				other.node.getComponent("TestEnemy").isHit = true;

@@ -49,8 +49,11 @@ export default class Boss extends cc.Component {
 
 	private lifebar = null;
 
+	private timeManager = null;
+
 	onLoad() {
 		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
+		this.timeManager = cc.find("Canvas/TimeManager").getComponent("TimeManager");
 	}
 
 	start() {
@@ -59,7 +62,7 @@ export default class Boss extends cc.Component {
         cc.director.getPhysicsManager().enabled = true
 		cc.director.getCollisionManager().enabled = true
 		this.player = cc.find('Canvas/Player')
-		this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
+		this.playerLife = cc.find('Canvas/Player/lifebar').getComponent("Lifebar")
 		this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
 		this.anim = this.getComponent(cc.Animation)
 		this.rigidbody = this.getComponent(cc.RigidBody)
@@ -71,7 +74,7 @@ export default class Boss extends cc.Component {
 		this.isDead = false
 		this.isFrozen = false
 		this.node.opacity = 255
-		this.anim.play('boss_walk')
+		this.anim.play('Boss_walk')
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
 
@@ -83,7 +86,7 @@ export default class Boss extends cc.Component {
 	}
 
 	update(dt) {
-		if (this.gameManager.isGamePaused || this.lifebar.cur_life <= 0) {
+		if (this.gameManager.isGamePaused || this.lifebar.cur_life <= 0 || this.timeManager.timeUP) {
 			return
 		}
 
@@ -97,15 +100,20 @@ export default class Boss extends cc.Component {
 			this.rigidbody.enabledContactListener = false
 			this.collider.enabled = false
 			// let fade = cc.fadeOut(1)
-			this.anim.stop()
-			this.anim.play('mushroom_die')
-			this.scheduleOnce(() => {
-				//this.EnemyManager.put(this.node)
-                this.node.destroy();
-			}, 1)
+			//destroy the node after animation finished
+			this.anim.stop();
+			this.anim.play('Boss_die');
+			this.anim.on('finished', ()=>{
+				console.log("Boss destroy");
+				this.node.destroy();
+			})
+			// this.scheduleOnce(() => {
+			// 	//this.EnemyManager.put(this.node)
+            //     this.node.destroy();
+			// }, 2)
 
-			this.isDead = false
-			this.enemyHealth = 100
+			//this.isDead = false
+			//this.enemyHealth = 100
 		}
 		if (this.isFrozen == true) {
 			return
@@ -129,6 +137,8 @@ export default class Boss extends cc.Component {
 
                 this.canDash = false;
                 this.isChargingDash = true;
+				this.anim.stop()
+				this.anim.play('Boss_attack')
 
                 this.scheduleOnce(() => {
                     this.isChargingDash = false;
@@ -136,6 +146,8 @@ export default class Boss extends cc.Component {
 
                     this.scheduleOnce(() => {
                         this.isDashing = false;
+						this.anim.stop()
+						this.anim.play('Boss_walk')
                     }, this.dashingTime);
 
                 }, this.chargingDashTime);
@@ -205,7 +217,7 @@ export default class Boss extends cc.Component {
 
 	onBeginContact(contact, selfCollider, otherCollider) {
 		if (otherCollider.node.name == 'Player') {
-			this.playerLife.minusLife(10)
+			this.lifebar.minusLife(10)
 			cc.log('boss hit player')
 		}
 		if (otherCollider.node.name == 'Bullet') {
@@ -213,7 +225,7 @@ export default class Boss extends cc.Component {
 			this.enemyHealth -= 10
 		}
 		if (otherCollider.node.name == 'wheel') {
-			this.enemyHealth -= 100
+			this.enemyHealth -= 20
 			this.scheduleOnce(() => {
 				contact.disabled = true
 			})
@@ -242,7 +254,7 @@ export default class Boss extends cc.Component {
 		cc.director.getPhysicsManager().enabled = true
 		cc.director.getCollisionManager().enabled = true
 		this.player = cc.find('Canvas/Player')
-		this.playerLife = cc.find('Canvas/Player/lifebar').getComponent(lifebar)
+		this.playerLife = cc.find('Canvas/Player/lifebar').getComponent("Lifebar")
 		this.gameManager = cc.find('Canvas/GameManager').getComponent('GameManager')
 		this.anim = this.getComponent(cc.Animation)
 		this.rigidbody = this.getComponent(cc.RigidBody)
@@ -254,7 +266,7 @@ export default class Boss extends cc.Component {
 		this.isDead = false
 		this.isFrozen = false
 		this.node.opacity = 255
-		this.anim.play('boss_walk')
+		this.anim.play('Boss_walk')
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
 

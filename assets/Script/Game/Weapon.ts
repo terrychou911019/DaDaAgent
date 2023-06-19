@@ -5,8 +5,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class Weapon extends cc.Component {
-    @property(cc.String)
-    weaponName: string = '';
+    
 
     @property(cc.Prefab)
     bulletPrefab: cc.Prefab = null;
@@ -14,6 +13,8 @@ export default class Weapon extends cc.Component {
     @property(cc.Node)
     skillManager: cc.Node = null;
 
+    weaponName: string = '';
+    
     Camera: cc.Node = null;
     Player: cc.Node = null;
     BulletNode: cc.Node = null;
@@ -161,6 +162,8 @@ export default class Weapon extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
+        //get weapon's name
+        this.weaponName = cc.sys.localStorage.getItem('weapon');
         this.Camera = cc.find("Canvas/Main Camera");
         this.Player = cc.find("Canvas/Player");
         this.BulletNode = cc.find("Canvas/Player/BulletNum");
