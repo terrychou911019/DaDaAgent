@@ -212,7 +212,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 120,
       "height": 67.8
     },
     "_anchorPoint": {
@@ -264,8 +264,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "Spin\nAttack",
-    "_N$string": "Spin\nAttack",
+    "_string": "Recover\nWheel",
+    "_N$string": "Recover\nWheel",
     "_fontSize": 20,
     "_lineHeight": 30,
     "_enableWrapText": true,

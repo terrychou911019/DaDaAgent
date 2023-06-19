@@ -6,7 +6,7 @@ export default class WeaponSpin extends cc.Component {
     wheelPrefab: cc.Prefab = null;
 
     @property(Number)
-    radius: number = 100; // Adjust the radius as desired
+    radius: number = 50; // Adjust the radius as desired
 
     @property(Number)
     spinSpeed: number = 10; // Adjust the rotation speed in degrees per second

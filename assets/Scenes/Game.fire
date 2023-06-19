@@ -2916,7 +2916,7 @@
     "wheelPrefab": {
       "__uuid__": "3e411edb-46c6-4fb8-8ed8-3a491828ddcb"
     },
-    "radius": 100,
+    "radius": 50,
     "spinSpeed": 90,
     "player": {
       "__id__": 6
