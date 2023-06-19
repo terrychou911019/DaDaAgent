@@ -60,7 +60,6 @@ export default class CCAW_button extends cc.Component {
         //deal with camera, chosen node, and back button
         this.ccawManager.setCharacterButton(this.node);
         this.ccawManager.moveToCW();
-        this.ccawManager.unableBackButton();
         console.log("player choose character : " + this.goalNode.name);
         //this is a chosen node
         this.chosenNode = true;
@@ -78,7 +77,6 @@ export default class CCAW_button extends cc.Component {
         //deal with camera, chosen node, and back button
         this.ccawManager.setCharacterButton(null);
         this.ccawManager.moveToCC();
-        this.ccawManager.disableBackButton();
         //cancel the chosen node
         this.goalNode.scaleX = -1;
         this.chosenNode = false;

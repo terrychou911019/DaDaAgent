@@ -1000,6 +1000,12 @@
     "abaoIcon": {
       "__uuid__": "83d740b3-adbc-4069-95d2-0604517c0968"
     },
+    "littleRedSprite": {
+      "__uuid__": "730cdb5a-5931-4857-a758-6a9a2736f8b2"
+    },
+    "abaoSprite": {
+      "__uuid__": "c0ae1508-a1b1-4c51-9733-ea7ea7d68186"
+    },
     "_id": "882+zlEvFNIagB+RpwfNk8"
   },
   {
@@ -3855,7 +3861,7 @@
         "__id__": 82
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 87

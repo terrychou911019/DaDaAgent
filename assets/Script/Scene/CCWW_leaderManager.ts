@@ -69,7 +69,6 @@ export default class LDButton extends cc.Component {
             this.third.opacity = 255;
             await firebase.database().ref('users/' + this.leaderboardData[2][0]).once('value', (snapshot) => {
                 let data = snapshot.val();
-                console.log(data);
                 this.setScoreAndName(2, data.username, this.leaderboardData[2][1], data.character);
             })
         }
