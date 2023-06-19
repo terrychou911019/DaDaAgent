@@ -52,7 +52,7 @@ export default class GameWin_manager extends cc.Component {
         }
         else {
             this.character.getComponent(cc.Sprite).spriteFrame = this.abaoIcon;
-            this.character.scale = 3;
+            this.character.scale = 2;
             this._animation.play("Abao_walk");
         }
     }

@@ -56,6 +56,7 @@ export default class ActorController extends Controller {
 	@property(cc.Node)
 	particleManager: cc.Node = null;
 
+
 	public moveAxisX: number = 0
 	public moveAxisY: number = 0
 	public get moveAxis2D() {
@@ -83,6 +84,12 @@ export default class ActorController extends Controller {
 
 	@property(cc.SpriteFrame)
 	abaoIcon: cc.SpriteFrame = null;
+
+	@property(cc.SpriteFrame)
+	littleRedSprite: cc.SpriteFrame = null;
+
+	@property(cc.SpriteFrame)
+	abaoSprite: cc.SpriteFrame = null;
 
 	checkstate() {
 		if (this.lifebar.cur_life <= 0) {
@@ -146,15 +153,22 @@ export default class ActorController extends Controller {
 		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
 
 		if(character == "LittleRed"){
+			//set spriteFrame
+			this.node.getComponent(cc.Sprite).spriteFrame = this.littleRedSprite;
+			//set icon
 			this.playerIcon.getComponent(cc.Sprite).spriteFrame = this.littleRedIcon;
 			this.playerIcon.scale = 3;
 		}
 		else{
+			//set spriteFrame
+			this.node.getComponent(cc.Sprite).spriteFrame = this.abaoSprite;
+			//set icon
 			this.playerIcon.getComponent(cc.Sprite).spriteFrame = this.abaoIcon;
 			this.playerIcon.scale = 4;
 		}
 
 		this.timeManager = cc.find("Canvas/TimeManager").getComponent("TimeManager");
+		
 	}
 
 	start() {

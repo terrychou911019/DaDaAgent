@@ -5,8 +5,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class Weapon extends cc.Component {
-    @property(cc.String)
-    weaponName: string = '';
+    
 
     @property(cc.Prefab)
     bulletPrefab: cc.Prefab = null;
@@ -14,6 +13,8 @@ export default class Weapon extends cc.Component {
     @property(cc.Node)
     skillManager: cc.Node = null;
 
+    weaponName: string = '';
+    
     Camera: cc.Node = null;
     Player: cc.Node = null;
     BulletNode: cc.Node = null;
@@ -72,7 +73,7 @@ export default class Weapon extends cc.Component {
         if(this.skillManager.getComponent('SkillManager').skillMap['StrongBullet'] == true){
             this.Camera.getComponent('MainCamera').setShakeMagnitude(2);
 
-            //AudioManager.getInstance().playSoundEffect(AudioType.StrongBullet);
+            AudioManager.getInstance().playSoundEffect(AudioType.StrongBullet);
         }
         
         this.createBullet(0);
@@ -91,7 +92,7 @@ export default class Weapon extends cc.Component {
         this.BulletNode.getChildByName("LoadingBar").width = 0;
 
         // play sound effect
-        //AudioManager.getInstance().playSoundEffect(AudioType.LaserShoot);
+        AudioManager.getInstance().playSoundEffect(AudioType.LaserShoot);
     }
 
     createBullet(adjustAngle: number) {
@@ -161,6 +162,8 @@ export default class Weapon extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
+        //get weapon's name
+        this.weaponName = cc.sys.localStorage.getItem('weapon');
         this.Camera = cc.find("Canvas/Main Camera");
         this.Player = cc.find("Canvas/Player");
         this.BulletNode = cc.find("Canvas/Player/BulletNum");

@@ -11,12 +11,22 @@ export default class enemyManager extends cc.Component {
 	@property(cc.Prefab)
 	boss: cc.Prefab = null
 
+	@property(cc.Node)
+	bossHealthBarFrame: cc.Node = null
+
+	@property(cc.Node)
+	bossHealthBar: cc.Node = null
+
+	MAXWIDTH: number = 465;
+
 	private enemyPool = null
 
-	private createCD = 0.5
+	createCD = 0.5
 	private createTimer = 0
 
 	private isBossSummoned = false;
+
+	private particleManager = null;
 
 	onLoad() {
 		this.enemyGroup = cc.find('Canvas/EnemyGroup')
@@ -35,7 +45,8 @@ export default class enemyManager extends cc.Component {
 		this.createTimer = 0;
 		this.isBossSummoned = false;
 		//this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
-		//this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
+
+		this.particleManager = cc.find('Canvas/ParticleManager');
 	}
 
 	//call this function to add new enemy to the scene.
@@ -56,6 +67,10 @@ export default class enemyManager extends cc.Component {
 			this.createTimer = 0
 			this.createEnemy()
 		}
+
+		if(this.isBossSummoned){
+			this.render();
+		}
 	}
 
 	summonBoss() {
@@ -67,6 +82,15 @@ export default class enemyManager extends cc.Component {
 
 		let boss = cc.instantiate(this.boss);
 		boss.parent = this.enemyGroup;
+
+		this.bossHealthBarFrame.active = true;
+		//set boss position randomly and a little far around the player
+		let player = cc.find('Canvas/Player');
+		let playerPos = player.getPosition();
+		let randX = Math.random() > 0.5 ? 1 : -1;
+		let randY = Math.random() > 0.5 ? 1 : -1;
+		let bossPos = cc.v2(playerPos.x + 500 * randX, playerPos.y + 500 * randY);
+		boss.setPosition(bossPos);
 	}
 
 	playerUseUlt() {
@@ -76,4 +100,21 @@ export default class enemyManager extends cc.Component {
 		}
 	}
 
+	UITEffect(){
+		for (let i = 0; i < this.node.children.length; i++) {
+			let enemy = this.node.children[i];
+			this.particleManager.getComponent('ParticleManager').spawnUITEffect2(enemy.position)
+		}
+	}
+
+	render() {
+		let bossNode = this.enemyGroup.getChildByName('Boss');
+
+		if(bossNode == null || bossNode.getComponent('Boss').enemyHealth <= 0){
+			this.bossHealthBarFrame.active = false;
+			return;
+		}
+		this.bossHealthBar.width = this.MAXWIDTH * bossNode.getComponent('Boss').enemyHealth / bossNode.getComponent('Boss').enemyFullHealth;
+		this.bossHealthBar.x = -(this.MAXWIDTH / 2) + this.bossHealthBar.width / 2;
+	}
 }
