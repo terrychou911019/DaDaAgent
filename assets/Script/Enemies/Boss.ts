@@ -104,7 +104,7 @@ export default class Boss extends cc.Component {
 				this.anim.play('Boss_die');
 				this.scheduleOnce(() => {
 					this.node.destroy();
-				}, 0.9)
+				}, 2)
 			}
 			// player gain exp and score	
 			this.scheduleOnce(() => {

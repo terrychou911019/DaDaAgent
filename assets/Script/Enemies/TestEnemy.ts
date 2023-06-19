@@ -180,8 +180,8 @@ export default class TestEnemy extends cc.Component {
 		}
 		//cc.log(otherCollider.node.name)
 		if (otherCollider.node.name == 'wheel') {
-			cc.log("in wheel")
-			this.enemyHealth -= 100
+			// cc.log("in wheel")
+			// this.enemyHealth -= 100
 			// this.scheduleOnce(() => {
 			// 	contact.disabled = true
 			// })

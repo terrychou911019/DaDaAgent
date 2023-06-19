@@ -15,6 +15,9 @@
     "_children": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 174
       }
     ],
     "_active": true,
@@ -8027,5 +8030,127 @@
     "_originalWidth": 0,
     "_originalHeight": 0,
     "_id": "29zXboiXFBKoIV4PQ2liTe"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "AudioManager",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 175
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        480,
+        320,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "faOrrXoSBE/o9jKSsCJjCR"
+  },
+  {
+    "__type__": "6ea6dz2p/hPYIGLmqfcU0rD",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 174
+    },
+    "_enabled": true,
+    "audioClips": [
+      {
+        "__uuid__": "e121758d-4c59-4c3b-8e39-eb3eb9e949fc"
+      },
+      {
+        "__uuid__": "9aabdcaa-3013-4b50-9cbf-e007912a1158"
+      },
+      {
+        "__uuid__": "39c9d1a2-6aef-4b9d-892d-a10ccc1c65b3"
+      },
+      {
+        "__uuid__": "3396ef46-b013-4c3c-aedd-561ec536c168"
+      },
+      {
+        "__uuid__": "06c489d2-6187-46a5-ad23-0dff1f30ba8e"
+      },
+      {
+        "__uuid__": "ce1c706c-075a-4db2-a1fd-325bdc64ce6c"
+      },
+      {
+        "__uuid__": "048c32cc-fb20-4a21-b016-dc63770d5523"
+      },
+      {
+        "__uuid__": "e161dbb7-77f9-4a85-a555-b2479e8f32b7"
+      },
+      {
+        "__uuid__": "9abfc0d9-a13c-434b-b388-8589dcc85c4c"
+      },
+      {
+        "__uuid__": "fd6f7da4-9474-4fd4-94ad-e200859bd931"
+      },
+      {
+        "__uuid__": "880b445a-7e55-4b43-9f4c-e1b23dfaa027"
+      },
+      {
+        "__uuid__": "a2038e37-61ae-4415-8e3f-a652324230cc"
+      }
+    ],
+    "titleBGM": {
+      "__uuid__": "65e0a8df-bb42-4be7-8ad4-c6be1861989e"
+    },
+    "gameWinBGM": {
+      "__uuid__": "0803f0db-9ee0-488a-86bd-9b45202fad4b"
+    },
+    "gameOverBGM": {
+      "__uuid__": "a15e7e56-a563-4d04-9843-0d5e61923671"
+    },
+    "selectBGM": {
+      "__uuid__": "f358293d-a05e-49d4-858b-ee6904d826a8"
+    },
+    "_id": "5fP8PD5KdL0JEKwLQbPvmy"
   }
 ]

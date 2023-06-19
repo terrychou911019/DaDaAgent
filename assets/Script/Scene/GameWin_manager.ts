@@ -41,6 +41,8 @@ export default class GameWin_manager extends cc.Component {
 
     private updateFinished: boolean = false;
 
+    private audioManager = null;
+
     onLoad() {
         this.gamewin_label = cc.find("Canvas/gamewin").getComponent(cc.Label);
         this.score_label = cc.find("Canvas/score").getComponent(cc.Label);
@@ -61,6 +63,10 @@ export default class GameWin_manager extends cc.Component {
             this.character.scale = 2;
             this._animation.play("Abao_walk");
         }
+
+        this.audioManager = cc.find("AudioManager");
+        this.audioManager.getComponent("AudioManager").stopBGM();
+        this.audioManager.getComponent("AudioManager").playGameWinBGM();
 
         const jsonStr = cc.sys.localStorage.getItem('userdata')
         this.userdata = JSON.parse(jsonStr)    

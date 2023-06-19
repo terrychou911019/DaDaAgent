@@ -40,6 +40,8 @@ export default class GameOver_manager extends cc.Component {
 
     private _animation: cc.Animation = null;
     
+    private audioManager = null;
+
     private updateFinished: boolean = false;
 
     async onLoad() {
@@ -89,6 +91,10 @@ export default class GameOver_manager extends cc.Component {
         cc.sys.localStorage.setItem('userdata', jsonStr);
         
         this.updateFinished = true;
+
+        this.audioManager = cc.find("AudioManager");
+        this.audioManager.getComponent("AudioManager").stopBGM();
+        this.audioManager.getComponent("AudioManager").playGameOverBGM();
     }
 
     start() {
