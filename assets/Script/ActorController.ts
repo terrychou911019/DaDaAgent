@@ -71,6 +71,15 @@ export default class ActorController extends Controller {
 
 	private lifebar = null;
 
+	@property(cc.Node)
+	playerIcon: cc.Node = null;
+
+	@property(cc.SpriteFrame)
+	littleRedIcon: cc.SpriteFrame = null;
+
+	@property(cc.SpriteFrame)
+	abaoIcon: cc.SpriteFrame = null;
+
 	checkstate() {
 		if (this.lifebar.cur_life <= 0) {
 			this.cur_State = State.Die;
@@ -131,6 +140,15 @@ export default class ActorController extends Controller {
 		this.dieAnimationName = character + "_die";
 
 		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
+
+		if(character == "LittleRed"){
+			this.playerIcon.getComponent(cc.Sprite).spriteFrame = this.littleRedIcon;
+			this.playerIcon.scale = 3;
+		}
+		else{
+			this.playerIcon.getComponent(cc.Sprite).spriteFrame = this.abaoIcon;
+			this.playerIcon.scale = 4;
+		}
 	}
 
 	start() {
