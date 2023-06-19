@@ -58,9 +58,10 @@ export default class CCAW_button extends cc.Component {
     changeToCW(){//change to choose weapon state
         this.changeAnimation('walk');
         //deal with camera, chosen node, and back button
-        this.ccawManager.setChosenButton(this.node);
+        this.ccawManager.setCharacterButton(this.node);
         this.ccawManager.moveToCW();
         this.ccawManager.unableBackButton();
+        console.log("player choose character : " + this.goalNode.name);
         //this is a chosen node
         this.chosenNode = true;
         this.goalNode.runAction(cc.sequence(
@@ -75,7 +76,7 @@ export default class CCAW_button extends cc.Component {
     changeToCC(){//change back to choose character state
         this.changeAnimation('walk');
         //deal with camera, chosen node, and back button
-        this.ccawManager.setChosenButton(null);
+        this.ccawManager.setCharacterButton(null);
         this.ccawManager.moveToCC();
         this.ccawManager.disableBackButton();
         //cancel the chosen node
@@ -92,7 +93,9 @@ export default class CCAW_button extends cc.Component {
     }
     
     changeToGame(){//have selected the weapon and enter the game
-        const characterNode: cc.Node = this.ccawManager.getChosenButton().getComponent('CCAW_button').goalNode;//get chosen button's goal node 
+        this.ccawManager.setWeaponButton(this.node);
+        const characterNode: cc.Node = this.ccawManager.getCharacterButton().getComponent('CCAW_button').goalNode;//get chosen button's goal node 
+        console.log("player choose weapon : " + this.goalNode.name);
         this.goalNode.runAction(cc.sequence(
             cc.moveTo(2, characterNode.x + 50, characterNode.y),
             cc.callFunc(()=>{

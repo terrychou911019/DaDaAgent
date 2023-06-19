@@ -35,6 +35,12 @@ export default class GameManager extends cc.Component {
     @property(cc.Node)
     ultManager: cc.Node = null;
 
+    @property(cc.Node)
+    mask: cc.Node = null;
+
+    @property(cc.Node)
+    label: cc.Node = null;
+
     private lifebar = null;
 
     isGamePaused = false;
@@ -44,6 +50,14 @@ export default class GameManager extends cc.Component {
         cc.director.getPhysicsManager().enabled = true
 		cc.director.getCollisionManager().enabled = true
         this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
+        //mask and label action
+        this.pauseGame()
+        this.label.zIndex = this.mask.zIndex = 4;
+        this.label.setPosition(0, 0);
+        this.mask.setPosition(0, 0);
+        this.label.opacity = 0;
+        this.mask.opacity = 255;
+        this.labelAction();
     }
 
     debug(){
@@ -89,5 +103,36 @@ export default class GameManager extends cc.Component {
             this.isGamePaused = true;
             this.pauseGame();
         }
+    }
+
+    labelAction(){
+        this.label.runAction(cc.sequence(
+            cc.fadeTo(1, 255),
+            cc.delayTime(1),
+            cc.fadeTo(1, 0),
+            cc.callFunc(()=>{
+                this.maskFadeoutAction();
+            })
+        ))
+    }
+
+    maskFadeoutAction(){
+        this.mask.runAction(cc.sequence(
+            cc.delayTime(0.5),
+            cc.fadeTo(1, 0),
+            cc.callFunc(()=>{
+                this.resumeGame();
+            })
+        ))
+    }
+
+    UITAction(){
+        this.mask.setPosition(this.player.getPosition());
+        this.mask.color = cc.color(255, 255, 255);
+        this.mask.runAction(cc.sequence(
+            cc.fadeTo(1, 255),
+            cc.delayTime(0.5),
+            cc.fadeTo(0, 0.5)
+        ))
     }
 }
