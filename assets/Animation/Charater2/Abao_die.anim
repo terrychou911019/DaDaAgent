@@ -3,14 +3,57 @@
   "_name": "Abao_die",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.5,
+  "_duration": 0.5166666666666667,
   "sample": 60,
   "speed": 0.5,
   "wrapMode": 1,
   "curveData": {
     "comps": {
       "cc.Sprite": {
-        "spriteFrame": []
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "a2f78b99-5609-4af5-8ca1-e1cb9e4b9578"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "14c044ad-ab11-45f4-af32-3468b13acec3"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "3eb2771e-d2d2-4a4f-8685-22b34f4ec59f"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "988ee086-8f24-4890-abd6-30299b5e3b54"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "968ba1b2-c8dd-4cf2-b6b3-e802cfcf0b6b"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "db1fd72e-a46f-42dd-bdbc-afdee36a12f4"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "0267577d-b889-4330-ab8c-904d9641497c"
+            }
+          }
+        ]
       }
     }
   },
