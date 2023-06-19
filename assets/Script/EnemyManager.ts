@@ -35,6 +35,7 @@ export default class enemyManager extends cc.Component {
 		this.createTimer = 0;
 		this.isBossSummoned = false;
 		//this.schedule(this.createEnemy, 0.5) //set one enemy to the scene every 0.5s .
+		//this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
 	}
 
 	//call this function to add new enemy to the scene.
