@@ -33,7 +33,26 @@ export default class Bullet extends cc.Component {
 	// LIFE-CYCLE CALLBACKS:
 	onBeginContact(contact, self, other) {
 		// if other is enemy, then let enemy take damage and destroy self
-		if (other.node.name == 'goblin' || other.node.name == "Boss") {
+		if (other.node.name == "Boss") {
+			if (this.skillManager.skillMap['Thunder'] == true) {
+				this.particleManager
+					.getComponent('ParticleManager')
+					.spawnThunderEffect(other.node.position)
+
+				AudioManager.getInstance().playSoundEffect(AudioType.Explosion)
+			}
+			if (this.skillManager.skillMap['Ice'] == true) {
+				this.particleManager
+					.getComponent('ParticleManager')
+					.spawnIceParticle(other.node.position)
+
+				AudioManager.getInstance().playSoundEffect(AudioType.Ice)
+			}
+			if (!this.skillManager.skillMap['LightBullet']) {
+				this.node.destroy();
+			}
+		}
+		if (other.node.name == 'goblin') {
 			//other.getComponent('TestEnemy').enemyHealth -= this.damage;
 			if (this.skillManager.skillMap['StrongBullet']) {
 				other.node.getComponent("TestEnemy").isHit = true;
@@ -48,14 +67,14 @@ export default class Bullet extends cc.Component {
 					.getComponent('ParticleManager')
 					.spawnThunderEffect(other.node.position)
 
-				//AudioManager.getInstance().playSoundEffect(AudioType.Explosion)
+				AudioManager.getInstance().playSoundEffect(AudioType.Explosion)
 			}
 			if (this.skillManager.skillMap['Ice'] == true) {
 				this.particleManager
 					.getComponent('ParticleManager')
 					.spawnIceParticle(other.node.position)
 
-				//AudioManager.getInstance().playSoundEffect(AudioType.Ice)
+				AudioManager.getInstance().playSoundEffect(AudioType.Ice)
 			}
 			if (this.skillManager.skillMap['Frozen'] == true) {
 				// if enemy is already frozen, then do nothing
@@ -72,7 +91,7 @@ export default class Bullet extends cc.Component {
 					other.node.getComponent('TestEnemy').isFrozen = false
 				}, 2)
 
-				//AudioManager.getInstance().playSoundEffect(AudioType.Frozen)
+				AudioManager.getInstance().playSoundEffect(AudioType.Frozen)
 			}
 
 			if (!this.skillManager.skillMap['LightBullet']) {
@@ -95,7 +114,7 @@ export default class Bullet extends cc.Component {
 			this.node.getChildByName('wake').active = false
 		}
 		else {
-			//AudioManager.getInstance().playSoundEffect(AudioType.LightBullet);
+			AudioManager.getInstance().playSoundEffect(AudioType.LightBullet);
 		}
 
 		this.scheduleOnce(() => {

@@ -37,7 +37,7 @@ export default class AudioManager extends cc.Component {
         }
 
         AudioManager.instance = this;
-        //cc.game.addPersistRootNode(this.node); // Make the AudioManager node persist between scenes
+        cc.game.addPersistRootNode(this.node); // Make the AudioManager node persist between scenes
         
         cc.resources.loadDir("Audios", cc.AudioClip);
     }

@@ -30,10 +30,16 @@
       },
       {
         "__id__": 5
+      },
+      {
+        "__id__": 6
+      },
+      {
+        "__id__": 7
       }
     ],
     "_prefab": {
-      "__id__": 6
+      "__id__": 8
     },
     "_opacity": 255,
     "_color": {
@@ -185,6 +191,39 @@
       "width": 50,
       "height": 50
     },
+    "_id": ""
+  },
+  {
+    "__type__": "7e920l4AQhL3a+kiqjewECl",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "player": null,
+    "playerLife": null,
+    "moveSpeed": 50,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_defaultClip": null,
+    "_clips": [
+      {
+        "__uuid__": "ab347000-0fff-43fc-b4e7-0b96698ef671"
+      },
+      {
+        "__uuid__": "696a2671-9d4b-49d6-8672-1f6f34478068"
+      }
+    ],
+    "playOnLoad": false,
     "_id": ""
   },
   {

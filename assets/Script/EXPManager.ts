@@ -2,22 +2,13 @@ import AudioManager, { AudioType } from "./AudioManager";
 
 var expTable = {
     1: 280,
-    2: 380,
-    3: 480,
-    4: 580,
-    5: 680,
-    6: 780,
-    7: 880,
-    8: 980,
-    9: 1080,
-    10: 1180,
-    11: 1280,
-    12: 1380,
-    13: 1480,
-    14: 1580,
-    15: 1680,
-    16: 1780,
-    17: 1880,
+    2: 480,
+    3: 680,
+    4: 980,
+    5: 1280,
+    6: 1680,
+    7: 1680,
+    8: 1680,
 }
 
 const {ccclass, property} = cc._decorator;
@@ -29,11 +20,16 @@ export default class EXPManager extends cc.Component {
     @property(cc.Node)
     levelLabel: cc.Node = null;
 
-    MAXLEVEL: number = 18;
+    @property(cc.Node)
+    weapon: cc.Node = null;
+
+    MAXLEVEL: number = 9;
     MAXWIDTH: number = 930;
 
     curEXP: number = 0;
     curLevel: number = 1;
+    
+    private buffPlayer = false;
 
     gainEXP(event, exp: number = 46) {
         this.curEXP += exp;
@@ -48,12 +44,21 @@ export default class EXPManager extends cc.Component {
             cc.find('Canvas/GameManager').getComponent('GameManager').pauseGame();
             cc.find('Canvas/ModalManager').getComponent('ModalManager').showSkillChooseModal();
         
-            //AudioManager.getInstance().playSoundEffect(AudioType.ChooseSkill);
+            AudioManager.getInstance().playSoundEffect(AudioType.ChooseSkill);
         }
         
         if (this.curLevel === this.MAXLEVEL) {
             this.expBar.width = this.MAXWIDTH;
             this.expBar.x = 0;
+            this.levelLabel.getComponent(cc.Label).string = `      CRAZE!!`;
+
+            if(this.buffPlayer === false) {
+                let wp = this.weapon.getComponent('Weapon');
+                wp.ATTACT_SPEED_SEC /= 2;
+                wp.RELOAD_TIME_SEC = 0;
+    
+                this.buffPlayer = true;
+            }
             return;
         }
     }

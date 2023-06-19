@@ -81,7 +81,7 @@ export default class TestEnemy extends cc.Component {
 			this.collider.enabled = false
 			// let fade = cc.fadeOut(1)
 			this.anim.stop()
-			this.anim.play('goblin_die')
+			this.anim.play('die')
 			this.scheduleOnce(() => {
 				this.EnemyManager.put(this.node)
 			}, 0.8)
@@ -175,14 +175,16 @@ export default class TestEnemy extends cc.Component {
 			else {
 				this.enemyHealth -= this.weapon.DAMAGE;	
 			}	
-			cc.log(this.enemyHealth)
+
 			
 		}
+		//cc.log(otherCollider.node.name)
 		if (otherCollider.node.name == 'wheel') {
-			this.enemyHealth -= 20
-			this.scheduleOnce(() => {
-				contact.disabled = true
-			})
+			cc.log("in wheel")
+			this.enemyHealth -= 100
+			// this.scheduleOnce(() => {
+			// 	contact.disabled = true
+			// })
 		}
 		if (otherCollider.node.name == "goblin") {
 			//cc.log("enemy hit enemy")
@@ -226,7 +228,7 @@ export default class TestEnemy extends cc.Component {
 		this.isFrozen = false
 		this.isHit = false
 		this.node.opacity = 255
-		this.anim.play('goblin_walk')
+		this.anim.play('walk')
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
 

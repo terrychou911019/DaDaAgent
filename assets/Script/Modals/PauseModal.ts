@@ -16,7 +16,7 @@ export default class PauseModal extends cc.Component {
             this.gameManager.resumeGame();
             this.node.parent.getComponent('ModalManager').hideAll();
 
-            //AudioManager.getInstance().resumeAll();
+            AudioManager.getInstance().resumeAll();
         });
     }
 

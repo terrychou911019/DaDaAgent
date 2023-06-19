@@ -53,6 +53,10 @@ export default class TimeManager extends cc.Component {
         if (this.countDownCD <= 0) {
             this.countDownCD = 1;
             this.countDown();
+
+            if (this.curSecond === 30) {
+                this.enemyManager.getComponent('EnemyManager').createCD /= 1.5;
+            }
         }
 
         // summon the boss in the last 30 seconds
