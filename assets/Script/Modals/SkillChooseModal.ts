@@ -114,7 +114,6 @@ export default class SkillChooseModal extends cc.Component {
             this.node.children[2].x += 80;
             this.node.children[1].y -= 20;
             this.node.children[2].y -= 20;
-            this.node.children[3].y -= 20;
         }
         else if(this.node.childrenCount == 4){
             // adjust children position

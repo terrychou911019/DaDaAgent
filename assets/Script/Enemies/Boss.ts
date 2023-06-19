@@ -48,8 +48,11 @@ export default class Boss extends cc.Component {
 
 	private lifebar = null;
 
+	private timeManager = null;
+
 	onLoad() {
 		this.lifebar = cc.find("Canvas/Player/lifebar").getComponent("Lifebar");
+		this.timeManager = cc.find("Canvas/TimeManager").getComponent("TimeManager");
 	}
 
 	start() {
@@ -82,7 +85,7 @@ export default class Boss extends cc.Component {
 	}
 
 	update(dt) {
-		if (this.gameManager.isGamePaused || this.lifebar.cur_life <= 0) {
+		if (this.gameManager.isGamePaused || this.lifebar.cur_life <= 0 || this.timeManager.timeUP) {
 			return
 		}
 

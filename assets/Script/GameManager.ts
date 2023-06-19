@@ -43,6 +43,14 @@ export default class GameManager extends cc.Component {
 
     private lifebar = null;
 
+    private mask = null;
+
+    private gameover = false;
+
+    private gamewin = false;
+
+    private scoreManager = null;
+
     isGamePaused = false;
     // LIFE-CYCLE CALLBACKS:
 
@@ -65,7 +73,30 @@ export default class GameManager extends cc.Component {
     }
 
     update (dt) {
-        if(this.isGamePaused || this.lifebar.cur_life <= 0) {
+        //this.mask.position = this.mainCamera.position;
+        if (this.TimeManager.getComponent('TimeManager').timeUP) {
+            if (!this.gamewin) {
+				this.scheduleOnce(() => {
+                    cc.sys.localStorage.setItem('score', this.scoreManager.curScore);
+					cc.log("gamewin")
+					this.toGameWin();
+				}, 2);
+			}
+			this.gamewin = true;
+        }
+        if (this.player.getComponent('ActorController').cur_State == 2) {
+            if (!this.gameover) {
+				this.scheduleOnce(() => {
+                    cc.sys.localStorage.setItem('score', this.scoreManager.curScore);
+					cc.log("gameover")
+					this.toGameOver();
+				}, 2);
+			}
+			this.gameover = true;
+        }
+
+        this.player.getComponent('ActorController').gameTick(dt);
+        if(this.isGamePaused || this.lifebar.cur_life <= 0 || this.TimeManager.getComponent('TimeManager').timeUP) {
             return;
         }
 
@@ -75,7 +106,7 @@ export default class GameManager extends cc.Component {
         this.bulletGroup.children.forEach((bullet) => {
             bullet.getComponent('Bullet').gameTick(dt);
         });
-        this.player.getComponent('ActorController').gameTick(dt);
+        
         this.weapon.getComponent('Weapon').gameTick(dt);
         //this.particleManager.getComponent('ParticleManager').gameTick(dt);
         //this.enemyGroup.children.forEach((enemy) => {
@@ -134,5 +165,23 @@ export default class GameManager extends cc.Component {
             cc.delayTime(0.5),
             cc.fadeTo(0, 0.5)
         ))
+    }
+
+    toGameOver() {
+        this.mask.runAction(cc.sequence(
+            cc.fadeTo(1.5, 255), 
+            cc.callFunc(() => {
+                cc.director.loadScene('GameOver');
+            })
+        ));   
+    }
+
+    toGameWin() {
+        this.mask.runAction(cc.sequence(
+            cc.fadeTo(1.5, 255), 
+            cc.callFunc(() => {
+                cc.director.loadScene('GameWin');
+            })
+        ));   
     }
 }

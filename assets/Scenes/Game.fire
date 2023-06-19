@@ -1298,6 +1298,9 @@
       },
       {
         "__id__": 65
+      },
+      {
+        "__id__": 109
       }
     ],
     "_active": true,
@@ -3986,7 +3989,6 @@
     "__type__": "cc.ClickEvent",
     "target": {
       "__id__": 78
-      "__id__": 78
     },
     "component": "",
     "_componentId": "af2c0mKiBNMTbLbf6EP3hcS",
@@ -4061,7 +4063,6 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 78
       "__id__": 78
     },
     "_enabled": true,
@@ -4160,7 +4161,6 @@
     "_objFlags": 512,
     "_parent": {
       "__id__": 81
-      "__id__": 81
     },
     "_children": [
       {
@@ -4233,7 +4233,6 @@
     "_objFlags": 512,
     "_parent": {
       "__id__": 82
-      "__id__": 82
     },
     "_children": [],
     "_active": true,
@@ -4297,7 +4296,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 83
-      "__id__": 83
     },
     "_enabled": true,
     "_materials": [
@@ -4331,7 +4329,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 82
-      "__id__": 82
     },
     "_enabled": true,
     "_materials": [
@@ -4364,7 +4361,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 82
-      "__id__": 82
     },
     "_enabled": true,
     "alignMode": 0,
@@ -4391,7 +4387,6 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 81
       "__id__": 81
     },
     "_enabled": true,
@@ -4471,14 +4466,12 @@
     },
     "_N$target": {
       "__id__": 82
-      "__id__": 82
     },
     "_id": "70jBQKl7REUL9SYB68EA7E"
   },
   {
     "__type__": "cc.ClickEvent",
     "target": {
-      "__id__": 89
       "__id__": 89
     },
     "component": "",
@@ -4554,7 +4547,6 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 89
       "__id__": 89
     },
     "_enabled": true,
@@ -4640,7 +4632,6 @@
     "_objFlags": 512,
     "_parent": {
       "__id__": 91
-      "__id__": 91
     },
     "_children": [
       {
@@ -4713,7 +4704,6 @@
     "_objFlags": 512,
     "_parent": {
       "__id__": 92
-      "__id__": 92
     },
     "_children": [],
     "_active": true,
@@ -4777,7 +4767,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 93
-      "__id__": 93
     },
     "_enabled": true,
     "_materials": [
@@ -4811,7 +4800,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 92
-      "__id__": 92
     },
     "_enabled": true,
     "_materials": [
@@ -4844,7 +4832,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 92
-      "__id__": 92
     },
     "_enabled": true,
     "alignMode": 0,
@@ -4871,7 +4858,6 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 91
       "__id__": 91
     },
     "_enabled": true,
@@ -4951,14 +4937,12 @@
     },
     "_N$target": {
       "__id__": 92
-      "__id__": 92
     },
     "_id": "83tU6dBmlC8ZvIRChi07Sz"
   },
   {
     "__type__": "cc.ClickEvent",
     "target": {
-      "__id__": 99
       "__id__": 99
     },
     "component": "",
@@ -5035,15 +5019,12 @@
     "_objFlags": 0,
     "node": {
       "__id__": 99
-      "__id__": 99
     },
     "_enabled": true,
     "Score5": {
       "__id__": 101
-      "__id__": 101
     },
     "Score4": {
-      "__id__": 103
       "__id__": 103
     },
     "Score3": {
@@ -5052,14 +5033,11 @@
     },
     "Score2": {
       "__id__": 107
-      "__id__": 107
     },
     "Score1": {
       "__id__": 109
-      "__id__": 109
     },
     "Score0": {
-      "__id__": 111
       "__id__": 111
     },
     "_id": "7805R/5zNLCq3ABZdx1G0r"
@@ -5069,7 +5047,6 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 102
       "__id__": 102
     },
     "_enabled": true,
@@ -5268,7 +5245,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 106
-      "__id__": 106
     },
     "_enabled": true,
     "_materials": [
@@ -5366,7 +5342,6 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 108
       "__id__": 108
     },
     "_enabled": true,
@@ -5466,7 +5441,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 110
-      "__id__": 110
     },
     "_enabled": true,
     "_materials": [
@@ -5565,7 +5539,6 @@
     "_objFlags": 0,
     "node": {
       "__id__": 112
-      "__id__": 112
     },
     "_enabled": true,
     "_materials": [
@@ -5657,6 +5630,100 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "_id": "211TdPrFRHyZRkXrpJKQHT"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Mask",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 26
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 110
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 0,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 960,
+      "height": 640
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "57ycE/KiNHs7Kikx5KAydi"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 109
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": null,
+    "_id": "f89AfWT5tMSp+Zu7pb0t90"
   },
   {
     "__type__": "cc.Camera",
