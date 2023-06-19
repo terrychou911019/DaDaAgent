@@ -26,8 +26,8 @@ export default class Boss extends cc.Component {
 	private EnemyManager = null
 	private gameManager = null
 
-	enemyFullHealth: number = 100
-	enemyHealth: number = 100
+	enemyFullHealth: number = 1000
+	enemyHealth: number = 1000
 	private isDead: boolean = false
 
 	private anim: cc.Animation = null
