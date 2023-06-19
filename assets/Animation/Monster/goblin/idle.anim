@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "goblin_idle",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6666666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "8e36a621-8d64-4b82-917b-2f8722c6f050"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "0bf17020-de0e-4e2c-b1d0-b2a857ab2553"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "8860a4a9-321f-4e94-88e7-79bdce1fa174"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "a8472569-33df-4ddd-97b2-fac97d1a557d"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.6666666666666666,
+      "func": "",
+      "params": []
+    }
+  ]
+}

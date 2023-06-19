@@ -81,7 +81,7 @@ export default class TestEnemy extends cc.Component {
 			this.collider.enabled = false
 			// let fade = cc.fadeOut(1)
 			this.anim.stop()
-			this.anim.play('goblin_die')
+			this.anim.play('die')
 			this.scheduleOnce(() => {
 				this.EnemyManager.put(this.node)
 			}, 0.8)
@@ -226,7 +226,7 @@ export default class TestEnemy extends cc.Component {
 		this.isFrozen = false
 		this.isHit = false
 		this.node.opacity = 255
-		this.anim.play('goblin_walk')
+		this.anim.play('walk')
 		this.rigidbody.enabledContactListener = true
 		this.collider.enabled = true
 
