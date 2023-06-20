@@ -2,3 +2,5 @@ library/
 local/
 temp/
 build/
+.firebase/
+.firebaserc
