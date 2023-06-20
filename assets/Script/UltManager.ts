@@ -1,3 +1,5 @@
+import AudioManager, { AudioType } from "./AudioManager";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -53,13 +55,19 @@ export default class UltManager extends cc.Component {
 
         this.ultTimer = 0;
         this.gameManager.getComponent('GameManager').pauseGame();//stop game
+        AudioManager.getInstance().playSoundEffect(AudioType.Eagle);
+        this.schedule(()=>{
+            AudioManager.getInstance().playSoundEffect(AudioType.Eagle);
+        }, 1, 2)
+        
         this.schedule(this.createPhoenix, 0.2, 10);
         this.scheduleOnce(()=>{
-            this.gameManager.getComponent('GameManager').UITAction();//stop game
+            this.gameManager.getComponent('GameManager').UITAction();//mask become white
         }, 2)
         this.scheduleOnce(()=>{
+            AudioManager.getInstance().playSoundEffect(AudioType.Thunder)
             this.enemyManager.getComponent('EnemyManager').UITEffect();//use effect
-        }, 3)
+        }, 3.5)
         this.scheduleOnce(()=>{
             this.gameManager.getComponent('GameManager').resumeGame();//stop game
             this.enemyManager.getComponent('EnemyManager').playerUseUlt();
