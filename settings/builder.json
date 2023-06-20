@@ -7,8 +7,8 @@
     "upsideDown": false
   },
   "packageName": "org.cocos2d.helloworld",
-  "startScene": "d3c43e19-78a4-4798-8e3e-a53ca4dd8c38",
-  "title": "hello_world",
+  "startScene": "cd95cb2e-5cac-4cc2-8b7d-e209f98de71f",
+  "title": "DaDaAgent",
   "webOrientation": "auto",
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
