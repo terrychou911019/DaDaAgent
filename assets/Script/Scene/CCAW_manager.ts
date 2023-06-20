@@ -123,7 +123,6 @@ export default class CCAW extends cc.Component {
             let weapon = script2.goalNode.name;
             cc.sys.localStorage.setItem('weapon', weapon);
         }
-        this.turnOutButton();
         this.enterGameAction();
     }
 

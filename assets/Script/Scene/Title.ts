@@ -37,6 +37,8 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     private messasge: cc.Node = null;
 
+    private audioManager: cc.Node = null;
+
 
 
     private backgroundNodes: cc.Node[] = [];
@@ -285,6 +287,10 @@ export default class NewClass extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        //BGM
+        this.audioManager = cc.find('AudioManager')
+        this.audioManager.getComponent('AudioManager').stopBGM();
+        this.audioManager.getComponent('AudioManager').playTitleBGM();
         //handle the background
         this.spawnBackground(true);
         this.spawnBackground(false);

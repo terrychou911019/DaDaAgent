@@ -35,6 +35,7 @@ export default class WeaponSpin extends cc.Component {
         const angle = 360 / this.wheels.length;
         for (let i = 0; i < this.wheels.length; i++) {
             const child = this.wheels[i];
+            child.angle += angle * i;
             const radian = cc.misc.degreesToRadians(angle * i);
             child.x = this.radius * Math.cos(radian);
             child.y = this.radius * Math.sin(radian);
@@ -46,6 +47,7 @@ export default class WeaponSpin extends cc.Component {
 
         for (let i = 0; i < this.wheels.length; i++) {
             const child = this.wheels[i];
+            child.angle += deltaAngle;
             const radian = cc.misc.degreesToRadians(deltaAngle);
             const rotatedPos = cc.v2(child.x, child.y).rotate(radian);
             child.x = rotatedPos.x;

@@ -69,6 +69,10 @@ export default class GameOver_manager extends cc.Component {
 
         this.updateUserdata();
         this.blink();
+
+        this.audioManager = cc.find("AudioManager");
+        this.audioManager.getComponent("AudioManager").stopBGM();
+        this.audioManager.getComponent("AudioManager").playGameOverBGM();
     }
 
     async updateUserdata(){
@@ -91,10 +95,6 @@ export default class GameOver_manager extends cc.Component {
         cc.sys.localStorage.setItem('userdata', jsonStr);
         
         this.updateFinished = true;
-
-        this.audioManager = cc.find("AudioManager");
-        this.audioManager.getComponent("AudioManager").stopBGM();
-        this.audioManager.getComponent("AudioManager").playGameOverBGM();
     }
 
     start() {

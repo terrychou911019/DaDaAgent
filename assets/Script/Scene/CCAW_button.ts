@@ -91,6 +91,7 @@ export default class CCAW_button extends cc.Component {
     }
     
     changeToGame(){//have selected the weapon and enter the game
+        this.ccawManager.turnOutButton();
         this.ccawManager.setWeaponButton(this.node);
         const characterNode: cc.Node = this.ccawManager.getCharacterButton().getComponent('CCAW_button').goalNode;//get chosen button's goal node 
         console.log("player choose weapon : " + this.goalNode.name);
