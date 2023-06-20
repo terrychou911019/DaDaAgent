@@ -12,7 +12,9 @@ export enum AudioType {
     LightBullet,
     Select,
     StrongBullet,
-    Tiktok1
+    Tiktok1,
+    Eagle,
+    Thunder
 }
 
 @ccclass

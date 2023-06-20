@@ -171,7 +171,7 @@ export default class GameManager extends cc.Component {
         this.mask.runAction(cc.sequence(
             cc.fadeTo(1, 255),
             cc.delayTime(0.5),
-            cc.fadeTo(0, 0.5)
+            cc.fadeTo(0.5, 0)
         ))
     }
 
